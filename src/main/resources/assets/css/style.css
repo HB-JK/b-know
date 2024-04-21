@@ -1,0 +1,39 @@
+/* .root{
+    -fx-background-color: #585C7B; primary color
+} */
+
+#label {
+    -fx-background-color: #7b9bce;
+}
+
+#left_screen {
+    -fx-alignment: baseline-left;
+    -fx-background-position: left top, center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover, auto;
+}
+
+#right_screen_content{
+    -fx-padding: 20px;
+}
+
+#form{
+    -fx-padding: 0 10px 0 10px 0;
+}
+
+#email_label, #password_label {
+    -fx-font-size: 16px;
+}
+
+#email, #password{
+    -fx-text-box-border: #a2a2a2;
+    -fx-pref-height: 34px;
+    -fx-prompt-text-fill: #777;
+    -fx-font-size: 16px;
+}
+
+#login {
+    -fx-background-color: #585C7B;
+    -fx-border-style: none;
+    -fx-text-fill: #fefefe;
+}
