@@ -18,11 +18,7 @@
         
             <HBox alignment="CENTER_LEFT">
                 <ImageView fx:id="logo" />
-                <Label fx:id="lblTest" minHeight="16" minWidth="69" text="B-KNOW">
-                    <font>
-                        <Font size="48.0" />
-                    </font>
-                </Label>
+                <Label fx:id="project_name" minHeight="16" minWidth="69" text="B-KNOW" />
             </HBox>
             
             <VBox fx:id="form" spacing="15">
@@ -39,8 +35,8 @@
                         <PasswordField fx:id="password" promptText="Masukkan password" />
                     </VBox>
                     
-                    <VBox>
-                        <Button fx:id="login" maxWidth="1.7976931348623157E308" prefHeight="40" text="Login" />
+                    <VBox >
+                        <Button fx:id="login" maxWidth="1.7976931348623157E308" prefHeight="40" text="Login" onAction="#verifyAccount" />
                     </VBox>
                 </children>
             </VBox>

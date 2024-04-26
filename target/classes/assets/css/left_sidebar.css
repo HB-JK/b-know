@@ -1,0 +1,17 @@
+.sidebar-item {
+    -fx-padding: 15px 10px 15px 10px;
+    fx-spacing: 20px;
+}
+
+.sidebar-item:hover, .sidebar-item.active{
+    -fx-background-color: #9093AF;
+}
+
+.sidebar-item .label{
+    -fx-text-fill: #fefefe;
+    -fx-font-size: 16px;
+}
+
+.sidebar-item.logout{
+    -fx-background-color: #F53B3B;
+}

@@ -17,12 +17,16 @@
     -fx-padding: 20px;
 }
 
+#project_name{
+    -fx-font-size: 48px;
+}
+
 #form{
     -fx-padding: 0 10px 0 10px 0;
 }
 
 #email_label, #password_label {
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
 }
 
 #email, #password{
@@ -36,4 +40,28 @@
     -fx-background-color: #585C7B;
     -fx-border-style: none;
     -fx-text-fill: #fefefe;
+    -fx-background-radius: 4px;   
+}
+
+#login:hover{
+    -fx-background-color: #333;
+}
+
+#left_sidebar {
+    -fx-alignment: baseline-left;
+    -fx-background-color: #585C7B;
+}
+
+#logo_section {
+    -fx-padding: 10px 15px 10px 15px;
+}
+
+#project_name_left_sidebar{
+    -fx-font-size: 24px;
+    -fx-text-fill: #fefefe;
+    -fx-font-weight: 700;
+}
+
+.sidebar-item{
+    -fx-padding: 0 15px 0 15px;
 }
