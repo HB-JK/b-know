@@ -9,15 +9,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
- */
+ * JavaFX App
+ */
 public class App extends Application {
 
-    private static Scene scene;
+private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1080, 640);
         scene.getStylesheets().add(getClass().getResource("/assets/css/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -32,8 +31,8 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+     public static void main(String[] args) {
+         launch(args);
+     }
 
 }

@@ -15,3 +15,7 @@
 .sidebar-item.logout{
     -fx-background-color: #F53B3B;
 }
+
+.margin-left {
+    -fx-margin-left: 200px;
+}
