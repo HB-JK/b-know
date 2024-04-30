@@ -2,6 +2,8 @@ package com.example.components;
 
 import java.io.IOException;
 
+import com.example.App;
+
 import javafx.beans.DefaultProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,8 +68,26 @@ public class LeftSidebar extends AnchorPane {
     public void setActiveClass(String path) {
         if(path == "dashboard") dashboard.getStyleClass().addAll("active");
         else if(path == "penjualan") penjualan.getStyleClass().addAll("active");
-        else if(path == "produk") produk.getStyleClass().addAll("active");
+        else if(path == "daftar_produk") produk.getStyleClass().addAll("active");
         else if(path == "rekap_penjualan") rekap_penjualan.getStyleClass().addAll("active");
         else if(path == "rekap_produk") rekap_produk.getStyleClass().addAll("active");
+    }
+    
+    @FXML
+    public void changeToDashboard(ActionEvent e) {
+        try {
+            App.setRoot("dashboard");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void changeToDaftarProduk(ActionEvent e) {
+        try {
+            App.setRoot("daftar_produk");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 }

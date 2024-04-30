@@ -38,6 +38,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sidebar.setActiveClass("dashboard");
         // Initialize sales data
         int totalPenjualan = 70;
         int totalProduk = 5;

@@ -23,15 +23,15 @@
             
             <VBox fx:id="left_sidebar_content">
                 <AnchorPane styleClass="sidebar-item" fx:id="dashboard" prefHeight="40">
-                    <Button fx:id="dashboard_button" prefWidth="200" prefHeight="40" text="Dashboard" onAction="changeToDashboard" />
+                    <Button fx:id="dashboard_button" prefWidth="200" prefHeight="40" text="Dashboard" onAction="#changeToDashboard" />
                     <ImageView styleClass="icon" fx:id="dashboard_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="penjualan" prefHeight="40">
-                    <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" onAction="changeToPenjualan" />
+                    <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" />
                     <ImageView styleClass="icon" fx:id="penjualan_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="produk" prefHeight="40">
-                    <Button fx:id="produk_button" prefWidth="200" prefHeight="40" text="Produk" />
+                    <Button fx:id="produk_button" prefWidth="200" prefHeight="40" text="Produk" onAction="#changeToDaftarProduk" />
                     <ImageView styleClass="icon" fx:id="produk_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="rekap_penjualan" prefHeight="40">
