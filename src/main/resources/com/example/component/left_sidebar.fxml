@@ -10,9 +10,9 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:id="left_sidebar" prefHeight="640" prefWidth="240">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:id="left_sidebar" prefHeight="640" prefWidth="200">
     <children>
-        <VBox spacing="20" prefWidth="240">
+        <VBox spacing="20" prefWidth="200">
             <HBox id="logo_section" alignment="CENTER_LEFT">
                 <ImageView fx:id="logo">
                     <fitWidth>60</fitWidth>
@@ -21,31 +21,31 @@
                 <Label fx:id="project_name_left_sidebar" minHeight="16" minWidth="69" text="B-KNOW" />
             </HBox>
             
-            <VBox fx:id="left_sidebar_content" maxWidth="1.7976931348623157E308">
-                <HBox spacing="10" styleClass="sidebar-item" fx:id="dashboard" maxWidth="1.7976931348623157E308" prefHeight="50" alignment="CENTER_LEFT">
-                    <ImageView fx:id="dashboard_icon" />
-                    <Label fx:id="dashboard_button" maxWidth="1.7976931348623157E308" text="Dashboard" />
-                </HBox>
-                <HBox spacing="10" styleClass="sidebar-item" fx:id="penjualan" maxWidth="1.7976931348623157E308" prefHeight="50" alignment="CENTER_LEFT">
-                    <ImageView fx:id="penjualan_icon" />
-                    <Label fx:id="penjualan_button" maxWidth="1.7976931348623157E308" text="Penjualan" />
-                </HBox>
-                <HBox spacing="10" styleClass="sidebar-item" fx:id="produk" maxWidth="1.7976931348623157E308" prefHeight="50" alignment="CENTER_LEFT">
-                    <ImageView fx:id="produk_icon" />
-                    <Label fx:id="produk_button" maxWidth="1.7976931348623157E308" text="Produk" />
-                </HBox>
-                <HBox spacing="10" styleClass="sidebar-item" fx:id="rekap_penjualan" maxWidth="1.7976931348623157E308" prefHeight="50" alignment="CENTER_LEFT">
-                    <ImageView fx:id="rekap_penjualan_icon" />
-                    <Label fx:id="rekap_penjualan_button" maxWidth="1.7976931348623157E308" text="Rekap Penjualan" />
-                </HBox>
-                <HBox spacing="10" styleClass="sidebar-item" fx:id="rekap_produk" maxWidth="1.7976931348623157E308" prefHeight="50" alignment="CENTER_LEFT">
-                    <ImageView fx:id="rekap_produk_icon" />
-                    <Label fx:id="rekap_produk_button" maxWidth="1.7976931348623157E308" text="Rekap Produk" />
-                </HBox>
-                <HBox spacing="10" styleClass="sidebar-item, logout" fx:id="logout" maxWidth="1.7976931348623157E308" prefHeight="50" alignment="CENTER_LEFT">
-                    <ImageView fx:id="logout_icon" />
-                    <Label fx:id="logout_button" maxWidth="1.7976931348623157E308" text="Keluar" />
-                </HBox>
+            <VBox fx:id="left_sidebar_content">
+                <AnchorPane styleClass="sidebar-item" fx:id="dashboard" prefHeight="40">
+                    <Button fx:id="dashboard_button" prefWidth="200" prefHeight="40" text="Dashboard" onAction="changeToDashboard" />
+                    <ImageView styleClass="icon" fx:id="dashboard_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="penjualan" prefHeight="40">
+                    <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" onAction="changeToPenjualan" />
+                    <ImageView styleClass="icon" fx:id="penjualan_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="produk" prefHeight="40">
+                    <Button fx:id="produk_button" prefWidth="200" prefHeight="40" text="Produk" />
+                    <ImageView styleClass="icon" fx:id="produk_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="rekap_penjualan" prefHeight="40">
+                    <Button fx:id="rekap_penjualan_button" prefWidth="200" prefHeight="40" text="Rekap Penjualan" />
+                    <ImageView styleClass="icon" fx:id="rekap_penjualan_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="rekap_produk" prefHeight="40">
+                    <Button fx:id="rekap_produk_button" prefWidth="200" prefHeight="40" text="Rekap Produk" />
+                    <ImageView styleClass="icon" fx:id="rekap_produk_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="logout" prefHeight="40">
+                    <Button styleClass="logout" fx:id="logout_button" prefWidth="200" prefHeight="40" text="Keluar" />
+                    <ImageView styleClass="icon" fx:id="logout_icon" />
+                </AnchorPane>
             </VBox>
         </VBox>
     </children>

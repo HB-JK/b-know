@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 public class LeftSidebar extends AnchorPane {
     @FXML private VBox extension;
     @FXML private ImageView logo;
-    @FXML private HBox dashboard, penjualan, produk, rekap_penjualan, rekap_produk, logout;
+    @FXML private AnchorPane dashboard, penjualan, produk, rekap_penjualan, rekap_produk, logout;
     @FXML private ImageView dashboard_icon, penjualan_icon, produk_icon, rekap_penjualan_icon, rekap_produk_icon, logout_icon;
     @FXML private ImageView[] list_icon;
     
@@ -41,8 +41,16 @@ public class LeftSidebar extends AnchorPane {
             };
             
             this.addIcons();
+            this.setIconPosition();
         } catch (IOException exc) {
             // handle exception
+        }
+    }
+    
+    public void setIconPosition() {
+        for(ImageView icon: this.list_icon) {
+            AnchorPane.setTopAnchor(icon, 12.0);
+            AnchorPane.setLeftAnchor(icon, 5.0);
         }
     }
     

@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ConnectDatabase {
     private String url = "jdbc:mysql://localhost:3306/project_manajemen_taksi";
-    private String username = "root";
+    private String username = "user";
     private String password = "";
     
     public ConnectDatabase() {
