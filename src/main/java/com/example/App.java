@@ -19,6 +19,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("login"), 1080, 640);
         scene.getStylesheets().add(getClass().getResource("/assets/css/style.css").toExternalForm());
+        stage.setTitle("B-Know");
         stage.setScene(scene);
         stage.show();
     }
