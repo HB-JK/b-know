@@ -46,13 +46,6 @@ public class DashboardController implements Initializable {
 
         // Set sales data to chart and labels
         PieChart.Data slice = new PieChart.Data("Total Penjualan", totalPenjualan);
-        // slice.getStyleClass().add("total-penjualan-slice");
         totalPenjualanChart.getData().add(slice);
-
-        // Set product data to table
-        // produkHariIniTableView.setItems(ProdukData.getData());
-
-        // You can potentially add logic to set the active class for the sidebar here
-        // if LeftSidebar provides such functionality
     }
 }

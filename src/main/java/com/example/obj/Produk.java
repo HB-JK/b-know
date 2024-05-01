@@ -24,6 +24,10 @@ import java.time.format.DateTimeFormatter;
 public class Produk implements Initializable{
     @FXML private LeftSidebar sidebar;
 
+    @FXML
+    private TableView<Penjualan> tablePenjualan;
+
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         sidebar.setActiveClass("produk");

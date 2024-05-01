@@ -10,13 +10,39 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
 <?import com.example.components.LeftSidebar?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DaftarProdukController">
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DaftarProdukController">
+    <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
     <LeftSidebar fx:id="sidebar" />
+    
+    <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
+        <HBox alignment="CENTER_LEFT" prefHeight="40">
+            <Label styleClass="fs-5, fw-semibold" text="Daftar Produk" />
 
-    <VBox HBox.hgrow="ALWAYS" styleClass="main-content">
-        <HBox alignment="CENTER_LEFT" prefHeight="40" >
-            <Label fx:id="daftar_produk" styleClass="fs-5, fw-semibold" text="Daftar Produk" /> 
+        <AnchorPane HBox.hgrow="ALWAYS" />
+    
+        <HBox spacing="15">
+            <Button text="Tambah" styleClass="btn, bg-primary" />
         </HBox>
-    </VBox>
-</AnchorPane>
+        </HBox>
+
+        <VBox prefHeight="900.0" prefWidth="1200.0">
+        <TableView fx:id="invoiceTable" >
+            <columns>
+                <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
+                <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="120.0" />
+                <TableColumn fx:id="kodeProdukCol" text="Kode Produk" prefWidth="100.0" />
+                <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="170.0" />
+                <TableColumn fx:id="jumlahStokCol" text="Jumlah Stok" prefWidth="100.0" />
+                <TableColumn fx:id="satuanCol" text="Satuan" prefWidth="100.0" />
+                <TableColumn fx:id="hargaProdukCol" text="Harga Produk" prefWidth="100.0" />
+                <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
+            </columns>
+        </TableView>
+        </VBox>
+    </VBox>    
+</HBox>
+    

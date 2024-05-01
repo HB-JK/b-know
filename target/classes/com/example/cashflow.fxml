@@ -8,13 +8,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.RekapPenjualanController">
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.CashflowController">
     <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
     <LeftSidebar fx:id="sidebar" />
     
     <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
         <HBox alignment="CENTER_LEFT" prefHeight="40">
-            <Label styleClass="fs-5, fw-semibold" text="Rekap Penjualan" />
+            <Label styleClass="fs-5, fw-semibold" text="Cash Flow" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
         </HBox>
@@ -29,10 +29,11 @@
         <VBox prefHeight="900.0" prefWidth="1200.0">
         <TableView fx:id="invoiceTable" >
             <columns>
-                <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
-                <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="250.0" />
-                <TableColumn fx:id="jumlahProdukCol" text="Jumlah Produk" prefWidth="250.0" />
-                <TableColumn fx:id="totalPenjualanCol" text="Total Penjualan" prefWidth="290.0" />
+                <TableColumn fx:id="noCol" text="No." />
+                <TableColumn fx:id="tanggalCol" text="Tanggal" />
+                <TableColumn fx:id="modalCol" text="Modal" />
+                <TableColumn fx:id="pendapatanCol" text="Pendapatan" />
+                <TableColumn fx:id="pendapatanBersihCol" text="Pendapatan Bersih" />
             </columns>
         </TableView>
         </VBox>

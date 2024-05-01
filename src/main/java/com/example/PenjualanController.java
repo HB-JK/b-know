@@ -31,12 +31,26 @@ public class PenjualanController implements Initializable {
     private DatePicker tanggalDatePicker;
     
     @FXML
-    private TableView<Penjualan> tablePenjualan;
+    private TableView<Penjualan> invoiceTable;
+
+    @FXML TableColumn<Void, Void> noCol, tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol, aksiCol;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
         fruitCombo.getItems().setAll("Pangsit Pedas", "Pangsit Manis", "Pangsit Goreng");
         tanggalDatePicker.setValue(LocalDate.now());
+
+        this.setColumnWidth();
+    }
+
+    public void setColumnWidth() {
+        noCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.05));
+        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.120));
+        noFakturCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.150));
+        namaPembeliCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
+        jumlahItemCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.140));
+        totalHargaCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
+        aksiCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
     }
 }

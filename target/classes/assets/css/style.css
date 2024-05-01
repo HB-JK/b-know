@@ -1,34 +1,43 @@
 /* .root{
-    -fx-background-color: #585C7B; primary color
+    #585C7B primary color
+    #9093AF secondary color
+    #CCC0DB secondary-light color
+    #EFA3A3 light-pink color
+    #A3E1EF aqua-blue color
+    #333333 dark color
+    #f1f1f1 light color
+    #ffffff white color
 } */
 
-/* Reusable style start */
+/* Reusable font style start */
 .fs-1{
     -fx-font-size: 12px;
+    -fx-text-fill: #333;
 }
 
 .fs-2{
     -fx-font-size: 14px;
+    -fx-text-fill: #333;
 }
 
 .fs-3{
     -fx-font-size: 16px;
+    -fx-text-fill: #333;
 }
 
 .fs-4{
     -fx-font-size: 16px;
+    -fx-text-fill: #333;
 }
 
 .fs-5{
     -fx-font-size: 20px;
+    -fx-text-fill: #333;
 }
 
 .fs-6{
     -fx-font-size: 24px;
-}
-
-.bg-primary{
-    -fx-background-color: #585C7B;
+    -fx-text-fill: #333;
 }
 
 .fw-extra-thin{
@@ -67,14 +76,87 @@
     -fx-font-weight: bold;
 }
 
+/* Reusable font style end */
+
+
+/* Reusable button style start */
 .btn{
     -fx-border-style: none;
     -fx-text-fill: #fefefe;
     -fx-background-radius: 4px;
     -fx-font-size: 16px;
 }
+/* Reusable button style end */
 
-/* Reusable class end */
+
+/* Reusable background style start */
+.bg-primary{
+    -fx-background-color: #585C7B;
+}
+
+.bg-secondary{
+    -fx-background-color: #9093AF;
+}
+
+.bg-secondary-light{
+    -fx-background-color: #CCC0DB;
+}
+
+.bg-light-pink{
+    -fx-background-color: #EFA3A3;
+}
+
+.bg-aqua{
+    -fx-background-color: #A3E1EF;
+}
+
+.bg-light{
+    -fx-background-color: #f1f1f1;
+}
+
+.bg-white{
+    -fx-background-color: #fff;
+}
+/* Reusable background style end*/
+
+
+/* Reusable padding style start*/
+.p-1{
+    -fx-padding: 4px;
+}
+
+.p-2{
+    -fx-padding: 8px;
+}
+
+.p-3{
+    -fx-padding: 12px;
+}
+
+.p-4{
+    -fx-padding: 16px;
+}
+
+.p-5{
+    -fx-padding: 20px;
+}
+/* Reusable padding style end*/
+
+
+/* Reusable border-radius style end*/
+.radius-1{
+    -fx-background-radius: 4px;
+}
+
+.radius-2{
+    -fx-background-radius: 8px;
+}
+
+.radius-3{
+    -fx-background-radius: 12px;
+}
+/* Reusable border-radius style end*/
+
 
 /* Login frame start */
 #left_screen {
@@ -121,11 +203,12 @@
 
 /* Main content start */
 .main-content{
+    -fx-background-color: #f1f1f1;
     -fx-padding: 20px;
 }
 
-.table-view {
-    background-color: #D1D1D1;
+.shadow{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 /* Main content end */

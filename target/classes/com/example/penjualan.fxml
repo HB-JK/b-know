@@ -24,15 +24,14 @@
             
             <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
             
-            <Label fx:id="tanggal" styleClass="fs-2" text="Rabu, 23 Agustus 2024" /> 
+            <Label fx:id="tanggal" styleClass="fs-3" text="Rabu, 1 Mei 2024" /> 
         </HBox>
         
         <VBox prefHeight="40" prefWidth="750">
             <AnchorPane>
-              
-              <AnchorPane.topAnchor>10.0</AnchorPane.topAnchor> <AnchorPane.leftAnchor>20.0</AnchorPane.leftAnchor>
+                <AnchorPane.topAnchor>10.0</AnchorPane.topAnchor> <AnchorPane.leftAnchor>20.0</AnchorPane.leftAnchor>
 
-              <Label fx:id="modalLabel" styleClass="fs-3" text="Modal Hari ini : -" style="-fx-padding: 35px 0px 35px 0px"/>
+                <Label fx:id="modalLabel" styleClass="fs-3" text="Modal Hari ini : -" style="-fx-padding: 35px 0px 35px 0px"/>
             </AnchorPane>
 
             <HBox alignment="CENTER_LEFT">
@@ -51,8 +50,8 @@
         </VBox>
 
         <VBox prefHeight="900.0" prefWidth="1200.0">
-          <TableView fx:id="invoiceTable" >
-              <columns>
+        <TableView fx:id="invoiceTable" >
+            <columns>
                 <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
                 <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="150.0" />
                 <TableColumn fx:id="noFakturCol" text="No. Faktur" prefWidth="150.0" />
@@ -60,10 +59,9 @@
                 <TableColumn fx:id="jumlahItemCol" text="Jumlah Item" prefWidth="100.0" />
                 <TableColumn fx:id="totalHargaCol" text="Total Harga" prefWidth="100.0" />
                 <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
-              </columns>
-          </TableView>
-          
-      </VBox>
+            </columns>
+        </TableView>
+        </VBox>
     </VBox>
 </HBox>
 
