@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -30,15 +31,17 @@ public class PenjualanController implements Initializable {
 
     // @FXML
     // private DatePicker tanggalDatePicker;
-
-    // public void bukaKasirButtonAction() {
-    // // Implement logic to open the kasir window or perform kasir-related actions
-    // System.out.println("Buka Kasir button clicked");
+    
+    // @FXML
+    // public void bukaKasirButtonAction(ActionEvent e) {
+    //     // Implement logic to open the kasir window or perform kasir-related actions
+    //     System.out.println("Buka Kasir button clicked");
     // }
-
-    // public void tambahButtonAction() {
-    // // Implement logic to add the product and date to the system
-    // System.out.println("Tambah button clicked");
+    
+    // @FXML
+    // public void tambahButtonAction(ActionEvent e) {
+    //     // Implement logic to add the product and date to the system
+    //     System.out.println("Tambah button clicked");
     // }
 
     @Override
