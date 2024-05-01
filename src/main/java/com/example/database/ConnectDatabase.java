@@ -3,9 +3,10 @@ package com.example.database;
 import java.sql.*;
 
 public class ConnectDatabase {
-    private String url = "jdbc:mysql://localhost:3306/bknow";
-    private String username = "root";
-    private String password = "";
+    private Credential credential = new Credential();
+    private String url = "jdbc:mysql://localhost:3306/" + credential.database_name;
+    private String username = credential.username;
+    private String password = credential.password;
     
     public ConnectDatabase() {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
