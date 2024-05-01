@@ -4,6 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import com.example.components.LeftSidebar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.RekapProdukController">
     <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
@@ -11,10 +14,32 @@
     
     <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
         <HBox alignment="CENTER_LEFT" prefHeight="40">
-            <Label styleClass="fs-6, fw-semibold" text="Rekap Produk" />
+            <Label styleClass="fs-5, fw-semibold" text="Rekap Produk" />
             <AnchorPane HBox.hgrow="ALWAYS" />
-            <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 23 Agustus 2024" />
+            <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
         </HBox>
-        
+
+
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Produk:   " styleClass="fs-1" />
+            <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" prefWidth="120.0" promptText="Semua"/>
+            <Label text="Pilih Tanggal:   " styleClass="fs-1" style="-fx-padding: 0px 10px 0px 10px" />
+            <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+        </HBox>
+
+        <VBox prefHeight="900.0" prefWidth="1200.0">
+        <TableView fx:id="invoiceTable" >
+            <columns>
+                <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
+                <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="250.0" />
+                <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="250.0" />
+                <TableColumn fx:id="jumlahCol" text="Jumlah" prefWidth="290.0" />
+            </columns>
+        </TableView>
+        </VBox>
+
+        <HBox alignment="CENTER_RIGHT" prefHeight="40">
+            <Label styleClass="fs-5, fw-semibold" text="Total Penjualan     Rp. 360.000" />
+        </HBox>
     </VBox>
 </HBox>

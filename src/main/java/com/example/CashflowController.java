@@ -13,7 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class RekapPenjualanController implements Initializable {
+public class CashflowController implements Initializable {
     @FXML
     private LeftSidebar sidebar;
 
@@ -21,14 +21,14 @@ public class RekapPenjualanController implements Initializable {
     private DatePicker tanggalDatePicker;
 
     @FXML
-    private TableView<Penjualan> invoiceTable;
+    private TableView<String> invoiceTable;
 
     @FXML
-    private TableColumn<Void, Void> noCol, tanggalCol, jumlahProdukCol, totalPenjualanCol;
+    private TableColumn<Void, Void> noCol, tanggalCol, modalCol, pendapatanCol, pendapatanBersihCol;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        sidebar.setActiveClass("rekap_penjualan");
+        sidebar.setActiveClass("cashflow");
         tanggalDatePicker.setValue(LocalDate.now());
 
         this.setColumnWidth();
@@ -36,8 +36,9 @@ public class RekapPenjualanController implements Initializable {
 
     public void setColumnWidth() {
         noCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.1));
-        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
-        jumlahProdukCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
-        totalPenjualanCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
+        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.225));
+        modalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.225));
+        pendapatanCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.225));
+        pendapatanBersihCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.225));
     }
 }

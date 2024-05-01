@@ -21,10 +21,10 @@ public class LeftSidebar extends AnchorPane {
     @FXML
     private ImageView logo;
     @FXML
-    private AnchorPane dashboard, penjualan, produk, rekap_penjualan, rekap_produk, logout;
+    private AnchorPane dashboard, cashflow, penjualan, produk, rekap_penjualan, rekap_produk, logout;
+    
     @FXML
-    private ImageView dashboard_icon, penjualan_icon, produk_icon, rekap_penjualan_icon, rekap_produk_icon, logout_icon;
-    @FXML
+    private ImageView dashboard_icon, cashflow_icon, penjualan_icon, produk_icon, rekap_penjualan_icon, rekap_produk_icon, logout_icon;
     private ImageView[] list_icon;
 
     public LeftSidebar() {
@@ -40,6 +40,7 @@ public class LeftSidebar extends AnchorPane {
 
             this.list_icon = new ImageView[] {
                     dashboard_icon,
+                    cashflow_icon,
                     penjualan_icon,
                     produk_icon,
                     rekap_penjualan_icon,
@@ -64,6 +65,8 @@ public class LeftSidebar extends AnchorPane {
     public void addIcons() {
         this.dashboard_icon
                 .setImage(new Image(getClass().getResource("/assets/img/icons/view-dashboard.png").toExternalForm()));
+        this.cashflow_icon
+                .setImage(new Image(getClass().getResource("/assets/img/icons/cash-register.png").toExternalForm()));
         this.penjualan_icon.setImage(new Image(getClass().getResource("/assets/img/icons/cart.png").toExternalForm()));
         this.produk_icon.setImage(
                 new Image(getClass().getResource("/assets/img/icons/briefcase-variant.png").toExternalForm()));
@@ -78,6 +81,8 @@ public class LeftSidebar extends AnchorPane {
     public void setActiveClass(String path) {
         if (path == "dashboard")
             dashboard.getStyleClass().addAll("active");
+        else if (path == "cashflow")
+            cashflow.getStyleClass().addAll("active");
         else if (path == "penjualan")
             penjualan.getStyleClass().addAll("active");
         else if (path == "daftar_produk")
@@ -98,6 +103,15 @@ public class LeftSidebar extends AnchorPane {
     }
 
     @FXML
+    public void changeToCashflow(ActionEvent e) {
+        try {
+            App.setRoot("cashflow");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @FXML
     public void changeToDaftarProduk(ActionEvent e) {
         try {
             App.setRoot("daftar_produk");
@@ -105,6 +119,7 @@ public class LeftSidebar extends AnchorPane {
             e1.printStackTrace();
         }
     }
+
     @FXML
     public void changeToPenjualan(ActionEvent e) {
         try {
@@ -113,6 +128,7 @@ public class LeftSidebar extends AnchorPane {
             e1.printStackTrace();
         }
     }
+
     @FXML
     public void changeToRekapPenjualan(ActionEvent e) {
         try {

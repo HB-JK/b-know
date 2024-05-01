@@ -26,6 +26,10 @@
                     <Button fx:id="dashboard_button" prefWidth="200" prefHeight="40" text="Dashboard" onAction="#changeToDashboard" />
                     <ImageView styleClass="icon" fx:id="dashboard_icon" />
                 </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="cashflow" prefHeight="40">
+                    <Button fx:id="cashflow_button" prefWidth="200" prefHeight="40" text="Cash Flow" onAction="#changeToCashflow" />
+                    <ImageView styleClass="icon" fx:id="cashflow_icon" />
+                </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="penjualan" prefHeight="40">
                     <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" onAction="#changeToPenjualan" />
                     <ImageView styleClass="icon" fx:id="penjualan_icon" />
