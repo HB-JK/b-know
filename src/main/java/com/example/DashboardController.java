@@ -49,10 +49,6 @@ public class DashboardController implements Initializable {
         // slice.getStyleClass().add("total-penjualan-slice");
         totalPenjualanChart.getData().add(slice);
 
-        totalPenjualanLabel.setText(String.valueOf(totalPenjualan));
-        totalProdukLabel.setText(String.valueOf(totalProduk));
-        totalPendapatanHariIniLabel.setText(String.format("%.2f", totalPendapatanHariIni));
-
         // Set product data to table
         // produkHariIniTableView.setItems(ProdukData.getData());
 

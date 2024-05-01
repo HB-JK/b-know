@@ -9,21 +9,16 @@
     <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
     <LeftSidebar fx:id="sidebar" />
     
-    <GridPane fx:id="ringkasanPenjualanGridPane" GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <Label text="Total Penjualan" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label fx:id="totalPenjualanLabel" text="70" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <VBox HBox.hgrow="ALWAYS" styleClass="main-content">
+        <HBox alignment="CENTER_LEFT" prefHeight="40">
+            <Label styleClass="fs-5, fw-semibold" text="Overview" />
+            <AnchorPane HBox.hgrow="ALWAYS" />
+            <Label fx:id="today_date" styleClass="fs-2" text="Rabu, 23 Agustus 2024" />
+        </HBox>
+            
+        <PieChart fx:id="totalPenjualanChart" prefWidth="400" prefHeight="400" />
+    </VBox>
 
-        <Label text="Total Produk" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label fx:id="totalProdukLabel" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-        <Label text="Total Pendapatan Hari Ini" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label fx:id="totalPendapatanHariIniLabel" text="2875000.00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    </GridPane>
-
-    <PieChart fx:id="totalPenjualanChart" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="400" prefHeight="400" />
-
-    <TableView fx:id="produkHariIniTableView" GridPane.columnIndex="1" GridPane.rowIndex="1">
-    </TableView>
-  
-    
+    <!-- <TableView fx:id="produkHariIniTableView" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    </TableView> -->
 </HBox>

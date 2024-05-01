@@ -1,3 +1,17 @@
+#left_sidebar {
+    -fx-alignment: baseline-left;
+    -fx-background-color: #585C7B;
+}
+
+#logo_section {
+    -fx-padding: 10px 15px 10px 15px;
+}
+
+#project_name_left_sidebar{
+    -fx-font-size: 24px;
+    -fx-text-fill: #fefefe;
+}
+
 .sidebar-item {
     fx-spacing: 20px;
 }

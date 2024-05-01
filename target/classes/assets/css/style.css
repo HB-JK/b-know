@@ -2,10 +2,70 @@
     -fx-background-color: #585C7B; primary color
 } */
 
-#label {
-    -fx-background-color: #7b9bce;
+/* Reusable style start */
+.fs-1{
+    -fx-font-size: 14px;
 }
 
+.fs-2{
+    -fx-font-size: 16px;
+}
+
+.fs-3{
+    -fx-font-size: 18px;
+}
+
+.fs-4{
+    -fx-font-size: 20px;
+}
+
+.fs-5{
+    -fx-font-size: 24px;
+}
+
+.bg-primary{
+    -fx-background-color: #585C7B;
+}
+
+.fw-extra-thin{
+    -fx-font-weight: 100;
+}
+
+.fw-thin{
+    -fx-font-weight: 200;
+}
+
+.fw-light{
+    -fx-font-weight: 300;
+}
+
+.fw-normal{
+    -fx-font-weight: 400;
+}
+
+.fw-medium{
+    -fx-font-weight: 500;
+}
+
+.fw-semibold{
+    -fx-font-weight: 600;
+}
+
+.fw-bold{
+    -fx-font-weight: 700;
+}
+
+.fw-extra-bold{
+    -fx-font-weight: 800;
+}
+
+.fw-black{
+    -fx-font-weight: bold;
+}
+
+/* Main content end */
+
+/* Login frame start */
 #left_screen {
     -fx-alignment: baseline-left;
     -fx-background-position: left top, center;
@@ -46,17 +106,11 @@
 #login:hover{
     -fx-background-color: #333;
 }
+/* Login frame end */
 
-#left_sidebar {
-    -fx-alignment: baseline-left;
-    -fx-background-color: #585C7B;
+/* Main content start */
+.main-content{
+    -fx-padding: 20px;
 }
 
-#logo_section {
-    -fx-padding: 10px 15px 10px 15px;
-}
-
-#project_name_left_sidebar{
-    -fx-font-size: 24px;
-    -fx-text-fill: #fefefe;
-}
+/* Main content end */
