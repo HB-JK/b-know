@@ -10,11 +10,48 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
 <?import com.example.components.LeftSidebar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PenjualanController">
     <LeftSidebar fx:id="sidebar" />
 
-    <HBox alignment="CENTER_LEFT">
-    <Label fx:id="penjualan" minHeight="30" minWidth="90" text="Penjualan"/>
+    <!-- <HBox alignment="CENTER_LEFT">
+        <AnchorPane prefHeight="80" prefWidth="900">  <Label fx:id="penjualan" text="Penjualan" style="-fx-font-size:24px;"/>
+        <AnchorPane.topAnchor>50.0</AnchorPane.topAnchor>
+        <AnchorPane.leftAnchor>60.0</AnchorPane.leftAnchor>
+        </AnchorPane>
+    </HBox> -->
+
+      <HBox alignment="CENTER_LEFT" >
+        <VBox prefHeight="40" prefWidth="750" style="-fx-padding: 25px 30px 25px 30px;-fx-margin: 10px 0px 0px 0px;">
+            <AnchorPane>
+              <Label fx:id="penjualan" text="Penjualan" style="-fx-font-size:24px;"/>
+            <AnchorPane.topAnchor>10.0</AnchorPane.topAnchor> <AnchorPane.leftAnchor>20.0</AnchorPane.leftAnchor>
+
+            <Label fx:id="modalLabel" text="Modal Hari ini : -" style="-fx-font-size:15px;-fx-padding: 35px 0px 35px 0px"/>
+            </AnchorPane>
+
+            <HBox alignment="CENTER_LEFT">
+              <Label text="Produk:   " style="-fx-font-size: 12px;" />
+              <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" prefWidth="120.0" promptText="Pilih Produk"/>
+              <Label text="Tanggal:   " style="-fx-font-size: 12px;-fx-padding: 0px 10px 0px 10px" />
+              <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+              <!-- <Button text="Buka Kasir" onAction="bukaKasirButtonAction" />
+              <Button text="Tambah" onAction="tambahButtonAction" /> -->
+            </HBox>
+      </VBox>
+
+            <!-- <Region fx:id="Data" HBox.setHgrow="ALWAYS" /> -->
+            <AnchorPane>
+              <Label fx:id="tanggal" text="Wed, 1 April 2024" style="-fx-font-size:16px;-fx-padding: 25px 30px 25px 30px;-fx-margin: 10px 0px 0px 0px;"/> 
+              
+            </AnchorPane>
+
+            
     </HBox>
+
 </HBox>
+
+
+    
