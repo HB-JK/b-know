@@ -12,6 +12,8 @@
 <?import com.example.components.LeftSidebar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PenjualanController">
     <LeftSidebar fx:id="sidebar" />
@@ -47,8 +49,22 @@
                 </HBox>
             </HBox>
         </VBox>
-    </VBox>
 
+        <VBox prefHeight="900.0" prefWidth="1200.0">
+          <TableView fx:id="invoiceTable" >
+              <columns>
+                <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
+                <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="150.0" />
+                <TableColumn fx:id="noFakturCol" text="No. Faktur" prefWidth="150.0" />
+                <TableColumn fx:id="namaPembeliCol" text="Nama Pembeli" prefWidth="190.0" />
+                <TableColumn fx:id="jumlahItemCol" text="Jumlah Item" prefWidth="100.0" />
+                <TableColumn fx:id="totalHargaCol" text="Total Harga" prefWidth="100.0" />
+                <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
+              </columns>
+          </TableView>
+          
+      </VBox>
+    </VBox>
 </HBox>
 
 

@@ -113,6 +113,7 @@ public class LeftSidebar extends AnchorPane {
             e1.printStackTrace();
         }
     }
+
     @FXML
     public void changeToRekapPenjualan(ActionEvent e) {
         try {

@@ -124,4 +124,8 @@
     -fx-padding: 20px;
 }
 
+.table-view {
+    background-color: #D1D1D1;
+}
+
 /* Main content end */
