@@ -27,7 +27,7 @@
                     <ImageView styleClass="icon" fx:id="dashboard_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="penjualan" prefHeight="40">
-                    <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" />
+                    <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" onAction="#changeToPenjualan" />
                     <ImageView styleClass="icon" fx:id="penjualan_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="produk" prefHeight="40">
@@ -35,11 +35,11 @@
                     <ImageView styleClass="icon" fx:id="produk_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="rekap_penjualan" prefHeight="40">
-                    <Button fx:id="rekap_penjualan_button" prefWidth="200" prefHeight="40" text="Rekap Penjualan" />
+                    <Button fx:id="rekap_penjualan_button" prefWidth="200" prefHeight="40" text="Rekap Penjualan" onAction="#changeToRekapPenjualan" />
                     <ImageView styleClass="icon" fx:id="rekap_penjualan_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="rekap_produk" prefHeight="40">
-                    <Button fx:id="rekap_produk_button" prefWidth="200" prefHeight="40" text="Rekap Produk" />
+                    <Button fx:id="rekap_produk_button" prefWidth="200" prefHeight="40" text="Rekap Produk" onAction="#changeToRekapProduk"/>
                     <ImageView styleClass="icon" fx:id="rekap_produk_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="logout" prefHeight="40">
