@@ -3,8 +3,8 @@ package com.example.database;
 import java.sql.*;
 
 public class ConnectDatabase {
-    private String url = "jdbc:mysql://localhost:3306/project_manajemen_taksi";
-    private String username = "user";
+    private String url = "jdbc:mysql://localhost:3306/bknow";
+    private String username = "root";
     private String password = "";
     
     public ConnectDatabase() {
