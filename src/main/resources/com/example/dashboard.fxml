@@ -49,9 +49,9 @@
                     
                     <TableView fx:id="produkHariIniTableView">
                         <columns>
-                            <TableColumn text="No." minWidth="50" maxWidth="1.7976931348623157E308" />
-                            <TableColumn text="Nama Produk" minWidth="180" maxWidth="1.7976931348623157E308" />
-                            <TableColumn text="Jumlah" minWidth="150" maxWidth="1.7976931348623157E308" />
+                            <TableColumn fx:id="number_property" text="No." minWidth="50" prefWidth="100" />
+                            <TableColumn fx:id="nama_produk_property" text="Nama Produk" minWidth="180" prefWidth="250" />
+                            <TableColumn fx:id="jumlah_property" text="Jumlah" minWidth="150" prefWidth="200" />
                         </columns>
                     </TableView>
                 </VBox> <!-- Tabel penjualan produk end -->
