@@ -7,39 +7,40 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.CashflowController">
     <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
     <LeftSidebar fx:id="sidebar" />
     
-    <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
-        <HBox alignment="CENTER_LEFT" prefHeight="40">
-            <Label styleClass="fs-5, fw-semibold" text="Cash Flow" />
-            <AnchorPane HBox.hgrow="ALWAYS" />
-            <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
-        </HBox>
-        
-        <VBox prefHeight="40" prefWidth="750">
-            <HBox alignment="CENTER_LEFT">
-                <Label text="Pilih Tanggal:   " styleClass="fs-1" style="-fx-padding: 5px 0px 5px 0px" />
-                <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+    <ScrollPane HBox.hgrow="ALWAYS" fx:id="scrollpane">
+        <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
+            <HBox alignment="CENTER_LEFT" prefHeight="40">
+                <Label styleClass="fs-5, fw-semibold" text="Cash Flow" />
+                <AnchorPane HBox.hgrow="ALWAYS" />
+                <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
             </HBox>
+            
+            <VBox spacing="10">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Pilih Tanggal:   " styleClass="fs-1" style="-fx-padding: 5px 0px 5px 0px" />
+                    <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+                </HBox>
+                
+                <TableView fx:id="invoiceTable" >
+                    <columns>
+                        <TableColumn fx:id="noCol" text="No." />
+                        <TableColumn fx:id="tanggalCol" text="Tanggal" />
+                        <TableColumn fx:id="modalCol" text="Modal" />
+                        <TableColumn fx:id="pendapatanCol" text="Pendapatan" />
+                        <TableColumn fx:id="pendapatanBersihCol" text="Pendapatan Bersih" />
+                    </columns>
+                </TableView>
+                
+                <HBox alignment="CENTER_RIGHT" prefHeight="40">
+                    <Label styleClass="fs-3, fw-semibold" text="Total Pendapatan Bersih Rp0" />
+                </HBox>
+            </VBox>
         </VBox>
-
-        <VBox prefHeight="900.0" prefWidth="1200.0">
-        <TableView fx:id="invoiceTable" >
-            <columns>
-                <TableColumn fx:id="noCol" text="No." />
-                <TableColumn fx:id="tanggalCol" text="Tanggal" />
-                <TableColumn fx:id="modalCol" text="Modal" />
-                <TableColumn fx:id="pendapatanCol" text="Pendapatan" />
-                <TableColumn fx:id="pendapatanBersihCol" text="Pendapatan Bersih" />
-            </columns>
-        </TableView>
-        </VBox>
-
-        <HBox alignment="CENTER_RIGHT" prefHeight="40">
-            <Label styleClass="fs-5, fw-semibold" text="Total Produk Terjual  Rp. 360.000" />
-        </HBox>
-    </VBox>
+    </ScrollPane>
 </HBox>

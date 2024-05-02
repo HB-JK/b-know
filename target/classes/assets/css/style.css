@@ -117,6 +117,10 @@
 .bg-white{
     -fx-background-color: #fff;
 }
+
+.bg-danger {
+    -fx-background-color: #F53B3B;
+}
 /* Reusable background style end*/
 
 
@@ -182,9 +186,9 @@
     -fx-font-size: 12px;
 }
 
-#email, #password{
+.form-control{
     -fx-text-box-border: #a2a2a2;
-    -fx-pref-height: 34px;
+    -fx-pref-height: 25px;
     -fx-prompt-text-fill: #777;
     -fx-font-size: 16px;
 }
@@ -204,7 +208,7 @@
 /* Main content start */
 .main-content{
     -fx-background-color: #f1f1f1;
-    -fx-padding: 20px;
+    -fx-padding: 12px;
 }
 
 .shadow{

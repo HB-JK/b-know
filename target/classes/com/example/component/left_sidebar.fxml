@@ -47,7 +47,7 @@
                     <ImageView styleClass="icon" fx:id="rekap_produk_icon" />
                 </AnchorPane>
                 <AnchorPane styleClass="sidebar-item" fx:id="logout" prefHeight="40">
-                    <Button styleClass="logout" fx:id="logout_button" prefWidth="200" prefHeight="40" text="Keluar" />
+                    <Button styleClass="logout" fx:id="logout_button" prefWidth="200" prefHeight="40" text="Keluar" onAction="#logout" />
                     <ImageView styleClass="icon" fx:id="logout_icon" />
                 </AnchorPane>
             </VBox>

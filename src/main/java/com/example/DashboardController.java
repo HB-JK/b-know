@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
@@ -29,6 +30,8 @@ public class DashboardController implements Initializable {
     private TableView<Produk> produkHariIniTableView;
     
     @FXML TableColumn<Void, Void> number_property, nama_produk_property, jumlah_property;
+    
+    @FXML private ScrollPane scrollpane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,8 +43,11 @@ public class DashboardController implements Initializable {
         // Set sales data to chart and labels
         PieChart.Data pangsit_mayo = new PieChart.Data("Pangsit Mayoo", 3);
         PieChart.Data pangsit_sosis = new PieChart.Data("Pangsit Sosis Ayam", 1);
-        PieChart.Data pangsit_bakso = new PieChart.Data("Pangsit Sosis Ayam", 2);
+        PieChart.Data pangsit_bakso = new PieChart.Data("Pangsit Bakso Ayam", 2);
         totalPenjualanChart.getData().addAll(pangsit_bakso, pangsit_mayo, pangsit_sosis);
+        
+        scrollpane.setFitToWidth(true);
+        scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
         this.setColumnSize();
     }

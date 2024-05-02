@@ -137,10 +137,20 @@ public class LeftSidebar extends AnchorPane {
             e1.printStackTrace();
         }
     }
+    
     @FXML
     public void changeToRekapProduk(ActionEvent e) {
         try {
             App.setRoot("rekap_produk");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void logout(ActionEvent e) {
+        try {
+            App.setRoot("login");
         } catch (IOException e1) {
             e1.printStackTrace();
         }

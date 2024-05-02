@@ -10,10 +10,10 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.LoginController">
-    <AnchorPane fx:id="left_screen" prefHeight="640" prefWidth="640"></AnchorPane> <!-- Bagian image -->
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.LoginController">
+    <AnchorPane HBox.hgrow="ALWAYS" fx:id="left_screen" prefHeight="640" prefWidth="640"></AnchorPane> <!-- Bagian image -->
     
-    <AnchorPane AnchorPane.leftAnchor="640" fx:id="right_screen" prefHeight="640" prefWidth="440">
+    <AnchorPane fx:id="right_screen" prefHeight="640" prefWidth="440">
         <VBox fx:id="right_screen_content" alignment="center" prefHeight="640" prefWidth="420" spacing="10">
         
             <HBox alignment="CENTER_LEFT">
@@ -26,13 +26,13 @@
                     <VBox spacing="5">
                         <Label fx:id="email_label" minHeight="16" minWidth="69" text="Email" />
                         
-                        <TextField fx:id="email" promptText="Masukkan email" />
+                        <TextField fx:id="email" styleClass="form-control" prefHeight="34" promptText="Masukkan email" />
                     </VBox>
                     
                     <VBox spacing="5">
                         <Label fx:id="password_label" minHeight="16" minWidth="69" text="Password" />
                         
-                        <PasswordField fx:id="password" promptText="Masukkan password" />
+                        <PasswordField fx:id="password" styleClass="form-control" prefHeight="34" promptText="Masukkan password" />
                     </VBox>
                     
                     <VBox >
@@ -42,4 +42,4 @@
             </VBox>
         </VBox>
     </AnchorPane>
-</AnchorPane>
+</HBox>

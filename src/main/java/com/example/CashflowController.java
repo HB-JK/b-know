@@ -10,6 +10,7 @@ import com.example.obj.Penjualan;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -25,11 +26,16 @@ public class CashflowController implements Initializable {
 
     @FXML
     private TableColumn<Void, Void> noCol, tanggalCol, modalCol, pendapatanCol, pendapatanBersihCol;
+    
+    @FXML private ScrollPane scrollpane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         sidebar.setActiveClass("cashflow");
         tanggalDatePicker.setValue(LocalDate.now());
+        
+        scrollpane.setFitToWidth(true);
+        scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         this.setColumnWidth();
     }

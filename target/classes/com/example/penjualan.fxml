@@ -3,6 +3,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
@@ -18,51 +19,51 @@
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PenjualanController">
     <LeftSidebar fx:id="sidebar" />
     
-    <VBox HBox.hgrow="ALWAYS" styleClass="main-content">
-        <HBox alignment="CENTER_LEFT" prefHeight="40">
-            <Label fx:id="penjualan" styleClass="fs-5, fw-semibold" text="Penjualan" />
-            
-            <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
-            
-            <Label fx:id="tanggal" styleClass="fs-3" text="Rabu, 1 Mei 2024" /> 
-        </HBox>
-        
-        <VBox prefHeight="40" prefWidth="750">
-            <AnchorPane>
-                <AnchorPane.topAnchor>10.0</AnchorPane.topAnchor> <AnchorPane.leftAnchor>20.0</AnchorPane.leftAnchor>
-
-                <Label fx:id="modalLabel" styleClass="fs-3" text="Modal Hari ini : -" style="-fx-padding: 35px 0px 35px 0px"/>
-            </AnchorPane>
-
-            <HBox alignment="CENTER_LEFT">
-                <Label text="Produk:   " styleClass="fs-1" />
-                <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" prefWidth="120.0" promptText="Pilih Produk"/>
-                <Label text="Tanggal:   " styleClass="fs-1" style="-fx-padding: 0px 10px 0px 10px" />
-                <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+    <ScrollPane HBox.hgrow="ALWAYS" fx:id="scrollpane">
+        <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
+            <HBox alignment="CENTER_LEFT" prefHeight="40">
+                <Label fx:id="penjualan" styleClass="fs-5, fw-semibold" text="Penjualan" />
                 
                 <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
                 
-                <HBox spacing="15">
-                    <Button text="Buka Kasir" styleClass="btn, bg-primary" />
-                    <Button text="Tambah" styleClass="btn, bg-primary" />
-                </HBox>
+                <Label fx:id="tanggal" styleClass="fs-3" text="Rabu, 1 Mei 2024" /> 
             </HBox>
-        </VBox>
+            
+            <VBox spacing="10">
+                <AnchorPane>
+                    <AnchorPane.topAnchor>10.0</AnchorPane.topAnchor> <AnchorPane.leftAnchor>20.0</AnchorPane.leftAnchor>
 
-        <VBox prefHeight="900.0" prefWidth="1200.0">
-        <TableView fx:id="invoiceTable" >
-            <columns>
-                <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
-                <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="150.0" />
-                <TableColumn fx:id="noFakturCol" text="No. Faktur" prefWidth="150.0" />
-                <TableColumn fx:id="namaPembeliCol" text="Nama Pembeli" prefWidth="190.0" />
-                <TableColumn fx:id="jumlahItemCol" text="Jumlah Item" prefWidth="100.0" />
-                <TableColumn fx:id="totalHargaCol" text="Total Harga" prefWidth="100.0" />
-                <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
-            </columns>
-        </TableView>
+                    <Label fx:id="modalLabel" styleClass="fs-3" text="Modal Hari ini : -"/>
+                </AnchorPane>
+
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Produk:   " styleClass="fs-1" />
+                    <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" prefWidth="120.0" promptText="Pilih Produk"/>
+                    <Label text="Tanggal:   " styleClass="fs-1" style="-fx-padding: 0px 10px 0px 10px" />
+                    <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+                    
+                    <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
+                    
+                    <HBox spacing="15">
+                        <Button text="Buka Kasir" styleClass="btn, bg-primary" onAction="#openCashierModal" />
+                        <Button text="Tambah" styleClass="btn, bg-primary" onAction="#openTambahPenjualanModal" />
+                    </HBox>
+                </HBox>
+                
+                <TableView fx:id="invoiceTable" >
+                    <columns>
+                        <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
+                        <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="150.0" />
+                        <TableColumn fx:id="noFakturCol" text="No. Faktur" prefWidth="150.0" />
+                        <TableColumn fx:id="namaPembeliCol" text="Nama Pembeli" prefWidth="190.0" />
+                        <TableColumn fx:id="jumlahItemCol" text="Jumlah Item" prefWidth="100.0" />
+                        <TableColumn fx:id="totalHargaCol" text="Total Harga" prefWidth="100.0" />
+                        <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
+                    </columns>
+                </TableView>
+            </VBox>
         </VBox>
-    </VBox>
+    </ScrollPane>
 </HBox>
 
 
