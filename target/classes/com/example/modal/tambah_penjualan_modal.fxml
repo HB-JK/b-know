@@ -10,34 +10,66 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.modal.TambahProdukModalController">
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.modal.TambahPenjualanModalController">
     <VBox HBox.hgrow="ALWAYS" styleClass="p-4" spacing="30">
-        <VBox spacing="15">
-            <HBox alignment="BASELINE_CENTER" spacing="5">
-                <Label text="Nama Produk" prefWidth="140" styleClass="fs-4" />
-                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_produk" promptText="Masukkan nama produk" />
-            </HBox>
+        <HBox spacing="15">
+            <VBox spacing="30" minWidth="300" maxWidth="600">
+                <VBox spacing="10">
+                    <HBox alignment="BASELINE_CENTER" spacing="5">
+                        <Label text="Customer" prefWidth="80" styleClass="fs-4" />
+                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_produk" promptText="" />
+                    </HBox>
+                    
+                    <HBox alignment="BASELINE_CENTER" spacing="5">
+                        <Label text="No Faktur" prefWidth="80" styleClass="fs-4" />
+                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control, bg-grey" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_stok" editable="false" />
+                    </HBox>
+                </VBox>
+                
+                <HBox spacing="5">
+                    <Button fx:id="button_tambah" text="Tambah" styleClass="btn, bg-secondary" onAction="#tambahItemPenjualan" />
+                    <Button fx:id="button_reset" text="Reset" styleClass="btn, bg-secondary-light" />
+                    <AnchorPane HBox.hgrow="ALWAYS" />
+                    <Button fx:id="button_proses" text="Proses Jual" styleClass="btn, bg-primary" />
+                </HBox>
+                
+            </VBox>
             
-            <HBox alignment="BASELINE_CENTER" spacing="5">
-                <Label text="Jumlah stok awal" prefWidth="140" styleClass="fs-4" />
-                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_stok" promptText="Masukkan jumlah stok awal (Angka)" />
-            </HBox>
-            
-            <HBox alignment="BASELINE_CENTER" spacing="5">
-                <Label text="Satuan" prefWidth="140" styleClass="fs-4" />
-                <ComboBox HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="satuan" promptText="Pilih satuan" />
-            </HBox>
-            
-            <HBox alignment="BASELINE_CENTER" spacing="5">
-                <Label text="Harga" prefWidth="140" styleClass="fs-4" />
-                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="harga" promptText="Masukkan harga (Angka)" />
-            </HBox>
-        </VBox>
-        
-        <HBox alignment="CENTER_RIGHT" spacing="5">
-            <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
-            <Button HBox.hgrow="ALWAYS" styleClass="btn, bg-primary" text="Simpan" />
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <AnchorPane styleClass="bg-aqua, p-1" prefHeight="50">
+                    <HBox spacing="5" alignment="BASELINE_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="Total Harga" styleClass="fs-2" />
+                        <Label fx:id="total_harga" text="35.000" styleClass="fs-6, fw-bold" />
+                    </HBox>
+                </AnchorPane>
+                
+                <AnchorPane styleClass="p-1" prefHeight="25">
+                    <HBox spacing="5" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="Pembayaran" styleClass="fs-2" />
+                        <Label fx:id="total_pembayaran" text="100.000" styleClass="fs-5, fw-semibold" />
+                    </HBox>
+                </AnchorPane>
+                
+                <AnchorPane styleClass="p-1" prefHeight="25">
+                    <HBox spacing="5" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
+                        <Label text="Kembalian" styleClass="fs-2" />
+                        <Label fx:id="Kembalian" text="65.000" styleClass="fs-5, fw-semibold" />
+                    </HBox>
+                </AnchorPane>
+            </VBox>
         </HBox>
+        
+        <TableView fx:id="list_penjualan_table">
+            <columns>
+                <TableColumn text="Nama Produk" fx:id="nama_produk_property" />
+                <TableColumn text="Jumlah" fx:id="jumlah_property" />
+                <TableColumn text="Harga" fx:id="harga_property" />
+                <TableColumn text="Total Harga" fx:id="total_harga_property" />
+            </columns>
+        </TableView>
+        
     </VBox>
 </HBox>

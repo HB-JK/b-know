@@ -15,39 +15,40 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class TambahPenjualanController extends BaseModalController implements Initializable{
+public class ProsesJualModalController extends BaseModalController implements Initializable{
     //Tambah / Edit Produk Modal property
     private String title;
     private InputTypeHelper input_helper = new InputTypeHelper();
     
     //Tambah / Edit Produk Modal FXML element
     @FXML private Button close_button;
-    @FXML private TextField nama_produk, jumlah_stok, harga;
-    @FXML private ComboBox<String> satuan;
-    private TextField[] list_input_integer;
+    @FXML private TextField jumlah_produk, sisa_stok, harga;
+    @FXML private TextField[] list_integer_input;
+    @FXML private ComboBox<String> nama_produk;
     
-    public TambahPenjualanController() {
-        this.title = "Tambah Produk";
+    public ProsesJualModalController() {
+        this.title = "Tambah Item Penjualan";
     }
 
-    public TambahPenjualanController(String title, double width, double height, Node parent_source) throws IOException {
-        super(title, width, height, parent_source, "modal/tambah_penjualan_modal.fxml");
+    public ProsesJualModalController(String title, double width, double height, Node parent_source) throws IOException {
+        super(title, width, height, parent_source, "modal/tambah_item_penjualan_modal.fxml");
         
         this.title = title;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        list_input_integer = new TextField[] {
-            jumlah_stok,
+        list_integer_input = new TextField[]{
+            jumlah_produk,
+            sisa_stok,
             harga
         };
         
-        for(TextField input: list_input_integer) {
+        for(TextField input: list_integer_input) {
             input_helper.setToInt(input);
         }
         
-        satuan.getItems().addAll("Pcs", "Lembar", "Buah", "Pack");
+        nama_produk.getItems().addAll("Pangsit bakso ayam", "Pangsit sosis ayam", "Pangsit Mayoo");
     }
     
     public void openModal() {

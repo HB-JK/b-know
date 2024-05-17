@@ -51,9 +51,8 @@ public class DaftarProdukController implements Initializable {
     
     @FXML
     public void openTambahProdukModal(ActionEvent e) {
-        TambahProdukModalController tambah_produk_modal;
         try {
-            tambah_produk_modal = new TambahProdukModalController("Tambah Produk", 450, 300, (Node) e.getSource());
+            TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Tambah Produk", 450, 300, (Node) e.getSource());
             tambah_produk_modal.openModal();
         } catch (IOException e1) {
             e1.printStackTrace();

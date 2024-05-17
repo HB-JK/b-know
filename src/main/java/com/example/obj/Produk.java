@@ -1,35 +1,73 @@
 package com.example.obj;
 
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.sql.Timestamp;
 
-import com.example.components.LeftSidebar;
-import com.example.obj.Penjualan;
+public class Produk {
+    private String table = "produk";
+    private int idProduk;
+    private String kodeProduk;
+    private String nama;
+    private int hargaProduk;
+    private String satuan;
+    private int sisaStok;
+    private Timestamp createdAt;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+    // Setter methods
+    public void setIdProduk(int idProduk) {
+        this.idProduk = idProduk;
+    }
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+    public void setKodeProduk(String kodeProduk) {
+        this.kodeProduk = kodeProduk;
+    }
 
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
 
-public class Produk implements Initializable{
-    @FXML private LeftSidebar sidebar;
+    public void setHargaProduk(int hargaProduk) {
+        this.hargaProduk = hargaProduk;
+    }
 
-    @FXML
-    private TableView<Penjualan> tablePenjualan;
+    public void setSatuan(String satuan) {
+        this.satuan = satuan;
+    }
 
+    public void setSisaStok(int sisaStok) {
+        this.sisaStok = sisaStok;
+    }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        sidebar.setActiveClass("produk");
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    // Getter methods
+    public int getIdProduk() {
+        return idProduk;
+    }
+
+    public String getKodeProduk() {
+        return kodeProduk;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public int getHargaProduk() {
+        return hargaProduk;
+    }
+
+    public String getSatuan() {
+        return satuan;
+    }
+
+    public int getSisaStok() {
+        return sisaStok;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 }
+

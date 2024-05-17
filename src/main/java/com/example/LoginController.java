@@ -4,16 +4,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.database.ConnectDatabase;
+import com.example.obj.Admin;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+import com.example.components.Alert.ErrorAlert;
 
 public class LoginController implements Initializable{
     
@@ -40,9 +44,13 @@ public class LoginController implements Initializable{
     }
     
     @FXML
-    public void verifyAccount() throws IOException {
-        ConnectDatabase connection = new ConnectDatabase();
-        App.setRoot("dashboard");
-        System.out.println("Email: " + email.getText() + ", Password: " + password.getText() );
+    public void verifyAccount(ActionEvent e) throws IOException {
+        Admin admin = new Admin();
+        if(admin.verifyAccount((String) email.getText(), (String) password.getText())) {
+            App.setRoot("dashboard");
+        } else {
+            ErrorAlert alert = new ErrorAlert("Login", (Node) e.getSource(), "Silahkan input ulang email dan password yang benar");
+            alert.openModal();
+        }
     }
 }

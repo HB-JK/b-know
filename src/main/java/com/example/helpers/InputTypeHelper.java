@@ -7,14 +7,16 @@ import javafx.scene.control.TextField;
 public class InputTypeHelper {
     
     public void setToInt(TextField element) {
-        element.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, 
-                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    element.setText(newValue.replaceAll("[^\\d]", ""));
+        if(element != null) {
+            element.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, 
+                    String newValue) {
+                    if (!newValue.matches("\\d*")) {
+                        element.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }

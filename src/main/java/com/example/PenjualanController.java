@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 import com.example.modal.CashierModalController;
-import com.example.modal.TambahPenjualanController;
+import com.example.modal.TambahPenjualanModalController;
 import com.example.obj.Penjualan;
 
 import javafx.event.ActionEvent;
@@ -74,7 +74,7 @@ public class PenjualanController implements Initializable {
     @FXML
     public void openTambahPenjualanModal(ActionEvent e) {
         try {
-            TambahPenjualanController tambah_penjualan_modal = new TambahPenjualanController("Input Modal", 800, 500, (Node) e.getSource());
+            TambahPenjualanModalController tambah_penjualan_modal = new TambahPenjualanModalController("Tambah Penjualan", 650, 500, (Node) e.getSource());
             tambah_penjualan_modal.openModal();
         } catch (IOException e1) {
             e1.printStackTrace();

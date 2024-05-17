@@ -82,44 +82,65 @@
 /* Reusable button style start */
 .btn{
     -fx-border-style: none;
-    -fx-text-fill: #fefefe;
     -fx-background-radius: 4px;
     -fx-font-size: 16px;
+}
+
+.alert-btn {
+    -fx-font-size: 20px !important;
 }
 /* Reusable button style end */
 
 
 /* Reusable background style start */
 .bg-primary{
+    -fx-text-fill: #fefefe;
     -fx-background-color: #585C7B;
 }
 
 .bg-secondary{
+    -fx-text-fill: #fefefe;
     -fx-background-color: #9093AF;
 }
 
 .bg-secondary-light{
+    -fx-text-fill: #333;
     -fx-background-color: #CCC0DB;
 }
 
 .bg-light-pink{
+    -fx-text-fill: #333;
     -fx-background-color: #EFA3A3;
 }
 
 .bg-aqua{
+    -fx-text-fill: #333;
     -fx-background-color: #A3E1EF;
 }
 
 .bg-light{
+    -fx-text-fill: #333;
     -fx-background-color: #f1f1f1;
 }
 
 .bg-white{
+    -fx-text-fill: #333;
     -fx-background-color: #fff;
 }
 
 .bg-danger {
+    -fx-text-fill: #fefefe;
     -fx-background-color: #F53B3B;
+}
+
+.bg-dark {
+    -fx-text-fill: #fefefe;
+    -fx-background-color: #333;
+}
+
+.bg-grey {
+    -fx-text-fill: #f1f1f1;
+    -fx-background-color: #d1d1d1;
 }
 /* Reusable background style end*/
 
