@@ -10,10 +10,10 @@ We're use Java to build the application, Tech stack we used is:
 2. Open the project using netbeans, ecllipse, or visual studio code
 3. If you are using visual studio code, make sure to install java debugger extension.
 4. Don't forget to connect database by open the `database folder` inside `/src/main/java/com/example/`
-5. Copy `Credential - example.java` to `Credential.java` or
+5. Copy `Credential-example.java-example` to `Credential.java` or
    
    ```cli
-   cp Credential - example.java Credential.java
+   cp Credential-example.java-example Credential.java
    ```
-6. Change the username, database_name, and password if you changed it.
+6. Change the username, database_name, and password if you have copied the file.
 7. Open `App.java` then press run on the top right of the screen, below close button
