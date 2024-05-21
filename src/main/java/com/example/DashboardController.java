@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar; // Assuming LeftSidebar is in the same package
-import com.example.obj.Produk;
+import com.example.model.Produk;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

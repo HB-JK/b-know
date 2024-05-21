@@ -6,7 +6,7 @@ module com.example {
     opens com.example to javafx.fxml;
     opens com.example.components to javafx.fxml;
     opens com.example.components.Alert to javafx.fxml;
-    opens com.example.modal to javafx.fxml;
+    opens com.example.components.Modal to javafx.fxml;
     opens com.example.database to javafx.fxml;
     exports com.example;
 }

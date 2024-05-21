@@ -10,7 +10,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.modal.CashierModalController">
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.components.Modal.CashierModalController">
     <VBox HBox.hgrow="ALWAYS" styleClass="p-2" spacing="25">
         <VBox spacing="5">
             <Label text="Jumlah modal hari ini" styleClass="fs-4" />
@@ -19,7 +19,7 @@
         
         <HBox alignment="CENTER_RIGHT" spacing="5">
             <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
-            <Button HBox.hgrow="ALWAYS" styleClass="btn, bg-primary" text="Simpan" />
+            <Button HBox.hgrow="ALWAYS" styleClass="btn, bg-primary" text="Simpan" onAction="#save" />
         </HBox>
     </VBox>
 </HBox>

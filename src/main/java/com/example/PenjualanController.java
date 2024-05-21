@@ -5,9 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
-import com.example.modal.CashierModalController;
-import com.example.modal.TambahPenjualanModalController;
-import com.example.obj.Penjualan;
+import com.example.components.Modal.CashierModalController;
+import com.example.components.Modal.TambahPenjualanModalController;
+import com.example.model.Penjualan;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -72,6 +72,19 @@ public class ConnectDatabase {
         }
     }
     
+    public ResultSet getSingleData(String table_name) {
+        try{
+            String query = String.format("SELECT * FROM %1$s SORT BY %2$s LIMIT 1", table_name);
+            ResultSet rs = this.stmt.executeQuery(query);
+            
+            return rs;
+        } catch (Exception e) {
+            System.out.println(e);
+            
+            return null;
+        }
+    }
+    
     public ResultSet findById(String table_name, int id) {
         try{
             String query = String.format("SELECT * FROM %1$s WHERE id_%1$s=%2$s", table_name, id);
@@ -85,16 +98,29 @@ public class ConnectDatabase {
         }
     }
     
-    public ResultSet executeQuery(String query) {
+    public ResultSet getDataQuery(String query) {
         try{
             ResultSet rs = this.stmt.executeQuery(query);
             // this.connection.close();
             
             return rs;
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
             
             return null;
+        }
+    }
+    
+    public int createUpdateQuery(String query) {
+        try{
+            int rs = this.stmt.executeUpdate(query);
+            // this.connection.close();
+            
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+            return 0;
         }
     }
 }

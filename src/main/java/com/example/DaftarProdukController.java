@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
-import com.example.modal.TambahProdukModalController;
-import com.example.obj.Penjualan;
+import com.example.components.Modal.TambahProdukModalController;
+import com.example.model.Penjualan;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

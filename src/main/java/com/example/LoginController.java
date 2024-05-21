@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.obj.Admin;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import com.example.components.Alert.ErrorAlert;
+import com.example.model.Admin;
 
 public class LoginController implements Initializable{
     
@@ -46,6 +45,8 @@ public class LoginController implements Initializable{
     @FXML
     public void verifyAccount(ActionEvent e) throws IOException {
         Admin admin = new Admin();
+        
+        // verifikasi akun melalui model admin dengan mengirimkan email, dan password
         if(admin.verifyAccount((String) email.getText(), (String) password.getText())) {
             App.setRoot("dashboard");
         } else {

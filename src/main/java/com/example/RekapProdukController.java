@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
-import com.example.obj.Penjualan;
+import com.example.model.Penjualan;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
