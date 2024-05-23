@@ -61,7 +61,7 @@
                     <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-white, shadow" spacing="5" minWidth="410" maxHeight="300">
                         <Label styleClass="fs-3, fw-bold" text="Total Penjualan Produk Hari Ini" />
                         
-                        <PieChart fx:id="totalPenjualanChart" prefWidth="400" prefHeight="300" /> -->
+                        <PieChart fx:id="totalPenjualanChart" prefWidth="400" prefHeight="300" />
                     </VBox> <!-- Tabel penjualan produk start -->
                 </HBox>
                 
