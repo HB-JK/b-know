@@ -13,7 +13,6 @@ public class Admin extends BaseModel{
     private String created_at, updated_at;
     public HashHelper hash = new HashHelper();
     
-    
     // Getter and Setter for 'id'
     public String getId() {
         return id;

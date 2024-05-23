@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import com.example.model.LogError.ErrorLevel;
+import com.example.enums.ErrorLevel;
 
 public class Modal extends BaseModel {
     private String table = "modal";
@@ -105,8 +105,7 @@ public class Modal extends BaseModel {
             return (rs == 1) ? true : false;
             
         } catch (Exception e) {
-            new LogError(ErrorLevel.CRITICAL, created_at);
-            e.printStackTrace();
+            new LogError(ErrorLevel.CRITICAL, e.getMessage());
             
             return false;
         }
