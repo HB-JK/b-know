@@ -16,7 +16,7 @@
                 <AnchorPane HBox.hgrow="ALWAYS" />
                 <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
             </HBox>
-            
+
             <VBox spacing="20">
                 <VBox> <!-- Kalimat selamat  datang -->
                     <Label text="Halo, Selamat Datang" styleClass="fs-3, fw-semibold" />
@@ -58,15 +58,14 @@
                     </VBox> <!-- Tabel penjualan produk end -->
                     
                     <!-- Tabel penjualan produk start -->
-                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-white, shadow" spacing="5" minWidth="410" maxHeight="300">
+                    <!-- <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-white, shadow" spacing="5" minWidth="410" maxHeight="300">
                         <Label styleClass="fs-3, fw-bold" text="Total Penjualan Produk Hari Ini" />
                         
-                        <PieChart fx:id="totalPenjualanChart" prefWidth="400" prefHeight="300" />
-                    </VBox> <!-- Tabel penjualan produk start -->
+                        <PieChart fx:id="totalPenjualanChart" prefWidth="400" prefHeight="300" /> -->
+                    <!-- </VBox> Tabel penjualan produk start -->
                 </HBox>
                 
             </VBox>
         </VBox>
-        
     </ScrollPane>
 </HBox>
