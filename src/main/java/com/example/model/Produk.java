@@ -113,7 +113,7 @@ public class Produk extends BaseModel {
             List<String> data = this.getLatestData();
             int index = (data.size() > 0) ? Integer.parseInt(data.get(0).toString()) : 1;
             
-            return "PROD-" + String.format("%03d", index);
+            return "PROD-" + String.format("%03d", index + 1);
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
             
