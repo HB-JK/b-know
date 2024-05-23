@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.components.Alert.ErrorAlert;
+import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.InputTypeHelper;
+import com.example.model.Modal;
 import com.example.model.Produk;
 
 import javafx.event.ActionEvent;
@@ -64,9 +67,64 @@ public class TambahProdukModalController extends BaseModalController implements 
     public void close(ActionEvent e) {
         this.closeModal();
     }
-    
+
+    // @FXML
+    // public void save(ActionEvent e) throws IOException {
+    //     if (this.modalProduk.getText().isEmpty()) {
+    //         ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap masukkan modal terlebih dahulu");
+    //         errorAlert.openModal();
+    //         return;
+    //     }
+
+    //     Modal modalProduk = new Modal(this.modalProduk.getText(), );
+    //     if (modalProduk.save()) {
+    //         SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Modal ditambahkan");
+    //         successAlert.openModal();
+    //         this.closeModal();
+    //         // this.updateState();
+
+    //     } else {
+    //         ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Modal gagal ditambahkan");
+    //         errorAlert.openModal();
+    //     }
+    // }
+
     @FXML
-    public void save(ActionEvent e) {        
-        this.closeModal();
+    public void save(ActionEvent e) throws IOException {
+        if (nama_produk.getText().isEmpty()) {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap mengisi nama produk terlebih dahulu");
+            errorAlert.openModal();
+            return; 
+        }
+
+        if (harga.getText().isEmpty()) {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap mengisi harga terlebih dahulu");
+            errorAlert.openModal();
+            return; 
+        }
+
+        if (satuan.getValue() == null) {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap memilih satuan terlebih dahulu");
+            errorAlert.openModal();
+            return; 
+        }
+
+        if (jumlah_stok.getText().isEmpty()) {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap mengisi jumlah stok terlebih dahulu");
+            errorAlert.openModal();
+            return; 
+        }
+
+        Produk produk = new Produk(nama_produk.getText(), harga.getText(), satuan.getValue(), jumlah_stok.getText());
+
+        if (produk.save()) {
+            SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Produk berhasil ditambahkan");
+            successAlert.openModal();
+            this.closeModal();
+        } else {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Produk gagal ditambahkan");
+            errorAlert.openModal();
+        }
     }
 }
+
