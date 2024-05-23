@@ -13,7 +13,7 @@ We're use Java to build the application, Tech stack we used is:
 5. Copy `Credential-example.java-example` to `Credential.java` or
    
    ```cli
-   cp Credential-example.java-example Credential.java
+   cp src/main/java/com/example/database/Credential-example.java-example src/main/java/com/example/database/Credential.java
    ```
 6. Change the username, database_url, and password if you have copied the file.
 7. Open `App.java` then press run on the top right of the screen, below close button
