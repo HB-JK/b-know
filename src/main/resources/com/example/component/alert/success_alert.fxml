@@ -17,7 +17,7 @@
                 <fitWidth>80</fitWidth>
                 <preserveRatio>true</preserveRatio>
             </ImageView>
-            <Label fx:id="alert_title" styleClass="fs-4, fw-4" wrapText="true" textAlignment="CENTER" text="gagal" />
+            <Label fx:id="alert_title" styleClass="fs-4, fw-4" wrapText="true" textAlignment="CENTER" text="Berhasil" />
             <Label fx:id="alert_message" styleClass="fs-4" wrapText="true" textAlignment="CENTER" />
         </VBox>
         

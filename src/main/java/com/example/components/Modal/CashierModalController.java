@@ -49,6 +49,10 @@ public class CashierModalController extends BaseModalController implements Initi
         Stage stage = (Stage) close_button.getScene().getWindow();
         stage.close();
     }
+
+    public void updateState() {
+        this.modal.setText("Tutup kasir");
+    }
     
     @FXML
     public void close(ActionEvent e) {
@@ -56,17 +60,23 @@ public class CashierModalController extends BaseModalController implements Initi
     }
     
     @FXML
-    public void save(ActionEvent e) throws IOException {
-        Modal modal = new Modal(this.modal.getText(), "buka");
-        
-        if(modal.save()) {
-            SuccessAlert success_alert = new SuccessAlert("Buka Kasir", (Node) e.getSource(), "Kasir sudah dibuka dengan modal " + this.modal.getText());
-            success_alert.openModal();
-        } else {
-            ErrorAlert error_alert = new ErrorAlert("Buka Kasir", (Node) e.getSource(), "Kasir belum berhasil dibuka");
-            error_alert.openModal();
+    public void openKasir(ActionEvent e) throws IOException {
+        if (this.modal.getText().isEmpty()) {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap masukkan modal terlebih dahulu");
+            errorAlert.openModal();
+            return;
         }
-        
-        this.closeModal();
+
+        Modal modal = new Modal(this.modal.getText(), "Buka");
+        if (modal.save()) {
+            SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Modal ditambahkan");
+            successAlert.openModal();
+            this.closeModal();
+            this.updateState();
+
+        } else {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Modal gagal ditambahkan");
+            errorAlert.openModal();
+        }
     }
 }
