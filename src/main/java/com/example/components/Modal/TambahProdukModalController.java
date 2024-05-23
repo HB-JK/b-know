@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.helpers.InputTypeHelper;
+import com.example.model.Produk;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,6 +62,11 @@ public class TambahProdukModalController extends BaseModalController implements 
     
     @FXML
     public void close(ActionEvent e) {
+        this.closeModal();
+    }
+    
+    @FXML
+    public void save(ActionEvent e) {        
         this.closeModal();
     }
 }

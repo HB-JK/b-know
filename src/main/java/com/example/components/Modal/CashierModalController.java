@@ -79,7 +79,4 @@ public class CashierModalController extends BaseModalController implements Initi
             errorAlert.openModal();
         }
     }
-
-    
-
 }

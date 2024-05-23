@@ -1,24 +1,22 @@
 package com.example.model;
 
+import com.example.enums.*;
+
 public class LogError extends BaseModel {
-    enum ErrorLevel {
-        EMERGENCY,
-        ALERT,
-        CRITICAL,
-        ERROR,
-        WAWRNING,
-        NOTICE,
-        INFORMATIONAL,
-        DEBUG
-    }
-    
+   
     private String table = "log_error";
     private int id;
-    private String error_level, pesan_error;
+    private ErrorLevel error_level;
+    private String pesan;
     private String created_at, updated_at;
     
-    public LogError(ErrorLevel error_level, String pesan_error) {
+    public LogError(ErrorLevel error_level, String pesan) {
+        System.out.println(error_level);
+        this.setErrorLevel(error_level);
+        this.setPesan(pesan);
+        this.setCreatedAt(this.date_helper.getDatabaseTimestamp());
         
+        this.save();
     }
     
     // Getter and Setter for 'id'
@@ -31,21 +29,21 @@ public class LogError extends BaseModel {
     }
 
     // Getter and Setter for 'error_level'
-    public String getErrorLevel() {
+    public ErrorLevel getErrorLevel() {
         return error_level;
     }
 
-    public void setErrorLevel(String error_level) {
+    public void setErrorLevel(ErrorLevel error_level) {
         this.error_level = error_level;
     }
 
-    // Getter and Setter for 'pesan_error'
-    public String getPesanError() {
-        return pesan_error;
+    // Getter and Setter for 'pesan'
+    public String getPesan() {
+        return pesan;
     }
 
-    public void setPesanError(String pesan_error) {
-        this.pesan_error = pesan_error;
+    public void setPesan(String pesan) {
+        this.pesan = pesan;
     }
 
     // Getter and Setter for 'created_at'
@@ -64,5 +62,16 @@ public class LogError extends BaseModel {
 
     public void setUpdatedAt(String updated_at) {
         this.updated_at = updated_at;
+    }
+    
+    public void save() {
+        try{
+            String query = String
+            .format("INSERT INTO %1$s(error_level, pesan, created_at, updated_at) VALUES('%2$s', '%3$s', '%4$s', %5$s)", table, error_level , pesan, created_at, updated_at);
+            
+            this.database.createUpdateQuery(query);            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
