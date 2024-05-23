@@ -57,15 +57,6 @@ public class CashierModalController extends BaseModalController implements Initi
     
     @FXML
     public void save(ActionEvent e) throws IOException {
-        Modal modal = new Modal(this.modal.getText(), "buka");
-        if(modal.save()) {
-            SuccessAlert success_alert = new SuccessAlert("Buka Kasir", (Node) e.getSource(), "Kasir sudah dibuka dengan modal " + this.modal.getText());
-            success_alert.openModal();
-        } else {
-            ErrorAlert error_alert = new ErrorAlert("Buka Kasir", (Node) e.getSource(), "Kasir belum berhasil dibuka");
-            error_alert.openModal();
-        }
-        
         this.closeModal();
     }
 }
