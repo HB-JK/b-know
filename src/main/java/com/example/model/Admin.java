@@ -2,22 +2,23 @@ package com.example.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.helpers.HashHelper;
 
 public class Admin extends BaseModel{
     private String table = "admin";
-    private int id; 
-    private String nama, email;
+    private String id, nama, email;
     private String created_at, updated_at;
     public HashHelper hash = new HashHelper();
     
     // Getter and Setter for 'id'
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -62,10 +63,10 @@ public class Admin extends BaseModel{
             String hashed_password = this.hash.getMd5(password);
             
             String query = String.format("SELECT * FROM %1$s WHERE email='%2$s' AND password='%3$s'", table, email, hashed_password);
-            ResultSet data = this.database.getDataQuery(query);
+            ArrayList<Object> data = this.database.getDataQuery(query);
             
-            return data.next();
-        } catch (SQLException e) {
+            return (data.size() > 0) ? true : false;
+        } catch (Exception e) {
             e.printStackTrace();
             
             return false;
@@ -74,16 +75,17 @@ public class Admin extends BaseModel{
     
     public void getAccount() {
         try {
-            ResultSet data = this.database.getAllData(table);
+            List<String> data = ((ArrayList<String>) this.database.getSingleData(table));
             
-            if(data.next()){
-                this.setId(data.getInt(1));
-                this.setNama(data.getString(2));
-                this.setEmail(data.getString(3));
-                this.setCreatedAt(data.getString(6));
+            if(data.size() > 0){
+                this.setId(data.get(0).toString());
+                this.setNama(data.get(1));
+                this.setEmail(data.get(2));
+                this.setCreatedAt(data.get(5));
+                this.setUpdatedAt(data.get(6));
             }
             
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

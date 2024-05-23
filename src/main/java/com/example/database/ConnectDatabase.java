@@ -1,6 +1,8 @@
 package com.example.database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConnectDatabase {
     private Connection connection;
@@ -20,101 +22,176 @@ public class ConnectDatabase {
         }
     }
     
-    public ResultSet getAllData(String table_name) {
+    public ArrayList<Object> getAllData(String table_name) {
+        ArrayList<Object> listData = new ArrayList<Object>();
+        
         try{
             String query = String.format("SELECT * FROM %1$s", table_name);
             ResultSet rs = this.stmt.executeQuery(query);
             
-            return rs;
+            while(rs.next()) {
+                ResultSetMetaData meta_data = rs.getMetaData();
+                
+                List<Object> data = new ArrayList<Object>();
+                
+                for(int i = 1; i <= meta_data.getColumnCount(); i++) {
+                    if(isNumberType(meta_data.getColumnType(i))) {
+                        data.add(rs.getInt(i));
+                    } else {
+                        data.add(rs.getString(i));
+                    }
+                }
+                
+                listData.add(data);
+            }
+            
+            this.stmt.close();
+            this.connection.close();
         } catch (Exception e) {
             System.out.println(e);
             
             return null;
         }
+        
+        return listData;
     }
     
-    public ResultSet getAllData(String table_name, String sort_column) {
-        try{
-            String query = String.format("SELECT * FROM %1$s SORT BY %2$s", table_name, sort_column);
-            ResultSet rs = this.stmt.executeQuery(query);
-            
-            return rs;
-        } catch (Exception e) {
-            System.out.println(e);
-            
-            return null;
-        }
-    }
-    
-    public ResultSet getAllDataByDesc(String table_name) {
+    public ArrayList<Object> getAllDataByDesc(String table_name) {
+        ArrayList<Object> listData = new ArrayList<Object>();
+        
         try{
             String query = String.format("SELECT * FROM %1$s DESC", table_name);
             ResultSet rs = this.stmt.executeQuery(query);
             
-            return rs;
+            while(rs.next()) {
+                ResultSetMetaData meta_data = rs.getMetaData();
+                
+                List<Object> data = new ArrayList<Object>();
+                
+                for(int i = 1; i <= meta_data.getColumnCount(); i++) {
+                    if(isNumberType(meta_data.getColumnType(i))) {
+                        data.add(rs.getInt(i));
+                    } else {
+                        data.add(rs.getString(i));
+                    }
+                }
+                
+                listData.add(data);
+            }
+            
+            this.stmt.close();
+            this.connection.close();
         } catch (Exception e) {
             System.out.println(e);
             
             return null;
         }
+        
+        return listData;
     }
     
-    public ResultSet getAllDataByDesc(String table_name, String sort_column) {
+    public Object getSingleData(String table_name) {
+        Object data_fetch = new Object();
+        
         try{
-            String query = String.format("SELECT * FROM %1$s SORT BY %2$s DESC", table_name, sort_column);
+            String query = String.format("SELECT * FROM %1$s LIMIT 1", table_name);
             ResultSet rs = this.stmt.executeQuery(query);
             
-            return rs;
+            while(rs.next()) {
+                ResultSetMetaData meta_data = rs.getMetaData();
+                
+                List<Object> data = new ArrayList<Object>();
+                
+                for(int i = 1; i <= meta_data.getColumnCount(); i++) {
+                    data.add(rs.getString(i));
+                }
+                
+                data_fetch = data;
+            }
+            
+            this.stmt.close();
+            this.connection.close();
         } catch (Exception e) {
             System.out.println(e);
             
             return null;
         }
+        
+        return data_fetch;
     }
     
-    public ResultSet getSingleData(String table_name) {
-        try{
-            String query = String.format("SELECT * FROM %1$s SORT BY %2$s LIMIT 1", table_name);
-            ResultSet rs = this.stmt.executeQuery(query);
-            
-            return rs;
-        } catch (Exception e) {
-            System.out.println(e);
-            
-            return null;
-        }
-    }
-    
-    public ResultSet findById(String table_name, int id) {
+    public ArrayList<Object> findById(String table_name, int id) {
+        ArrayList<Object> listData = new ArrayList<Object>();
+        
         try{
             String query = String.format("SELECT * FROM %1$s WHERE id_%1$s=%2$s", table_name, id);
             ResultSet rs = this.stmt.executeQuery(query);
             
-            return rs;
+            while(rs.next()) {
+                ResultSetMetaData meta_data = rs.getMetaData();
+                
+                List<Object> data = new ArrayList<Object>();
+                
+                for(int i = 1; i <= meta_data.getColumnCount(); i++) {
+                    if(isNumberType(meta_data.getColumnType(i))) {
+                        data.add(rs.getInt(i));
+                    } else {
+                        data.add(rs.getString(i));
+                    }
+                }
+                
+                listData.add(data);
+            }
+            
+            this.stmt.close();
+            this.connection.close();
         } catch (Exception e) {
             System.out.println(e);
             
             return null;
         }
+        
+        return listData;
     }
     
-    public ResultSet getDataQuery(String query) {
+    public ArrayList<Object> getDataQuery(String query) {
+        ArrayList<Object> listData = new ArrayList<Object>();
         try{
             ResultSet rs = this.stmt.executeQuery(query);
-            // this.connection.close();
             
-            return rs;
+            while(rs.next()) {
+                ResultSetMetaData meta_data = rs.getMetaData();
+                
+                List<Object> data = new ArrayList<Object>();
+                
+                for(int i = 1; i <= meta_data.getColumnCount(); i++) {
+                    if(isNumberType(meta_data.getColumnType(i))) {
+                        data.add(rs.getInt(i));
+                    } else {
+                        data.add(rs.getString(i));
+                    }
+                }
+                
+                listData.add(data);
+            }
+            
+            this.stmt.close();
+            this.connection.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
             
             return null;
         }
+        
+        return listData;
     }
     
     public int createUpdateQuery(String query) {
         try{
             int rs = this.stmt.executeUpdate(query);
-            // this.connection.close();
+            this.stmt.close();
+            this.connection.close();
             
             return rs;
         } catch (SQLException e) {
@@ -122,5 +199,13 @@ public class ConnectDatabase {
             
             return 0;
         }
+    }
+    
+    public boolean isNumberType(int column_type_number) {
+        if(column_type_number == -5) return true;
+        if(column_type_number == 4) return true;
+        if(column_type_number == -6) return true;
+        if(column_type_number == 5) return true;
+        return false;
     }
 }

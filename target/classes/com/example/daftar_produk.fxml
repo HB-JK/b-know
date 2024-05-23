@@ -30,7 +30,7 @@
                 </HBox>
             </HBox>
 
-            <TableView fx:id="invoiceTable" >
+            <TableView fx:id="produkTable" >
                 <columns>
                     <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
                     <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="120.0" />

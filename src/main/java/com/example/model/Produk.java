@@ -10,6 +10,10 @@ public class Produk {
     private int sisa_stok;
     private String created_at;
     
+    public Produk(Object data){
+        
+    }
+    
     // Getter and Setter for 'id'
     public int getId() {
         return id;

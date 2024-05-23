@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import com.example.model.LogError.ErrorLevel;
+
 public class Modal extends BaseModel {
     private String table = "modal";
     private int id, id_admin;
@@ -96,13 +98,16 @@ public class Modal extends BaseModel {
     public boolean save() {
         try{
             String query = String
-            .format("INSERT INTO %1$s(id_admin, jumlah_modal_masuk,jumlah_penarikan_modal, status_kasir, created_at, updated_at) VALUES('%2$s', %3$d, %4$d, '%5$s', '%6$s', %7$s)",
+            .format("INSERT INTO %1$s(id_admin, jumlah_modal_masuk, jumlah_penarikan_modal, status_kasir, created_at, updated_at) VALUES('%2$s', %3$d, %4$d, '%5$s', '%6$s', %7$s)",
             table, admin.getId(), jumlah_modal_masuk, jumlah_penarikan_modal, status_kasir, created_at, updated_at);
             
             int rs = this.database.createUpdateQuery(query);
             return (rs == 1) ? true : false;
             
         } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, created_at);
+            e.printStackTrace();
+            
             return false;
         }
     }
