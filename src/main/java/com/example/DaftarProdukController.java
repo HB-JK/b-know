@@ -2,13 +2,11 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 import com.example.components.Modal.TambahProdukModalController;
-import com.example.database.ConnectDatabase;
 import com.example.model.Produk;
 
 import javafx.collections.FXCollections;
@@ -52,6 +50,7 @@ public class DaftarProdukController implements Initializable {
     }
     
     public void setupColumn() {
+        //set column width to fit with tableview
         noCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.05));
         tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
         kodeProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
@@ -61,6 +60,7 @@ public class DaftarProdukController implements Initializable {
         hargaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.150));
         aksiCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.190));
         
+        //set property of each column to get data from the model Produk
         tanggalCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("createdAt"));
         kodeProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("kodeProduk"));
         namaProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("nama"));
