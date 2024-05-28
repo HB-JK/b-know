@@ -2,13 +2,17 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 import com.example.components.Modal.TambahProdukModalController;
-import com.example.model.Penjualan;
+import com.example.database.ConnectDatabase;
 import com.example.model.Produk;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class DaftarProdukController implements Initializable {
@@ -29,6 +34,12 @@ public class DaftarProdukController implements Initializable {
     
     @FXML private ScrollPane scrollpane;
     
+    private ObservableList<Produk> initialData() {
+        List<Produk> list_produk = new Produk().getTableData();
+        
+        return FXCollections.observableArrayList(list_produk);
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sidebar.setActiveClass("daftar_produk");
@@ -36,11 +47,11 @@ public class DaftarProdukController implements Initializable {
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
-        this.setColumnWidth();
-        // produkTable.getItems().add
+        this.setupColumn();
+        produkTable.setItems(initialData());
     }
     
-    public void setColumnWidth() {
+    public void setupColumn() {
         noCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.05));
         tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
         kodeProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
@@ -49,6 +60,17 @@ public class DaftarProdukController implements Initializable {
         satuanCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.120));
         hargaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.150));
         aksiCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.190));
+        
+        tanggalCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("createdAt"));
+        kodeProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("kodeProduk"));
+        namaProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("nama"));
+        jumlahStokCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("sisaStok"));
+        satuanCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("satuan"));
+        hargaProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("hargaProduk"));
+    }
+    
+    public void addItemToTable(Produk produk) {
+        produkTable.getItems().add(produk);
     }
     
     @FXML

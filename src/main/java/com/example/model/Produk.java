@@ -3,112 +3,160 @@ package com.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Produk extends BaseModel {
     private String table = "produk";
-    private int id;
-    private String kode_produk;
-    private String nama;
-    private int harga_produk;
-    private String satuan;
-    private int sisa_stok;
-    private String created_at, updated_at;
+    private final StringProperty id = new SimpleStringProperty();
+    private final StringProperty kodeProduk = new SimpleStringProperty();
+    private final StringProperty nama = new SimpleStringProperty();
+    private final StringProperty hargaProduk = new SimpleStringProperty();
+    private final StringProperty satuan = new SimpleStringProperty();
+    private final StringProperty sisa_stok = new SimpleStringProperty();
+    private final StringProperty createdAt = new SimpleStringProperty();
+    private final StringProperty updated_at = new SimpleStringProperty();
+    private LogStokProduk[] log_stok_produk;
     
     public Produk() {}
     
-    public Produk(String nama, String harga_produk, String satuan, String sisa_stok) {
+    public Produk(String nama, String hargaProduk, String satuan, String sisa_stok) {
+        this.setKodeProduk(this.getUniqueCode());
         this.setNama(nama);
-        this.setHargaProduk(Integer.parseInt(harga_produk));
-        this.setSisaStok(Integer.parseInt(sisa_stok));
+        this.setHargaProduk(hargaProduk);
+        this.setSisaStok(sisa_stok);
         this.setSatuan(satuan);
         this.setCreatedAt(this.date_helper.getDatabaseTimestamp());
     }
     
     public Produk(Object object){
-        ArrayList<String> data = new ArrayList<String>();
-        this.id = Integer.parseInt(data.get(0).toString());
-        this.kode_produk = data.get(1).toString();
-        this.nama = data.get(2).toString();
-        this.harga_produk = Integer.parseInt(data.get(3).toString());
-        this.satuan = data.get(4).toString();
-        this.sisa_stok = Integer.parseInt(data.get(5).toString());
-        this.created_at = data.get(6).toString();
+        try{
+            List<String> data = (ArrayList<String>) object;
+            
+            this.id.set(String.valueOf(data.get(0)));
+            this.kodeProduk.set(data.get(1));
+            this.nama.set(data.get(2));
+            this.hargaProduk.set(String.valueOf(data.get(3)));
+            this.satuan.set(data.get(4));
+            this.sisa_stok.set(String.valueOf(data.get(5)));
+            this.createdAt.set(data.get(6));
+        } catch ( Exception e ) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+        }
     }
     
     // Getter and Setter for 'id'
-    public int getId() {
+    public final StringProperty idProperty() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    
+    public String getId() {
+        return id.get();
     }
 
-    // Getter and Setter for 'kode_produk'
-    public String getKodeProduk() {
-        return kode_produk;
+    public void setId(String id) {
+        this.id.set(id);
+    }
+
+    // Getter and Setter for 'kodeProduk'
+    public final StringProperty kodeProdukProperty() {
+        return kodeProduk;
     }
     
-    public void setKodeProduk(String kode_produk) {
-        this.kode_produk = kode_produk;
+    public String getKodeProduk() {
+        return kodeProduk.get();
+    }
+    
+    public void setKodeProduk(String kodeProduk) {
+        this.kodeProduk.set(kodeProduk);
     }
 
     // Getter and Setter for 'nama'
-    public String getNama() {
+    public final StringProperty namaProperty() {
         return nama;
+    }
+    
+    public String getNama() {
+        return nama.get();
     }
 
     public void setNama(String nama) {
-        this.nama = nama;
+        this.nama.set(nama);
     }
 
-    // Getter and Setter for 'harga_produk'
+    // Getter and Setter for 'hargaProduk'
+    public final StringProperty hargaProdukProperty() {
+        return new SimpleStringProperty(
+            this.format_helper.convertToRupiah(Integer.parseInt(hargaProduk.get()))
+        );
+    }
+    
     public int getHargaProduk() {
-        return harga_produk;
+        return Integer.parseInt(hargaProduk.get());
     }
 
-    public void setHargaProduk(int harga_produk) {
-        this.harga_produk = harga_produk;
+    public void setHargaProduk(String hargaProduk) {
+        this.hargaProduk.set(hargaProduk);
     }
 
     // Getter and Setter for 'satuan'
-    public String getSatuan() {
+    public final StringProperty satuanProperty() {
         return satuan;
+    }
+    
+    public String getSatuan() {
+        return satuan.get();
     }
 
     public void setSatuan(String satuan) {
-        this.satuan = satuan;
+        this.satuan.set(satuan);
     }
 
     // Getter and Setter for 'sisa_stok'
-    public int getSisaStok() {
+    public final StringProperty sisaStokProperty() {
         return sisa_stok;
     }
-
-    public void setSisaStok(int sisa_stok) {
-        this.sisa_stok = sisa_stok;
+    
+    public int getSisaStok() {
+        return Integer.parseInt(sisa_stok.get());
     }
 
-    // Getter and Setter for 'created_at'
+    public void setSisaStok(String sisa_stok) {
+        this.sisa_stok.set(sisa_stok);
+    }
+
+    // Getter and Setter for 'createdAt'
+    public final StringProperty createdAtProperty() {
+        return new SimpleStringProperty(
+            this.date_helper.getDatabaseDate(createdAt.get())
+        );
+    }
+    
     public String getCreatedAt() {
-        return created_at;
+        return createdAt.get();
     }
 
-    public void setCreatedAt(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt.set(createdAt);
     }
     
     // Getter and Setter for 'updated_at'
-    public String getUpdatedAt() {
+    public StringProperty updatedAtProperty() {
         return updated_at;
+    }
+    
+    public String getUpdatedAt() {
+        return updated_at.get();
     }
 
     public void setUpdatedAt(String updated_at) {
-        this.updated_at = updated_at;
+        this.updated_at.set(updated_at);
     }
     
-    public String getUniqueKode() {
+    public String getUniqueCode() {
         try{
             List<String> data = this.getLatestData();
             int index = (data.size() > 0) ? Integer.parseInt(data.get(0).toString()) : 1;
@@ -133,11 +181,28 @@ public class Produk extends BaseModel {
         }
     }
     
+    public List<Produk> getTableData() {
+        try{
+            List<Produk> data = new ArrayList<Produk>();
+            ArrayList<Object> data_fetch = new ConnectDatabase().getAllData("produk");
+            
+            for(Object produk : data_fetch) {
+                data.add(new Produk(produk));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Produk");
+            return null;
+        }
+    }
+    
     public boolean save() {
         try{
             String query = String.format(
                 "INSERT INTO %1$s(kode_produk, nama, harga_produk, satuan, sisa_stok, created_at, updated_at) VALUES('%2$s', '%3$s', %4$d, '%5$s', %6$d, '%7$s', %8$s)",
-                table, this.getUniqueKode(), nama, harga_produk, satuan, sisa_stok, created_at, updated_at
+                table, getKodeProduk(), getNama(), getHargaProduk(), getSatuan(), getSisaStok(), getCreatedAt(), getUpdatedAt()
+                
             );
             
             int rs = this.database.createUpdateQuery(query);

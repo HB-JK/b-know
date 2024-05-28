@@ -26,7 +26,7 @@
                 
                 <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
                 
-                <Label fx:id="tanggal" styleClass="fs-3" text="Rabu, 1 Mei 2024" /> 
+                <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" /> 
             </HBox>
             
             <VBox spacing="10">

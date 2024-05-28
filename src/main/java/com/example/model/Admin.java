@@ -5,11 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.enums.ErrorLevel;
 import com.example.helpers.HashHelper;
 
 public class Admin extends BaseModel{
     private String table = "admin";
-    private String id, nama, email;
+    private String id, nama, email, is_superadmin;
     private String created_at, updated_at;
     public HashHelper hash = new HashHelper();
     
@@ -39,6 +40,15 @@ public class Admin extends BaseModel{
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    // Getter and Setter for 'is_superadmin'
+    public String getIsSuperadmin() {
+        return is_superadmin;
+    }
+
+    public void setIsSuperadmin(String is_superadmin) {
+        this.is_superadmin = is_superadmin;
+    }
 
     // Getter and Setter for 'created_at'
     public String getCreatedAt() {
@@ -65,15 +75,35 @@ public class Admin extends BaseModel{
             String query = String.format("SELECT * FROM %1$s WHERE email='%2$s' AND password='%3$s'", table, email, hashed_password);
             ArrayList<Object> data = this.database.getDataQuery(query);
             
-            return (data.size() > 0) ? true : false;
+            if(data.size() > 0) {
+                this.setAccount(data.get(0));
+                return true;
+            }
+            
+            return false;
         } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
             e.printStackTrace();
             
             return false;
         }
     }
     
-    public void getAccount() {
+    public void setAccount(Object obj) {
+        try{
+            List<String> data = (ArrayList) obj;
+            
+            this.setId(String.valueOf(data.get(0)));
+            this.setNama(data.get(1).toString());
+            this.setEmail(data.get(2).toString());
+            this.setIsSuperadmin(data.get(4).toString());
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void getAccount(int id) {
         try {
             List<String> data = ((ArrayList<String>) this.database.getSingleData(table));
             

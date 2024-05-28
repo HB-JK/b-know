@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.DaftarProdukController;
 import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.InputTypeHelper;
@@ -67,27 +68,6 @@ public class TambahProdukModalController extends BaseModalController implements 
     public void close(ActionEvent e) {
         this.closeModal();
     }
-
-    // @FXML
-    // public void save(ActionEvent e) throws IOException {
-    //     if (this.modalProduk.getText().isEmpty()) {
-    //         ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Harap masukkan modal terlebih dahulu");
-    //         errorAlert.openModal();
-    //         return;
-    //     }
-
-    //     Modal modalProduk = new Modal(this.modalProduk.getText(), );
-    //     if (modalProduk.save()) {
-    //         SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Modal ditambahkan");
-    //         successAlert.openModal();
-    //         this.closeModal();
-    //         // this.updateState();
-
-    //     } else {
-    //         ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Modal gagal ditambahkan");
-    //         errorAlert.openModal();
-    //     }
-    // }
 
     @FXML
     public void save(ActionEvent e) throws IOException {

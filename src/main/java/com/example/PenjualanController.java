@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.example.components.LeftSidebar;
 import com.example.components.Modal.CashierModalController;
 import com.example.components.Modal.TambahPenjualanModalController;
+import com.example.helpers.DateHelper;
 import com.example.model.Penjualan;
 
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,6 +40,8 @@ public class PenjualanController implements Initializable {
     TableColumn<Void, Void> noCol, tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol, aksiCol;
     
     @FXML private ScrollPane scrollpane;
+    
+    @FXML private Label today_date;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -48,10 +52,11 @@ public class PenjualanController implements Initializable {
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        this.setColumnWidth();
+        this.setupColumn();
+        today_date.setText(new DateHelper().getTodayDate());
     }
 
-    public void setColumnWidth() {
+    public void setupColumn() {
         noCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.05));
         tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.120));
         noFakturCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.150));

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar; // Assuming LeftSidebar is in the same package
+import com.example.helpers.DateHelper;
 import com.example.model.Produk;
 
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ public class DashboardController implements Initializable {
     private PieChart totalPenjualanChart;
 
     @FXML
-    private Label total_penjualan, total_produk, total_pendapatan;
+    private Label total_penjualan, total_produk, total_pendapatan, today_date;
 
     @FXML
     private TableView<Produk> produkHariIniTableView;
@@ -49,6 +50,7 @@ public class DashboardController implements Initializable {
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
         this.setColumnSize();
+        today_date.setText(new DateHelper().getTodayDate());
     }
     
     public void setColumnSize() {

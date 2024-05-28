@@ -4,9 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.enums.ErrorLevel;
-import com.example.model.LogError;
-
 public class ConnectDatabase {
     private Connection connection;
     private Statement stmt;
@@ -51,7 +48,7 @@ public class ConnectDatabase {
             this.stmt.close();
             this.connection.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             
             return null;
         }
@@ -72,11 +69,7 @@ public class ConnectDatabase {
                 List<Object> data = new ArrayList<Object>();
                 
                 for(int i = 1; i <= meta_data.getColumnCount(); i++) {
-                    if(isNumberType(meta_data.getColumnType(i))) {
-                        data.add(rs.getInt(i));
-                    } else {
-                        data.add(rs.getString(i));
-                    }
+                    data.add(rs.getString(i));
                 }
                 
                 listData.add(data);
@@ -85,7 +78,7 @@ public class ConnectDatabase {
             this.stmt.close();
             this.connection.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             
             return null;
         }
@@ -115,7 +108,7 @@ public class ConnectDatabase {
             this.stmt.close();
             this.connection.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             
             return null;
         }
@@ -163,11 +156,7 @@ public class ConnectDatabase {
                 List<Object> data = new ArrayList<Object>();
                 
                 for(int i = 1; i <= meta_data.getColumnCount(); i++) {
-                    if(isNumberType(meta_data.getColumnType(i))) {
-                        data.add(rs.getInt(i));
-                    } else {
-                        data.add(rs.getString(i));
-                    }
+                    data.add(rs.getString(i));
                 }
                 
                 listData.add(data);
@@ -176,7 +165,7 @@ public class ConnectDatabase {
             this.stmt.close();
             this.connection.close();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             
             return null;
         }
@@ -195,11 +184,7 @@ public class ConnectDatabase {
                 List<Object> data = new ArrayList<Object>();
                 
                 for(int i = 1; i <= meta_data.getColumnCount(); i++) {
-                    if(isNumberType(meta_data.getColumnType(i))) {
-                        data.add(rs.getInt(i));
-                    } else {
-                        data.add(rs.getString(i));
-                    }
+                    data.add(rs.getString(i));
                 }
                 
                 listData.add(data);
@@ -225,7 +210,7 @@ public class ConnectDatabase {
             this.connection.close();
             return rs;
         } catch (SQLException e) {     
-            System.out.println(e.getMessage());     
+            e.printStackTrace();
             return 0;
         }
     }
