@@ -1,7 +1,5 @@
 package com.example.model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,7 @@ import com.example.helpers.HashHelper;
 
 public class Admin extends BaseModel{
     private String table = "admin";
-    private String id, nama, email, is_superadmin;
+    private String id, nama, email, role_admin;
     private String created_at, updated_at;
     public HashHelper hash = new HashHelper();
     
@@ -41,13 +39,13 @@ public class Admin extends BaseModel{
         this.email = email;
     }
     
-    // Getter and Setter for 'is_superadmin'
-    public String getIsSuperadmin() {
-        return is_superadmin;
+    // Getter and Setter for 'role_admin'
+    public String getAdminRole() {
+        return role_admin;
     }
 
-    public void setIsSuperadmin(String is_superadmin) {
-        this.is_superadmin = is_superadmin;
+    public void setAdminRole(String role_admin) {
+        this.role_admin = role_admin;
     }
 
     // Getter and Setter for 'created_at'
@@ -96,7 +94,7 @@ public class Admin extends BaseModel{
             this.setId(String.valueOf(data.get(0)));
             this.setNama(data.get(1).toString());
             this.setEmail(data.get(2).toString());
-            this.setIsSuperadmin(data.get(4).toString());
+            this.setAdminRole(data.get(4).toString().equals("y") ? "superadmin" : "kasir");
         } catch (Exception e) {
             new LogError(ErrorLevel.CRITICAL, e.getMessage());
             e.printStackTrace();

@@ -16,8 +16,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import com.example.components.Alert.ErrorAlert;
+import com.example.enums.ErrorLevel;
 import com.example.helpers.UserHelper;
 import com.example.model.Admin;
+import com.example.model.LogError;
 
 public class LoginController implements Initializable{
     
@@ -45,15 +47,26 @@ public class LoginController implements Initializable{
     
     @FXML
     public void verifyAccount(ActionEvent e) throws IOException {
-        Admin admin = new Admin();
-        
-        // verifikasi akun melalui model admin dengan mengirimkan email, dan password
-        if(admin.verifyAccount((String) email.getText(), (String) password.getText())) {
-            new UserHelper().saveAdmin(admin);
-            App.setRoot("dashboard");
-        } else {
-            ErrorAlert alert = new ErrorAlert("Login", (Node) e.getSource(), "Silahkan input ulang email dan password yang benar");
+        try{
+            Admin admin = new Admin();
+            
+            // verifikasi akun melalui model admin dengan mengirimkan email, dan password
+            if(admin.verifyAccount((String) email.getText(), (String) password.getText())) {
+                if(new UserHelper().saveAdminToJson(admin)) {
+                    App.setRoot("dashboard");
+                    return;
+                }
+                
+                throw new Exception("Folder config kamu terhapus, silahkan buat ulang folder config");
+            } else {
+                ErrorAlert alert = new ErrorAlert("Login", (Node) e.getSource(), "Silahkan input ulang email dan password yang benar");
+                alert.openModal();
+            }
+        } catch (Exception exception) {
+            ErrorAlert alert = new ErrorAlert("Login", (Node) e.getSource(), exception.getMessage());
             alert.openModal();
+            
+            new LogError(ErrorLevel.CRITICAL, exception.getMessage());
         }
     }
 }

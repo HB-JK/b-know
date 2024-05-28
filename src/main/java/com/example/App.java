@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.example.helpers.UserHelper;
+
 
 public class App extends Application {
 
@@ -15,7 +17,9 @@ public class App extends Application {
 
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1080, 640);
+        String starter_page = new UserHelper().checkExpired() ? "login" : "dashboard";
+        
+        scene = new Scene(loadFXML(starter_page), 1080, 640);
         scene.getStylesheets().add(getClass().getResource("/assets/css/style.css").toExternalForm());
         stage.setTitle("B-Know");
         stage.setScene(scene);
