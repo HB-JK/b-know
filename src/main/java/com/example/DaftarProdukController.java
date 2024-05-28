@@ -51,14 +51,13 @@ public class DaftarProdukController implements Initializable {
     
     public void setupColumn() {
         //set column width to fit with tableview
-        noCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.05));
-        tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
-        kodeProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
-        namaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.190));
-        jumlahStokCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.100));
-        satuanCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.120));
-        hargaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.150));
-        aksiCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.190));
+        tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.15));
+        kodeProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.10));
+        namaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.19));
+        jumlahStokCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.10));
+        satuanCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.12));
+        hargaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.15));
+        aksiCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.19));
         
         //set property of each column to get data from the model Produk
         tanggalCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("createdAt"));

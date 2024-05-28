@@ -17,7 +17,7 @@ import com.example.enums.ErrorLevel;
         public Modal() {}
         
         public Modal(String jumlah_modal_masuk, String status_kasir) {
-            // this.setAdmin(this.user_helper.getAdmin());
+            this.setAdmin(this.user_helper.getAdmin());
             this.setJumlahModalMasuk(Integer.parseInt(jumlah_modal_masuk));
             this.setStatusKasir(status_kasir);
             this.setCreatedAt(date_helper.getDatabaseTimestamp());

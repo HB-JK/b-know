@@ -32,7 +32,6 @@
 
             <TableView fx:id="produkTable" >
                 <columns>
-                    <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
                     <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="120.0" />
                     <TableColumn fx:id="kodeProdukCol" text="Kode Produk" prefWidth="100.0" />
                     <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="170.0" />
