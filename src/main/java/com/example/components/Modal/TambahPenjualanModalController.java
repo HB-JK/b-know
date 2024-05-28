@@ -40,10 +40,10 @@ public class TambahPenjualanModalController extends BaseModalController implemen
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.setColumnWidth();
+        this.setupColumn();
     }
     
-    public void setColumnWidth() {
+    public void setupColumn() {
         nama_produk_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
         jumlah_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
         harga_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));

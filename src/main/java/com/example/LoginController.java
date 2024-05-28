@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import com.example.components.Alert.ErrorAlert;
+import com.example.helpers.UserHelper;
 import com.example.model.Admin;
 
 public class LoginController implements Initializable{
@@ -48,6 +49,7 @@ public class LoginController implements Initializable{
         
         // verifikasi akun melalui model admin dengan mengirimkan email, dan password
         if(admin.verifyAccount((String) email.getText(), (String) password.getText())) {
+            new UserHelper().saveAdmin(admin);
             App.setRoot("dashboard");
         } else {
             ErrorAlert alert = new ErrorAlert("Login", (Node) e.getSource(), "Silahkan input ulang email dan password yang benar");
