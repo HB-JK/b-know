@@ -29,9 +29,19 @@ public class UserHelper {
         }
     }
     
-    public Admin getAdmin() throws NoSuchElementException {
+    public void getAdminFromJson() throws NoSuchElementException {
         try {
             this.admin.putAll(json_helper.getJsonFile("config/session.json"));
+            
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public Admin getAdmin() {
+        try {
+            this.getAdminFromJson();
             
             if(this.admin.size() > 0) {
                 Admin admin = new Admin();
@@ -43,13 +53,14 @@ public class UserHelper {
                 return admin;
             }
         } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage());
             e.printStackTrace();
         }
         return null;
     }
     
     public boolean checkExpired() {
-        this.getAdmin();
+        this.getAdminFromJson();
         
         if(this.admin.size() > 0 && !isSessionEnd(Long.valueOf(this.admin.get("session_end_time")))) {
             return false;
