@@ -1,5 +1,6 @@
 package com.example.helpers;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -57,6 +58,10 @@ public class UserHelper {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public void logout() throws IOException {
+        this.json_helper.removeFileContent("config/session.json");
     }
     
     public boolean checkExpired() {

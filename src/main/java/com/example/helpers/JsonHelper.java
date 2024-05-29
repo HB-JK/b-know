@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.*;
 
@@ -64,6 +66,15 @@ public class JsonHelper {
             new LogError(ErrorLevel.CRITICAL, e.getLocalizedMessage());
         }
         return json_data;
+    }
+    
+    public void removeFileContent(String path_name) throws IOException {
+        File file = new File(Paths.get(path_name).toString());
+        file.setWritable(true);
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file));
+        bufferedOutputStream.write("{}".getBytes());
+        bufferedOutputStream.flush();
+        bufferedOutputStream.close();
     }
     
     public boolean existJsonFile(String path_name) {
