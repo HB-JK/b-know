@@ -25,6 +25,7 @@ public class CashierModalController extends BaseModalController implements Initi
     //Cashier modal fxml element
     @FXML private Button close_button;
     @FXML private TextField modal;
+    // @FXML private Button action_button;
     
     public CashierModalController() {
         this.title = "Input Modal";
@@ -50,19 +51,19 @@ public class CashierModalController extends BaseModalController implements Initi
         stage.close();
     }
 
-    // public void updateState() {
-    //     this.modal.setText("Tutup kasir");
-    // }
-
     public void updateState() {
-        String currentText = this.modal.getText();
-
-        if (currentText.equals("Buka Kasir")) {
-            this.modal.setText("Tutup Kasir");
-        } else if (currentText.equals("Tutup Kasir")) {
-            this.modal.setText("Buka Kasir");
-        }     
+        this.modal.setText("Tutup kasir");
     }
+
+    // public void updateState() {
+    //     String currentText = action_button.getText();
+
+    //     if (currentText.equals("Buka Kasir")) {
+    //         action_button.setText("Tutup Kasir");
+    //     } else if (currentText.equals("Tutup Kasir")) {
+    //         action_button.setText("Buka Kasir");
+    //     }     
+    // }
 
     
     @FXML

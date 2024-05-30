@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -43,6 +44,8 @@ public class PenjualanController implements Initializable {
     
     @FXML private Label today_date;
 
+    @FXML private Button action_button;
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
@@ -64,6 +67,16 @@ public class PenjualanController implements Initializable {
         jumlahItemCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.140));
         totalHargaCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
         aksiCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
+    }
+
+    public void updateState() {
+        String currentText = action_button.getText();
+
+        if (currentText.equals("Buka Kasir")) {
+            action_button.setText("Tutup Kasir");
+        } else if (currentText.equals("Tutup Kasir")) {
+            action_button.setText("Buka Kasir");
+        }     
     }
 
     @FXML
