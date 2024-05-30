@@ -44,7 +44,7 @@ public class PenjualanController implements Initializable {
     @FXML private Label today_date;
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL arg, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
         fruitCombo.getItems().setAll("Pangsit Pedas", "Pangsit Manis", "Pangsit Goreng");
         tanggalDatePicker.setValue(LocalDate.now());

@@ -23,7 +23,7 @@ public class CashierModalController extends BaseModalController implements Initi
     private InputTypeHelper input_helper = new InputTypeHelper();
     
     //Cashier modal fxml element
-    @FXML private Button close_button;
+    @FXML private Button close_button, action_button;
     @FXML private TextField modal;
     
     public CashierModalController() {
@@ -34,6 +34,8 @@ public class CashierModalController extends BaseModalController implements Initi
         super(title, width, height, parent_source, "modal/cashier_modal.fxml");
         
         this.title = title;
+        CashierModalController controller = super.loader.getController();
+        controller.updateState();
     }
 
     @Override
@@ -49,22 +51,11 @@ public class CashierModalController extends BaseModalController implements Initi
         Stage stage = (Stage) close_button.getScene().getWindow();
         stage.close();
     }
-
-    // public void updateState() {
-    //     this.modal.setText("Tutup kasir");
-    // }
-
+    
     public void updateState() {
-        String currentText = this.modal.getText();
-
-        if (currentText.equals("Buka Kasir")) {
-            this.modal.setText("Tutup Kasir");
-        } else if (currentText.equals("Tutup Kasir")) {
-            this.modal.setText("Buka Kasir");
-        }     
+        this.action_button.setText("Tutup");
     }
 
-    
     @FXML
     public void close(ActionEvent e) {
         this.closeModal();
@@ -83,7 +74,6 @@ public class CashierModalController extends BaseModalController implements Initi
             SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Modal ditambahkan");
             successAlert.openModal();
             this.closeModal();
-            this.updateState();
 
         } else {
             ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Modal gagal ditambahkan");

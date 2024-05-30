@@ -23,11 +23,10 @@ public class Produk extends BaseModel {
     
     public Produk() {}
     
-    public Produk(String nama, String hargaProduk, String satuan, String sisa_stok) {
+    public Produk(String nama, String hargaProduk, String satuan) {
         this.setKodeProduk(this.getUniqueCode());
         this.setNama(nama);
         this.setHargaProduk(hargaProduk);
-        this.setSisaStok(sisa_stok);
         this.setSatuan(satuan);
         this.setCreatedAt(this.date_helper.getDatabaseTimestamp());
     }
@@ -152,8 +151,8 @@ public class Produk extends BaseModel {
         return updated_at.get();
     }
 
-    public void setUpdatedAt(String updated_at) {
-        this.updated_at.set(updated_at);
+    public void setUpdatedAt() {
+        this.updated_at.set(this.date_helper.getDatabaseTimestamp());
     }
     
     public String getUniqueCode() {
@@ -200,9 +199,27 @@ public class Produk extends BaseModel {
     public boolean save() {
         try{
             String query = String.format(
-                "INSERT INTO %1$s(kode_produk, nama, harga_produk, satuan, sisa_stok, created_at, updated_at) VALUES('%2$s', '%3$s', %4$d, '%5$s', %6$d, '%7$s', %8$s)",
-                table, getKodeProduk(), getNama(), getHargaProduk(), getSatuan(), getSisaStok(), getCreatedAt(), getUpdatedAt()
-                
+                "INSERT INTO %1$s(kode_produk, nama, harga_produk, satuan, created_at, updated_at) VALUES('%2$s', '%3$s', %4$d, '%5$s', '%6$s', %7$s)",
+                table, getKodeProduk(), getNama(), getHargaProduk(), getSatuan(),  getCreatedAt(), getUpdatedAt()
+            );
+            
+            int rs = this.database.createUpdateQuery(query);
+            return (rs == 1) ? true : false;
+            
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+            
+            return false;
+        }
+    }
+    
+    public boolean update() {
+        try{
+            this.setUpdatedAt();
+            
+            String query = String.format(
+                "UPDATE %1$s SET nama = '%2$s', harga_produk = %3$d, satuan = '%4$s', sisa_stok = %5$d, updated_at = '%6$s' WHERE id_%1$s = '%7$s';",
+                table, getNama(), getHargaProduk(), getSatuan(), getSisaStok(), getUpdatedAt(), getId()
             );
             
             int rs = this.database.createUpdateQuery(query);

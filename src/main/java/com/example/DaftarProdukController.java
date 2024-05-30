@@ -81,7 +81,7 @@ public class DaftarProdukController implements Initializable {
                     Produk rowData = row.getItem();
                     
                     try {
-                        TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Edit Produk", 450, 300, (Node) event.getSource(), rowData);
+                        TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Edit Produk", 450, 250, (Node) event.getSource(), rowData);
                         tambah_produk_modal.openModal();
                     } catch (IOException el) {
                         el.printStackTrace();
@@ -99,7 +99,7 @@ public class DaftarProdukController implements Initializable {
     @FXML
     public void openTambahProdukModal(ActionEvent e) {
         try {
-            TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Tambah Produk", 450, 300, (Node) e.getSource());
+            TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Tambah Produk", 450, 250, (Node) e.getSource());
             tambah_produk_modal.openModal();
         } catch (IOException el) {
             el.printStackTrace();
