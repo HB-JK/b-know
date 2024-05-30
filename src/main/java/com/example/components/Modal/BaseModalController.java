@@ -15,6 +15,7 @@ public class BaseModalController extends Stage {
     protected Scene scene;
     protected FXMLLoader loader;
     protected double width = 300.0, height = 250.0;
+    protected boolean finish = false;
     
     public BaseModalController() {
         
@@ -46,5 +47,9 @@ public class BaseModalController extends Stage {
         setTitle(title);
         initModality(Modality.WINDOW_MODAL);
         initOwner(parent_source.getScene().getWindow());
+    }
+    
+    public boolean isFinished() {
+        return this.finish;
     }
 }
