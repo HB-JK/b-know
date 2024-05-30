@@ -20,11 +20,6 @@
             </HBox>
             
             <HBox alignment="BASELINE_CENTER" spacing="5">
-                <Label text="Jumlah stok awal" prefWidth="140" styleClass="fs-4" />
-                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_stok" promptText="Masukkan jumlah stok awal (Angka)" />
-            </HBox>
-            
-            <HBox alignment="BASELINE_CENTER" spacing="5">
                 <Label text="Satuan" prefWidth="140" styleClass="fs-4" />
                 <ComboBox HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="satuan" promptText="Pilih satuan" />
             </HBox>
@@ -35,9 +30,10 @@
             </HBox>
         </VBox>
         
-        <HBox alignment="CENTER_RIGHT" spacing="5">
+        <HBox fx:id="buttons" alignment="CENTER_RIGHT" spacing="5">
             <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
-            <Button HBox.hgrow="ALWAYS" styleClass="btn, bg-primary" text="Simpan" onAction="#save" />
+            <Button HBox.hgrow="ALWAYS" fx:id="save_button" styleClass="btn, bg-primary" text="Simpan" onAction="#save" />
+            <Button HBox.hgrow="ALWAYS" fx:id="edit_button" styleClass="btn, bg-primary" text="Ubah" onAction="#update" />
         </HBox>
     </VBox>
 </HBox>
