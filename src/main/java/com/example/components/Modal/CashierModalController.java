@@ -50,9 +50,20 @@ public class CashierModalController extends BaseModalController implements Initi
         stage.close();
     }
 
+    // public void updateState() {
+    //     this.modal.setText("Tutup kasir");
+    // }
+
     public void updateState() {
-        this.modal.setText("Tutup kasir");
+        String currentText = this.modal.getText();
+
+        if (currentText.equals("Buka Kasir")) {
+            this.modal.setText("Tutup Kasir");
+        } else if (currentText.equals("Tutup Kasir")) {
+            this.modal.setText("Buka Kasir");
+        }     
     }
+
     
     @FXML
     public void close(ActionEvent e) {
