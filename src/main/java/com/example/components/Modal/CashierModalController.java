@@ -53,7 +53,7 @@ public class CashierModalController extends BaseModalController implements Initi
     }
     
     public void updateState() {
-        this.action_button.setText("Tutup");
+        this.action_button.setText("Simpan");
     }
 
     @FXML
