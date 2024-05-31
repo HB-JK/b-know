@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 import com.example.DaftarProdukController;
 import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
+import com.example.enums.ErrorLevel;
 import com.example.helpers.InputTypeHelper;
+import com.example.model.LogError;
 import com.example.model.Modal;
 import com.example.model.Produk;
 
@@ -28,6 +30,7 @@ public class TambahProdukModalController extends BaseModalController implements 
     private String title;
     private InputTypeHelper input_helper = new InputTypeHelper();
     private Produk produk = new Produk();
+    private DaftarProdukController parent_controller;
     
     //Tambah / Edit Produk Modal FXML element
     @FXML private HBox buttons;
@@ -40,20 +43,21 @@ public class TambahProdukModalController extends BaseModalController implements 
         this.title = "Tambah Produk";
     }
 
-    public TambahProdukModalController(String title, double width, double height, Node parent_source) throws IOException {
+    public TambahProdukModalController(String title, double width, double height, Node parent_source, DaftarProdukController parent_controller) throws IOException {
         super(title, width, height, parent_source, "modal/tambah_produk_modal.fxml");
-        
         this.title = title;
         
         TambahProdukModalController controller = super.loader.getController();
+        controller.setController(parent_controller);
         controller.updateState();
     }
     
-    public TambahProdukModalController(String title, double width, double height, Node parent_source, Produk produk) throws IOException {
+    public TambahProdukModalController(String title, double width, double height, Node parent_source, DaftarProdukController parent_controller, Produk produk) throws IOException {
         super(title, width, height, parent_source, "modal/tambah_produk_modal.fxml");
-        
         this.title = title;
+        
         TambahProdukModalController controller = super.loader.getController();
+        controller.setController(parent_controller);
         controller.setProduk(produk);
         controller.updateState();
     }
@@ -104,6 +108,10 @@ public class TambahProdukModalController extends BaseModalController implements 
         }
     }
     
+    public void setController(DaftarProdukController controller) {
+        this.parent_controller = controller;
+    }
+    
     public String isEmptyInput() {
         if (nama_produk.getText().isEmpty()) {
             return "Harap mengisi nama produk terlebih dahulu";
@@ -134,13 +142,15 @@ public class TambahProdukModalController extends BaseModalController implements 
                 SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Produk berhasil ditambahkan");
                 successAlert.openModal();
                 
-                this.finish = true;
+                parent_controller.updateTable(produk);
+                
                 this.closeModal();
                 return;
             }
             
             throw new Exception("Produk gagal ditambahkan");
         } catch (Exception exc) {
+            new LogError(ErrorLevel.ERROR, exc.getMessage());
             ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), exc.getMessage());
             errorAlert.openModal();
         }

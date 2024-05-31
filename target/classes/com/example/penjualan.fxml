@@ -33,7 +33,10 @@
                 <AnchorPane>
                     <AnchorPane.topAnchor>10.0</AnchorPane.topAnchor> <AnchorPane.leftAnchor>20.0</AnchorPane.leftAnchor>
 
-                    <Label fx:id="modalLabel" styleClass="fs-3" text="Modal Hari ini : -"/>
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label styleClass="fs-3" text="Modal Hari ini :"/>
+                        <Label styleClass="fs-3" fx:id="modal_label" text="-" />
+                    </HBox>
                 </AnchorPane>
 
                 <HBox alignment="CENTER_LEFT">

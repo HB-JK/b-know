@@ -41,7 +41,7 @@ public class PenjualanController implements Initializable {
     
     @FXML private ScrollPane scrollpane;
     
-    @FXML private Label today_date;
+    @FXML private Label today_date, modal_label;
 
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
@@ -71,6 +71,7 @@ public class PenjualanController implements Initializable {
         try {
             CashierModalController cashier_modal = new CashierModalController("Input Modal", 300, 150, (Node) e.getSource());
             cashier_modal.openModal();
+            modal_label.setText("Rp2.000,00");
         } catch (IOException e1) {
             e1.printStackTrace();
         }

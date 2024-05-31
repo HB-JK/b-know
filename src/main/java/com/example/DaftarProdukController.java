@@ -1,7 +1,6 @@
 package com.example;
 
 import java.io.IOException;
-import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,7 +12,6 @@ import com.example.model.Produk;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -22,7 +20,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 
 public class DaftarProdukController implements Initializable {
@@ -34,13 +31,7 @@ public class DaftarProdukController implements Initializable {
     
     @FXML private ScrollPane scrollpane;
     
-    private Node source;
-    
-    private ObservableList<Produk> initialData() {
-        List<Produk> list_produk = new Produk().getTableData();
-        
-        return FXCollections.observableArrayList(list_produk);
-    }
+    public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getTableData());
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +42,7 @@ public class DaftarProdukController implements Initializable {
         
         this.setupRow();
         this.setupColumn();
-        produkTable.setItems(initialData());
+        produkTable.setItems(initialData);
     }
     
     public void setupColumn() {        
@@ -81,7 +72,7 @@ public class DaftarProdukController implements Initializable {
                     Produk rowData = row.getItem();
                     
                     try {
-                        TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Edit Produk", 450, 250, (Node) event.getSource(), rowData);
+                        TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Edit Produk", 450, 250, (Node) event.getSource(), this, rowData);
                         tambah_produk_modal.openModal();
                     } catch (IOException el) {
                         el.printStackTrace();
@@ -92,14 +83,20 @@ public class DaftarProdukController implements Initializable {
         });
     }
     
-    public void addItemToTable(Produk produk) {
-        produkTable.getItems().add(produk);
+    public void updateTable(Produk produk) {
+        initialData.add(produk);
+        
+        produkTable.refresh();
+    }
+    
+    public void updateTable() {
+        produkTable.refresh();
     }
     
     @FXML
     public void openTambahProdukModal(ActionEvent e) {
         try {
-            TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Tambah Produk", 450, 250, (Node) e.getSource());
+            TambahProdukModalController tambah_produk_modal = new TambahProdukModalController("Tambah Produk", 450, 250, (Node) e.getSource(), this);
             tambah_produk_modal.openModal();
         } catch (IOException el) {
             el.printStackTrace();
