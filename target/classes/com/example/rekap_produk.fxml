@@ -25,9 +25,9 @@
             <VBox spacing="10">
                 <HBox alignment="CENTER_LEFT">
                     <Label text="Produk:   " styleClass="fs-1" />
-                    <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" prefWidth="120.0" promptText="Semua"/>
-                    <Label text="Pilih Tanggal:   " styleClass="fs-1" style="-fx-padding: 0px 10px 0px 10px" />
-                    <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+                    <ComboBox fx:id="fruitCombo"  prefWidth="120.0" promptText="Semua"/>
+                    <Label text="Pilih Tanggal Awal:   " styleClass="fs-1" style="-fx-padding: 0px 10px 0px 10px" />
+                    <DatePicker fx:id="tanggalDatePicker" prefWidth="150"/>
                 </HBox>
                 
                 <TableView fx:id="invoiceTable" >
