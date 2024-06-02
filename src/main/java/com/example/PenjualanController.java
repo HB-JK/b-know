@@ -66,15 +66,26 @@ public class PenjualanController implements Initializable {
         aksiCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
     }
 
+    public void updateModal(String modal) {
+        modal_label.setText(modal);
+    }
+
     @FXML
     public void openCashierModal(ActionEvent e) {
         try {
-            CashierModalController cashier_modal = new CashierModalController("Input Modal", 300, 150, (Node) e.getSource());
+            CashierModalController cashier_modal = new CashierModalController("Input Modal", 300, 150, (Node) e.getSource(), this);
             cashier_modal.openModal();
-            modal_label.setText("Rp2.000,00");
+
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    @FXML
+    public void closeCashier(ActionEvent e) {
+        // try {
+            
+        // }
     }
     
     @FXML

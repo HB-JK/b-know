@@ -72,6 +72,5 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        
     }
 }

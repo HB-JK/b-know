@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.PenjualanController;
 import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.InputTypeHelper;
@@ -21,6 +22,8 @@ public class CashierModalController extends BaseModalController implements Initi
     //Cashier modal property
     private String title;
     private InputTypeHelper input_helper = new InputTypeHelper();
+    private PenjualanController parent_controller;
+
     
     //Cashier modal fxml element
     @FXML private Button close_button, action_button;
@@ -30,11 +33,12 @@ public class CashierModalController extends BaseModalController implements Initi
         this.title = "Input Modal";
     }
 
-    public CashierModalController(String title, double width, double height, Node parent_source) throws IOException {
+    public CashierModalController(String title, double width, double height, Node parent_source, PenjualanController parent_controller) throws IOException {
         super(title, width, height, parent_source, "modal/cashier_modal.fxml");
-        
         this.title = title;
+
         CashierModalController controller = super.loader.getController();
+        controller.setController(parent_controller);
         controller.updateState();
     }
 
@@ -56,6 +60,10 @@ public class CashierModalController extends BaseModalController implements Initi
         this.action_button.setText("Simpan");
     }
 
+    public void setController(PenjualanController controller) {
+        this.parent_controller = controller;
+    }
+
     @FXML
     public void close(ActionEvent e) {
         this.closeModal();
@@ -73,7 +81,10 @@ public class CashierModalController extends BaseModalController implements Initi
         if (modal.save()) {
             SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Modal ditambahkan");
             successAlert.openModal();
+
+            this.parent_controller.updateModal(this.modal.getText());
             this.closeModal();
+            return;
 
         } else {
             ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Modal gagal ditambahkan");
