@@ -28,6 +28,7 @@ public class CashierModalController extends BaseModalController implements Initi
     //Cashier modal fxml element
     @FXML private Button close_button, action_button;
     @FXML private TextField modal;
+    // @FXML private Button action_button;
     
     public CashierModalController() {
         this.title = "Input Modal";
