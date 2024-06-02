@@ -36,8 +36,16 @@ public class RekapProdukController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         sidebar.setActiveClass("rekap_produk");
-        tanggalDatePicker.setValue(LocalDate.now());
         
+        // tanggalDatePicker.setValue(LocalDate.now());
+        // DatePicker tanggalAwalDatePicker = new DatePicker();
+        // tanggalAwalDatePicker.setValue(LocalDate.now());  
+        // tanggalAwalDatePicker.setId("tanggalAwalDatePicker"); 
+
+        // DatePicker tanggalAkhirDatePicker = new DatePicker();
+        // tanggalAkhirDatePicker.setValue(LocalDate.now());  
+        // tanggalAkhirDatePicker.setId("tanggalAkhirDatePicker");  
+
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
