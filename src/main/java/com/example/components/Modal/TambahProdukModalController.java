@@ -11,10 +11,8 @@ import com.example.components.Alert.SuccessAlert;
 import com.example.enums.ErrorLevel;
 import com.example.helpers.InputTypeHelper;
 import com.example.model.LogError;
-import com.example.model.Modal;
 import com.example.model.Produk;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
