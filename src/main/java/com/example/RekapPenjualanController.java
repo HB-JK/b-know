@@ -24,6 +24,12 @@ public class RekapPenjualanController implements Initializable {
     private DatePicker tanggalDatePicker;
 
     @FXML
+    private DatePicker tanggaAwallDatePicker;
+
+    @FXML
+    private DatePicker tanggaAkhirlDatePicker;
+
+    @FXML
     private TableView<Penjualan> invoiceTable;
 
     @FXML
