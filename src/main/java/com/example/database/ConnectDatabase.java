@@ -206,8 +206,6 @@ public class ConnectDatabase {
         try{
             int rs = this.stmt.executeUpdate(query);
             
-            this.stmt.close();
-            this.connection.close();
             return rs;
         } catch (SQLException e) {     
             e.printStackTrace();
