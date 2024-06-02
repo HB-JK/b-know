@@ -24,6 +24,12 @@ public class RekapPenjualanController implements Initializable {
     private DatePicker tanggalDatePicker;
 
     @FXML
+    private DatePicker tanggaAwallDatePicker;
+
+    @FXML
+    private DatePicker tanggaAkhirlDatePicker;
+
+    @FXML
     private TableView<Penjualan> invoiceTable;
 
     @FXML
@@ -36,7 +42,17 @@ public class RekapPenjualanController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         sidebar.setActiveClass("rekap_penjualan");
-        tanggalDatePicker.setValue(LocalDate.now());
+        // tanggalAwalDatePicker.setValue(LocalDate.now());
+        // tanggalAkhirDatePicker.setValue(LocalDate.now());
+
+        DatePicker tanggalAwalDatePicker = new DatePicker();
+        tanggalAwalDatePicker.setValue(LocalDate.now());  
+        tanggalAwalDatePicker.setId("tanggalAwalDatePicker"); 
+
+        DatePicker tanggalAkhirDatePicker = new DatePicker();
+        tanggalAkhirDatePicker.setValue(LocalDate.now());  
+        tanggalAkhirDatePicker.setId("tanggalAkhirDatePicker");  
+
         
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

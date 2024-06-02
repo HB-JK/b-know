@@ -23,9 +23,12 @@
             
             <VBox spacing="10">
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Pilih Tanggal:   " styleClass="fs-1" style="-fx-padding: 5px 0px 5px 0px" />
-                    <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+                    <Label text="Pilih Tanggal Awal: " styleClass="fs-1" />
+                    <DatePicker fx:id="tanggalAwalDatePicker" prefWidth="150"/>  
+                    <Label text="Pilih Tanggal Akhir: " styleClass="fs-1" style="-fx-padding: 0px 15px 0px 15px" />
+                    <DatePicker fx:id="tanggalAkhirDatePicker" prefWidth="150"/>  
                 </HBox>
+
                 
                 <TableView fx:id="invoiceTable" >
                     <columns>

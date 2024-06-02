@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 public class TambahPenjualanModalController extends BaseModalController implements Initializable{
     //Tambah / Edit Produk Modal property
     private String title;
@@ -27,6 +28,7 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     @FXML private Button close_button;
     @FXML private TableView<Penjualan> list_penjualan_table;
     @FXML private TableColumn<Void, Void> nama_produk_property, jumlah_property, harga_property, total_harga_property;
+    @FXML private Button action_button;
     
     public TambahPenjualanModalController() {
         this.title = "Tambah Penjualan";
@@ -72,6 +74,5 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        
     }
 }

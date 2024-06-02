@@ -156,7 +156,31 @@ public class TambahProdukModalController extends BaseModalController implements 
     
     @FXML
     public void update(ActionEvent e) throws IOException {
-        
+        try {
+            String check_empty_input = isEmptyInput();
+            
+            if(check_empty_input != null){
+                throw new Exception(check_empty_input);
+            }
+            
+            produk.setHargaProduk(this.harga.getText());
+            produk.setNama(this.nama_produk.getText());
+            produk.setSatuan(this.satuan.getValue());
+
+            if (produk.update()) {
+                SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Produk " + produk.getNama() +" diubah");
+                successAlert.openModal();
+                
+                parent_controller.updateTable();
+                this.closeModal();
+                return;
+            }
+            
+            throw new Exception("Produk gagal diubah");
+        } catch (Exception exc) {
+            ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), exc.getMessage());
+            errorAlert.openModal();
+        }
+
     }
 }
-
