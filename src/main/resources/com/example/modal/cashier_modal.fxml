@@ -15,7 +15,7 @@
         <VBox spacing="5">
             <Label text="Jumlah modal hari ini" styleClass="fs-4" />
             <TextField styleClass="form-control" maxWidth="1.7976931348623157E308" fx:id="modal" promptText="Masukkan modal hari ini" />
-        </VBox>
+        </VBox> 
         
         <HBox alignment="CENTER_RIGHT" spacing="5">
             <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
