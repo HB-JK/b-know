@@ -47,9 +47,9 @@
                     
                     <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
                     
-                    <HBox spacing="15">
-                        <Button text="Tutup Kasir" styleClass="btn, bg-primary" onAction="#closeCashier" />
-                        <Button text="Buka Kasir" styleClass="btn, bg-primary" onAction="#openCashierModal" />
+                    <HBox spacing="15" fx:id="tombol">
+                        <Button text="Tutup Kasir" fx:id="closeCashier_button" styleClass="btn, bg-primary" onAction="#closeCashier" />
+                        <Button text="Buka Kasir" fx:id="openCashier_button" styleClass="btn, bg-primary" onAction="#openCashierModal" />
                         <Button text="Tambah" styleClass="btn, bg-primary" onAction="#openTambahPenjualanModal" />
                     </HBox>
                 </HBox>
