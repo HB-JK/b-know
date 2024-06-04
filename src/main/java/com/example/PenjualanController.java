@@ -48,7 +48,7 @@ public class PenjualanController implements Initializable {
     @FXML private Label today_date, modal_label;
 
     @FXML private HBox tombol;
-    @FXML private Button openCashier_button, closeCashier_button;
+    @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button;
     
 
     @Override
@@ -66,8 +66,9 @@ public class PenjualanController implements Initializable {
         Modal modal = new Modal().getTodayCashier();
         if(modal.getId() != null) {
             this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
+        } else {
+            this.updateState(false);
         }
-        this.updateState(false);
     }
 
     public void setupColumn() {
@@ -88,11 +89,19 @@ public class PenjualanController implements Initializable {
     }
 
     public void updateState(boolean state) {
+        if(!this.tombol.getChildren().equals(close_cashier_button) && state) {
+            this.tombol.getChildren().add(close_cashier_button);
+        }
+        
+        if(!this.tombol.getChildren().equals(add_penjualan_button) && state) {
+            this.tombol.getChildren().add(add_penjualan_button);
+        }
+        
         if(state) {
-            this.tombol.getChildren().remove(openCashier_button);
-            this.tombol.getChildren().add(closeCashier_button);
+            this.tombol.getChildren().remove(open_cashier_button);
         } else {
-            this.tombol.getChildren().remove(closeCashier_button);
+            this.tombol.getChildren().remove(close_cashier_button);
+            this.tombol.getChildren().remove(add_penjualan_button);
         }
     }
 
