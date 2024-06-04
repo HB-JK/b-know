@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 
 import java.time.LocalDate;
 
@@ -44,6 +45,10 @@ public class PenjualanController implements Initializable {
     
     @FXML private Label today_date, modal_label;
 
+    @FXML private HBox tombol;
+    @FXML private Button openCashier_button, closeCashier_button;
+    
+
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
@@ -55,6 +60,7 @@ public class PenjualanController implements Initializable {
 
         this.setupColumn();
         today_date.setText(new DateHelper().getTodayDate());
+        this.updateState(false);
     }
 
     public void setupColumn() {
@@ -69,6 +75,16 @@ public class PenjualanController implements Initializable {
 
     public void updateModal(String modal) {
         modal_label.setText(modal);
+        this.updateState(true);
+    }
+
+    public void updateState(boolean state) {
+        if(state) {
+            this.tombol.getChildren().remove(openCashier_button);
+            this.tombol.getChildren().add(closeCashier_button);
+        } else {
+            this.tombol.getChildren().remove(closeCashier_button);
+        }
     }
 
     @FXML
