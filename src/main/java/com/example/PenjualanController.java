@@ -8,6 +8,8 @@ import com.example.components.LeftSidebar;
 import com.example.components.Modal.CashierModalController;
 import com.example.components.Modal.TambahPenjualanModalController;
 import com.example.helpers.DateHelper;
+import com.example.helpers.FormatHelper;
+import com.example.model.Modal;
 import com.example.model.Penjualan;
 
 import javafx.event.ActionEvent;
@@ -55,6 +57,11 @@ public class PenjualanController implements Initializable {
 
         this.setupColumn();
         today_date.setText(new DateHelper().getTodayDate());
+        
+        Modal modal = new Modal().getTodayCashier();
+        if(modal.getId() != null) {
+            this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
+        }
     }
 
     public void setupColumn() {
@@ -68,7 +75,9 @@ public class PenjualanController implements Initializable {
     }
 
     public void updateModal(String modal) {
-        modal_label.setText(modal);
+        modal_label.setText(
+            new FormatHelper().convertToRupiah(Integer.parseInt(modal))
+        );
     }
 
     @FXML
