@@ -9,17 +9,41 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ScrollPane?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.components.Modal.CashierModalController">
-    <VBox HBox.hgrow="ALWAYS" styleClass="p-2" spacing="25">
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.components.Modal.CashierModalController" spacing="25" styleClass="p-2">
+    <VBox HBox.hgrow="ALWAYS" spacing="25">
         <VBox spacing="5">
-            <Label text="Jumlah modal hari ini" styleClass="fs-4" />
-            <TextField styleClass="form-control" maxWidth="1.7976931348623157E308" fx:id="modal" promptText="Masukkan modal hari ini" />
+            <Label text="Jumlah modal hari ini" styleClass="fs-s"/>
+            <TextField fx:id="modal" styleClass="form-control" promptText="Masukkan modal hari ini" maxWidth="1.7976931348623157E308"/>
         </VBox> 
+    </VBox>
+
+    <VBox HBox.hgrow="ALWAYS" spacing="25">
+        <VBox alignment="CENTER_RIGHT" spacing="10"> 
+            <Label text="Fendy" styleClass="fs-4 fw-black"/>
+            <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024"/> 
+        </VBox>
         
-        <HBox alignment="CENTER_RIGHT" spacing="5">
-            <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
-            <Button HBox.hgrow="ALWAYS" fx:id="action_button" styleClass="btn, bg-primary" text="Simpan" onAction="#openKasir" />
+        <ScrollPane HBox.hgrow="ALWAYS" fx:id="scrollpane">
+            <VBox styleClass="main-content" spacing="20">
+                <TableView fx:id="invoiceTable">
+                    <columns>
+                        <TableColumn fx:id="noCol" text="No" prefWidth="0.1"/>
+                        <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="100.0"/>
+                        <TableColumn fx:id="stockCol" text="Stock" prefWidth="170.0"/>
+                        <TableColumn fx:id="hargaCol" text="Harga per/pcs" prefWidth="100.0"/>
+                        <TableColumn fx:id="statusCol" text="Status" prefWidth="100.0"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </ScrollPane>
+
+        <HBox alignment="BOTTOM_RIGHT" spacing="10">
+            <Button fx:id="close_button" styleClass="btn bg-danger" text="Tutup" onAction="#close"/>
+            <Button fx:id="action_button" styleClass="btn bg-primary" text="Simpan" onAction="#openKasir"/>
         </HBox>
     </VBox>
 </HBox>
