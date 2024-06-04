@@ -74,7 +74,7 @@ public class PenjualanController implements Initializable {
     @FXML
     public void openCashierModal(ActionEvent e) {
         try {
-            CashierModalController cashier_modal = new CashierModalController("Input Modal", 300, 150, (Node) e.getSource(), this);
+            CashierModalController cashier_modal = new CashierModalController("Buka Kasir", 550, 350, (Node) e.getSource(), this);
             cashier_modal.openModal();
 
         } catch (IOException e1) {
@@ -99,3 +99,5 @@ public class PenjualanController implements Initializable {
         }
     }
 }
+
+
