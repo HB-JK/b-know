@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
+import com.example.components.Alert.ConfirmAlert;
+import com.example.components.Alert.ErrorAlert;
+import com.example.components.Alert.SuccessAlert;
 import com.example.components.Modal.TambahProdukModalController;
 import com.example.model.Produk;
 
@@ -21,15 +24,13 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
 public class DaftarProdukController implements Initializable {
     @FXML private LeftSidebar sidebar;
-
     @FXML private TableView<Produk> produkTable;
-
     @FXML private TableColumn<Produk, String> noCol, tanggalCol, kodeProdukCol, namaProdukCol, jumlahStokCol, satuanCol, hargaProdukCol, aksiCol;
-    
     @FXML private ScrollPane scrollpane;
+    
+    private boolean is_confirm = false;
     
     public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getTableData());
     
@@ -44,7 +45,7 @@ public class DaftarProdukController implements Initializable {
         this.setupColumn();
         produkTable.setItems(initialData);
     }
-    
+        
     public void setupColumn() {        
         //set column width to fit with tableview
         tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.15));
@@ -91,6 +92,26 @@ public class DaftarProdukController implements Initializable {
     
     public void updateTable() {
         produkTable.refresh();
+    }
+    
+    public void handleUserChoice(boolean state) {
+        this.is_confirm = state;
+    }
+    
+    public int getSelectedProdukIndex(Node source) throws IOException {
+        TableView.TableViewSelectionModel<Produk> selectionModel = produkTable.getSelectionModel();
+        if(selectionModel.isEmpty()) {
+            ErrorAlert error_alert = new ErrorAlert("Menghapus data", source, "Gagal menghapus data, belum ada produk yang terpilih");
+            error_alert.openModal();
+            return -1;
+        }
+        
+        return selectionModel.getFocusedIndex();
+    }
+    
+    @FXML
+    public void deleteData(ActionEvent e) throws IOException {
+        
     }
     
     @FXML

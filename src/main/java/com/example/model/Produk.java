@@ -231,5 +231,19 @@ public class Produk extends BaseModel {
             return false;
         }
     }
+    
+    public boolean delete() {
+        try{
+            String query = String.format("DELETE FROM %1$s WHERE id_%1$s='%2$s'", table, this.getId());
+            
+            int rs = this.database.createUpdateQuery(query);
+            
+            return (rs == 1) ? true : false;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+            
+            return false;
+        }
+    }
 }
 
