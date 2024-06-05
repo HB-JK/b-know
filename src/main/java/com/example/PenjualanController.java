@@ -89,11 +89,11 @@ public class PenjualanController implements Initializable {
     }
 
     public void updateState(boolean state) {
-        if(!this.tombol.getChildren().equals(close_cashier_button) && state) {
+        if(!this.tombol.getChildren().contains(close_cashier_button) && state) {
             this.tombol.getChildren().add(close_cashier_button);
         }
         
-        if(!this.tombol.getChildren().equals(add_penjualan_button) && state) {
+        if(!this.tombol.getChildren().contains(add_penjualan_button) && state) {
             this.tombol.getChildren().add(add_penjualan_button);
         }
         

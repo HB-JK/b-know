@@ -14,7 +14,7 @@
 <?import javafx.scene.control.ScrollPane?>
 
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.components.Modal.CashierModalController" spacing="25" styleClass="p-2">
-    <VBox HBox.hgrow="ALWAYS" spacing="25">
+    <VBox HBox.hgrow="ALWAYS" spacing="10">
         <HBox spacing="50">
             <VBox spacing="5">
                 <Label text="Jumlah modal hari ini" styleClass="fs-s"/>
@@ -42,8 +42,8 @@
         </HBox>
 
         <HBox  alignment="BOTTOM_RIGHT" spacing="10">
-            <Button fx:id="close_button" styleClass="btn bg-danger" text="Tutup" onAction="#close"/>
-            <Button fx:id="action_button" styleClass="btn bg-primary" text="Simpan" onAction="#openKasir"/>
+            <Button fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close"/>
+            <Button fx:id="action_button" styleClass="btn, bg-primary" text="Simpan" onAction="#openKasir"/>
         </HBox>
     </VBox>
 
