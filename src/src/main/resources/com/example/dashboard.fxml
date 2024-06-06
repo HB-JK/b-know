@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import com.example.components.LeftSidebar?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DashboardController">
+    <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
+    <LeftSidebar fx:id="sidebar" />
+    
+    <ScrollPane HBox.hgrow="ALWAYS" fx:id="scrollpane">
+        <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
+            <HBox alignment="CENTER_LEFT" prefHeight="40">
+                <Label styleClass="fs-6, fw-semibold" text="Overview" />
+                <AnchorPane HBox.hgrow="ALWAYS" />
+                <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
+            </HBox>
+
+            <VBox spacing="20">
+                <VBox> <!-- Kalimat selamat  datang -->
+                    <Label text="Halo, Selamat Datang" styleClass="fs-3, fw-semibold" />
+                    <Label text="Apa yang ingin anda lakukan hari ini?" styleClass="fs-3, fw-semibold" />
+                </VBox>
+                
+                <HBox spacing="15"> <!-- Scorebox penjualan -->
+                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-secondary-light, radius-1" spacing="10" prefWidth="270">
+                        <Label styleClass="fs-2" text="Total Penjualan" />
+                        <Label fx:id="total_penjualan" styleClass="fs-6" text="70" />
+                        <Label fx:id="total_penjualan_description" styleClass="fs-1, fw-bold" text="Penjualan meningkat sebanyak 10%" />
+                    </VBox>
+                    
+                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-light-pink, radius-1" spacing="10" prefWidth="270">
+                        <Label styleClass="fs-2" text="Total Produk" />
+                        <Label fx:id="total_produk" styleClass="fs-6" text="3" />
+                        <Label fx:id="total_produk_description" styleClass="fs-1, fw-bold" text="Produk meningkat sebanyak 66%" />
+                    </VBox>
+                    
+                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-aqua, radius-1" spacing="10" prefWidth="270">
+                        <Label styleClass="fs-2" text="Total Pendapatan" />
+                        <Label fx:id="total_pendapatan" styleClass="fs-6" text="2.875.000" />
+                        <Label fx:id="total_pendapatan_description" styleClass="fs-1, fw-bold" text="Pendapatan meningkat sebanyak 20%" />
+                    </VBox>
+                </HBox> <!-- Scorebox penjualan end-->
+                
+                <HBox spacing="20">
+                    <!-- Tabel penjualan produk start -->
+                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-white, shadow" spacing="5" minWidth="410" maxHeight="300">
+                        <Label styleClass="fs-3, fw-bold" text="Stock Krisis" />
+                        
+                        <TableView fx:id="produkHariIniTableView">
+                            <columns>
+                                <TableColumn fx:id="number_property" text="No." minWidth="50" prefWidth="100" />
+                                <TableColumn fx:id="nama_produk_property" text="Nama Produk" minWidth="180" prefWidth="250" />
+                                <TableColumn fx:id="jumlah_property" text="Jumlah" minWidth="150" prefWidth="200" />
+                            </columns>
+                        </TableView>
+                    </VBox> <!-- Tabel penjualan produk end -->
+                    
+                    <!-- Tabel penjualan produk start -->
+                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-white, shadow" spacing="5" minWidth="410" maxHeight="300">
+                        <Label styleClass="fs-3, fw-bold" text="Total Penjualan Produk Hari Ini" />
+                        
+                        <PieChart fx:id="totalPenjualanChart" prefWidth="400" prefHeight="300" />
+                    </VBox> <!-- Tabel penjualan produk start -->
+                </HBox>
+                
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</HBox>

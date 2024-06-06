@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.components.Modal.TambahProdukModalController">
+    <VBox HBox.hgrow="ALWAYS" styleClass="p-4" spacing="30">
+        <VBox spacing="15">
+            <HBox alignment="BASELINE_CENTER" spacing="5">
+                <Label text="Nama Produk" prefWidth="140" styleClass="fs-4" />
+                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_produk" promptText="Masukkan nama produk" />
+            </HBox>
+            
+            <HBox alignment="BASELINE_CENTER" spacing="5">
+                <Label text="Satuan" prefWidth="140" styleClass="fs-4" />
+                <ComboBox HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="satuan" promptText="Pilih satuan" />
+            </HBox>
+            
+            <HBox alignment="BASELINE_CENTER" spacing="5">
+                <Label text="Harga" prefWidth="140" styleClass="fs-4" />
+                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="harga" promptText="Masukkan harga (Angka)" />
+            </HBox>
+        </VBox>
+        
+        <HBox fx:id="buttons" alignment="CENTER_RIGHT" spacing="5">
+            <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
+            <Button HBox.hgrow="ALWAYS" fx:id="save_button" styleClass="btn, bg-primary" text="Simpan" onAction="#save" />
+            <Button HBox.hgrow="ALWAYS" fx:id="edit_button" styleClass="btn, bg-primary" text="Ubah" onAction="#update" />
+        </HBox>
+    </VBox>
+</HBox>
