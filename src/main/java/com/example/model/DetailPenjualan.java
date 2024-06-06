@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.example.enums.ErrorLevel;
+
 public class DetailPenjualan extends BaseModel {
     private String table = "detail_penjualan";
     private int id;
@@ -108,5 +110,15 @@ public class DetailPenjualan extends BaseModel {
 
     public void setDeletedAt(String deleted_at) {
         this.deleted_at = deleted_at;
+    }
+    
+    public void save() {
+        try {
+            String query = String.format(
+                "INSERT INTO detail_penjualan (id_penjualan, id_produk, nama_customer, jumlah_produk, harga_jual, diskon, total_harga, created_at, updated_at) VALUES ('1', '4', '10', '7000', '0', '70000', '2024-06-07 05:34:50', NULL);"
+            );
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+        }
     }
 }

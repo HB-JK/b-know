@@ -1,56 +1,91 @@
 package com.example.model;
 
-public class StokJual {
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+public class StokJual extends BaseModel {
     private String table = "stok_jual";
-    private int id;
-    private int jumlah_stok_awal, jumlah_stok_tutup;
-    private String created_at, updated_at;
+    private StringProperty id = new SimpleStringProperty();
+    private StringProperty jumlahStokAwal = new SimpleStringProperty();
+    private StringProperty jumlahStokTutup = new SimpleStringProperty();
+    private String createdAt, updatedAt;
     private Modal modal;
     private Produk produk;
     
     // Getter and Setter for 'id'
-    public int getId() {
+    public final StringProperty idProperty() {
         return id;
     }
+    
+    public String getId() {
+        return id.get();
+    }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id.set(id);
     }
 
     // Getter and Setter for 'jumlah_stok_awal'
+    public final StringProperty jumlahStokAwalProperty() {
+        return new SimpleStringProperty(
+            (jumlahStokAwal.get() == null) ? "0" : jumlahStokAwal.get()
+        );
+    }
+    
     public int getJumlahStokAwal() {
-        return jumlah_stok_awal;
+        return (jumlahStokAwal.get() == null) ? 0 : Integer.parseInt(jumlahStokAwal.get());
     }
 
-    public void setJumlahStokAwal(int jumlah_stok_awal) {
-        this.jumlah_stok_awal = jumlah_stok_awal;
+    public void setJumlahStokAwal(String jumlahStokAwal) {
+        this.jumlahStokAwal.set(jumlahStokAwal);
     }
 
-    // Getter and Setter for 'jumlah_stok_tutup'
+    // Getter and Setter for 'jumlahStokTutup'
+    public final StringProperty jumlahStokTutupProperty() {
+        return jumlahStokTutup;
+    }
+    
     public int getJumlahStokTutup() {
-        return jumlah_stok_tutup;
+        return Integer.parseInt(jumlahStokTutup.get());
     }
 
-    public void setJumlahStokTutup(int jumlah_stok_tutup) {
-        this.jumlah_stok_tutup = jumlah_stok_tutup;
+    public void setJumlahStokTutup(String jumlahStokTutup) {
+        this.jumlahStokTutup.set(jumlahStokTutup);
     }
 
-    // Getter and Setter for 'created_at'
+    // Getter and Setter for 'createdAt'
     public String getCreatedAt() {
-        return created_at;
+        return createdAt;
     }
 
-    public void setCreatedAt(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = this.date_helper.getDatabaseTimestamp();
     }
 
-    // Getter and Setter for 'updated_at'
+    // Getter and Setter for 'updatedAt'
     public String getUpdatedAt() {
-        return updated_at;
+        return updatedAt;
     }
 
-    public void setUpdatedAt(String updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = this.date_helper.getDatabaseTimestamp();
+    }
+    
+    // Getter for 'namaProduk'
+    public final StringProperty namaProdukProperty() {
+        return produk.namaProperty();
+    }
+    
+    // Getter for 'hargaProduk'
+    public final StringProperty hargaProdukProperty() {
+        return produk.hargaProdukProperty();
+    }
+    
+    // Getter for 'hargaProduk'
+    public final StringProperty statusProperty() {
+        return new SimpleStringProperty(
+            (this.getJumlahStokAwal() < 1) ? "Tidak tersedia" : "Tersedia"
+        );
     }
 
     // Getter and Setter for 'modal'

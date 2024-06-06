@@ -94,6 +94,7 @@ public class DaftarProdukController implements Initializable {
         produkTable.refresh();
     }
     
+    //callback function used for getting response from modal
     public void handleUserChoice(boolean state) {
         this.is_confirm = state;
     }
