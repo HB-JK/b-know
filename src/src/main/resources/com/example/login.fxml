@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.LoginController">
+    <AnchorPane HBox.hgrow="ALWAYS" fx:id="left_screen" prefHeight="640" prefWidth="640"></AnchorPane> <!-- Bagian image -->
+    
+    <AnchorPane fx:id="right_screen" prefHeight="640" prefWidth="440">
+        <VBox fx:id="right_screen_content" alignment="center" prefHeight="640" prefWidth="420" spacing="10">
+        
+            <HBox alignment="CENTER_LEFT">
+                <ImageView fx:id="logo" />
+                <Label fx:id="project_name" minHeight="16" minWidth="69" text="B-KNOW" />
+            </HBox>
+            
+            <VBox fx:id="form" spacing="15">
+                <children>
+                    <VBox spacing="5">
+                        <Label fx:id="email_label" minHeight="16" minWidth="69" text="Email" />
+                        
+                        <TextField fx:id="email" styleClass="form-control" prefHeight="34" promptText="Masukkan email" />
+                    </VBox>
+                    
+                    <VBox spacing="5">
+                        <Label fx:id="password_label" minHeight="16" minWidth="69" text="Password" />
+                        
+                        <PasswordField fx:id="password" styleClass="form-control" prefHeight="34" promptText="Masukkan password" />
+                    </VBox>
+                    
+                    <VBox >
+                        <Button fx:id="login" maxWidth="1.7976931348623157E308" prefHeight="40" text="Login" onAction="#verifyAccount" />
+                    </VBox>
+                </children>
+            </VBox>
+        </VBox>
+    </AnchorPane>
+</HBox>

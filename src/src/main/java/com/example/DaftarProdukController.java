@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
-import com.example.components.Alert.ConfirmAlert;
-import com.example.components.Alert.ErrorAlert;
-import com.example.components.Alert.SuccessAlert;
 import com.example.components.Modal.TambahProdukModalController;
 import com.example.model.Produk;
 
@@ -24,13 +21,15 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
 public class DaftarProdukController implements Initializable {
     @FXML private LeftSidebar sidebar;
+
     @FXML private TableView<Produk> produkTable;
+
     @FXML private TableColumn<Produk, String> noCol, tanggalCol, kodeProdukCol, namaProdukCol, jumlahStokCol, satuanCol, hargaProdukCol, aksiCol;
-    @FXML private ScrollPane scrollpane;
     
-    private boolean is_confirm = false;
+    @FXML private ScrollPane scrollpane;
     
     public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getTableData());
     
@@ -45,7 +44,7 @@ public class DaftarProdukController implements Initializable {
         this.setupColumn();
         produkTable.setItems(initialData);
     }
-        
+    
     public void setupColumn() {        
         //set column width to fit with tableview
         tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.15));
@@ -92,44 +91,6 @@ public class DaftarProdukController implements Initializable {
     
     public void updateTable() {
         produkTable.refresh();
-    }
-    
-    public void handleUserChoice(boolean state) {
-        this.is_confirm = state;
-    }
-    
-    public int getSelectedProdukIndex(Node source) throws IOException {
-        TableView.TableViewSelectionModel<Produk> selectionModel = produkTable.getSelectionModel();
-        if(selectionModel.isEmpty()) {
-            ErrorAlert error_alert = new ErrorAlert("Menghapus data", source, "Gagal menghapus data, belum ada produk yang terpilih");
-            error_alert.openModal();
-            return -1;
-        }
-        
-        return selectionModel.getFocusedIndex();
-    }
-    
-    @FXML
-    public void deleteData(ActionEvent e) throws IOException {
-        int produk_index = getSelectedProdukIndex((Node) e.getSource());
-        if(produk_index == -1) return;
-        
-        Produk produk = produkTable.getItems().get(produk_index);
-        
-        ConfirmAlert confirm_alert = new ConfirmAlert(this::handleUserChoice, "Konfirmasi menghapus data", (Node) e.getSource(), "Apakah yakin untuk menghapus " + produk.getNama() + " ?");
-        confirm_alert.openModal();
-        
-        if(is_confirm) {
-            if(produk.delete()) {
-                SuccessAlert success_alert = new SuccessAlert("Menghapus data", (Node) e.getSource(), "Berhasil menghapus data " + produk.getNama());
-                success_alert.openModal();
-            } else {
-                ErrorAlert error_alert = new ErrorAlert("Menghapus data", (Node) e.getSource(), "Gagal menghapus data, sudah ada histori penjualan pada produk ini.");
-                error_alert.openModal();
-            }
-            
-            produkTable.getItems().remove(produk_index);
-        }
     }
     
     @FXML

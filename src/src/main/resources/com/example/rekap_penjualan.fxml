@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import com.example.components.LeftSidebar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.RekapPenjualanController">
+    <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
+    <LeftSidebar fx:id="sidebar" />
+    
+    <ScrollPane HBox.hgrow="ALWAYS" fx:id="scrollpane">
+        <VBox styleClass="main-content" spacing="20">
+            <HBox alignment="CENTER_LEFT" prefHeight="40">
+                <Label styleClass="fs-5, fw-semibold" text="Rekap Penjualan" />
+                <AnchorPane HBox.hgrow="ALWAYS" />
+                <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024" />
+            </HBox>
+            
+            <VBox spacing="10">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Pilih Tanggal Awal: " styleClass="fs-1" />
+                    <DatePicker fx:id="tanggalAwalDatePicker" prefWidth="150"/>  
+                    <Label text="Pilih Tanggal Akhir: " styleClass="fs-1" style="-fx-padding: 0px 15px 0px 15px" />
+                    <DatePicker fx:id="tanggalAkhirDatePicker" prefWidth="150"/>  
+                </HBox>
+
+                
+                <TableView fx:id="invoiceTable" >
+                    <columns>
+                        <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
+                        <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="250.0" />
+                        <TableColumn fx:id="jumlahProdukCol" text="Jumlah Produk" prefWidth="250.0" />
+                        <TableColumn fx:id="totalPenjualanCol" text="Total Penjualan" prefWidth="290.0" />
+                    </columns>
+                </TableView>
+                
+                <HBox alignment="CENTER_RIGHT" prefHeight="40">
+                    <Label styleClass="fs-3, fw-semibold" text="Total Penjualan Rp0" />
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+</HBox>
