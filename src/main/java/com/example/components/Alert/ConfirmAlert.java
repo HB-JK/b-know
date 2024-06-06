@@ -3,6 +3,7 @@ package com.example.components.Alert;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import com.example.components.Modal.BaseModalController;
 import com.example.helpers.InputTypeHelper;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 public class ConfirmAlert extends BaseModalController implements Initializable{
     //Tambah / Edit Produk Modal property
     private String title;
+    private Consumer<Boolean> callback;
 
     private final StringProperty alert_msg = new SimpleStringProperty();
     
@@ -34,21 +36,23 @@ public class ConfirmAlert extends BaseModalController implements Initializable{
         this.title = "Confirm Alert";
     }
 
-    public ConfirmAlert(String title, double width, double height, Node parent_source, String alert_msg) throws IOException {
+    public ConfirmAlert(Consumer<Boolean> callback, String title, double width, double height, Node parent_source, String alert_msg) throws IOException {
         super(title, width, height, parent_source, "component/alert/confirm_alert.fxml");
         
         //Agar dapat memberi value ke variabel alert_msg dalam fxml, maka harus melalui controller
         ConfirmAlert current = super.loader.getController();
         current.setAlertMsg(alert_msg);
+        current.setCallback(callback);
         this.title = title;
     }
     
-    public ConfirmAlert(String title, Node parent_source, String alert_msg) throws IOException {
+    public ConfirmAlert(Consumer<Boolean> callback, String title, Node parent_source, String alert_msg) throws IOException {
         super(title, parent_source, "component/alert/confirm_alert.fxml");
         
         //Agar dapat memberi value ke variabel alert_msg dalam fxml, maka harus melalui controller
         ConfirmAlert current = super.loader.getController();
         current.setAlertMsg(alert_msg);
+        current.setCallback(callback);
         this.title = title;
     }
     
@@ -76,8 +80,19 @@ public class ConfirmAlert extends BaseModalController implements Initializable{
         stage.close();
     }
     
+    public void setCallback(Consumer<Boolean> callback) {
+        this.callback = callback;
+    }
+    
     @FXML
     public void close(ActionEvent e) {
+        callback.accept(false);
+        this.closeModal();
+    }
+    
+    @FXML
+    public void confirm(ActionEvent e){
+        callback.accept(true);
         this.closeModal();
     }
 }

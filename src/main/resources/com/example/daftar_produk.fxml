@@ -26,6 +26,7 @@
                 <AnchorPane HBox.hgrow="ALWAYS" />
         
                 <HBox spacing="15">
+                    <Button text="Hapus Data" styleClass="btn, bg-danger" onAction="#deleteData" />
                     <Button text="Tambah" styleClass="btn, bg-primary" onAction="#openTambahProdukModal" />
                 </HBox>
             </HBox>
@@ -38,6 +39,7 @@
                     <TableColumn fx:id="jumlahStokCol" text="Jumlah Stok" prefWidth="100.0" />
                     <TableColumn fx:id="satuanCol" text="Satuan" prefWidth="100.0" />
                     <TableColumn fx:id="hargaProdukCol" text="Harga Produk" prefWidth="100.0" />
+                    <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
                 </columns>
             </TableView>
         </VBox>    
