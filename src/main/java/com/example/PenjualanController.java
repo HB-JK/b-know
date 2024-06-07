@@ -47,6 +47,10 @@ public class PenjualanController implements Initializable {
     
     @FXML private Label today_date, modal_label;
 
+    @FXML private HBox tombol;
+    @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button;
+    
+
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
@@ -58,6 +62,13 @@ public class PenjualanController implements Initializable {
 
         this.setupColumn();
         today_date.setText(new DateHelper().getTodayDate());
+        
+        Modal modal = new Modal().getTodayCashier();
+        if(modal.getId() != null) {
+            this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
+        } else {
+            this.updateState(false);
+        }
     }
 
     public void setupColumn() {
@@ -71,7 +82,27 @@ public class PenjualanController implements Initializable {
     }
 
     public void updateModal(String modal) {
-        modal_label.setText(modal);
+        modal_label.setText(
+            new FormatHelper().convertToRupiah(Integer.parseInt(modal))
+        );
+        this.updateState(true);
+    }
+
+    public void updateState(boolean state) {
+        if(!this.tombol.getChildren().contains(close_cashier_button) && state) {
+            this.tombol.getChildren().add(close_cashier_button);
+        }
+        
+        if(!this.tombol.getChildren().contains(add_penjualan_button) && state) {
+            this.tombol.getChildren().add(add_penjualan_button);
+        }
+        
+        if(state) {
+            this.tombol.getChildren().remove(open_cashier_button);
+        } else {
+            this.tombol.getChildren().remove(close_cashier_button);
+            this.tombol.getChildren().remove(add_penjualan_button);
+        }
     }
 
     @FXML
@@ -87,7 +118,9 @@ public class PenjualanController implements Initializable {
 
     @FXML
     public void closeCashier(ActionEvent e) {
-        
+        // try {
+            
+        // }
     }
     
     @FXML
