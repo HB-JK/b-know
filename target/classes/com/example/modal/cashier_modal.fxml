@@ -30,9 +30,8 @@
         </HBox>
         
         <HBox HBox.hgrow="ALWAYS">
-            <TableView HBox.hgrow="ALWAYS" fx:id="invoiceTable">
+            <TableView HBox.hgrow="ALWAYS" fx:id="cashierModalTable">
                 <columns>
-                    <TableColumn fx:id="noCol" text="No" prefWidth="0.1"/>
                     <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="100.0"/>
                     <TableColumn fx:id="stockCol" text="Stock" prefWidth="170.0"/>
                     <TableColumn fx:id="hargaCol" text="Harga per/pcs" prefWidth="100.0"/>

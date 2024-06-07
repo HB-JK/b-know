@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.text.Font?>
+<?import com.example.components.LeftSidebar?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ScrollPane?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DaftarProdukController">
+    <!-- Bagian sidebar, jangan lupa import com.example.components.LeftSidebar -->
+    <LeftSidebar fx:id="sidebar" />
+    
+    <ScrollPane HBox.hgrow="ALWAYS" fx:id="scrollpane">
+        <VBox HBox.hgrow="ALWAYS" styleClass="main-content" spacing="20">
+            <HBox alignment="CENTER_LEFT" prefHeight="40">
+                <Label styleClass="fs-5, fw-semibold" text="Daftar Produk" />
+
+                <AnchorPane HBox.hgrow="ALWAYS" />
+        
+                <HBox spacing="15">
+                    <Button text="Tambah" styleClass="btn, bg-primary" onAction="#openTambahProdukModal" />
+                </HBox>
+            </HBox>
+
+            <TableView fx:id="produkTable" >
+                <columns>
+                    <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="120.0" />
+                    <TableColumn fx:id="kodeProdukCol" text="Kode Produk" prefWidth="100.0" />
+                    <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="170.0" />
+                    <TableColumn fx:id="jumlahStokCol" text="Jumlah Stok" prefWidth="100.0" />
+                    <TableColumn fx:id="satuanCol" text="Satuan" prefWidth="100.0" />
+                    <TableColumn fx:id="hargaProdukCol" text="Harga Produk" prefWidth="100.0" />
+                </columns>
+            </TableView>
+        </VBox>    
+    </ScrollPane>
+</HBox>
+    

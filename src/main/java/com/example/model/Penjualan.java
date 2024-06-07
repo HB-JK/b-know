@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.List;
+
 public class Penjualan extends BaseModel {
     private String table = "penjualan";
     private int id;
@@ -7,7 +9,7 @@ public class Penjualan extends BaseModel {
     private String nomor_faktur, nama_customer;
     private int total_harga;
     private String created_at, updated_at, deleted_at;
-    private DetailPenjualan[] list_detail_penjualan;
+    private List<DetailPenjualan> list_detail_penjualan;
     
     // Getter and Setter for 'id'
     public int getId() {
@@ -82,11 +84,11 @@ public class Penjualan extends BaseModel {
     }
 
     // Getter and Setter for 'list_detail_penjualan'
-    public DetailPenjualan[] getListDetailPenjualan() {
+    public List<DetailPenjualan> getListDetailPenjualan() {
         return list_detail_penjualan;
     }
 
-    public void setListDetailPenjualan(DetailPenjualan[] list_detail_penjualan) {
-        this.list_detail_penjualan = list_detail_penjualan;
+    public void setListDetailPenjualan(DetailPenjualan detail_penjualan) {
+        this.list_detail_penjualan.add(detail_penjualan);
     }
 }

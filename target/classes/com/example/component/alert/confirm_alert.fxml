@@ -17,12 +17,13 @@
                 <fitWidth>80</fitWidth>
                 <preserveRatio>true</preserveRatio>
             </ImageView>
-            <Label fx:id="alert_title" styleClass="fs-4, fw-4" wrapText="true" textAlignment="CENTER" text="Berhasil" />
+            <Label fx:id="alert_title" styleClass="fs-4, fw-4" wrapText="true" textAlignment="CENTER" text="Konfirmasi" />
             <Label fx:id="alert_message" styleClass="fs-4" wrapText="true" textAlignment="CENTER" />
         </VBox>
         
         <HBox alignment="CENTER" spacing="5">
-            <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-primary, alert-btn" text="Oke" onAction="#close" />
+            <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger, alert-btn" text="Tidak" onAction="#close" />
+            <Button HBox.hgrow="ALWAYS" fx:id="confirm_button" styleClass="btn, bg-primary, alert-btn" text="Ya" onAction="#confirm" />
         </HBox>
     </VBox>
 </HBox>

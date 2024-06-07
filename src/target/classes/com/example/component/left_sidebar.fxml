@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.text.Font?>
+
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:id="left_sidebar" prefHeight="640" prefWidth="200">
+    <children>
+        <VBox spacing="20" prefWidth="200">
+            <HBox id="logo_section" alignment="CENTER_LEFT">
+                <ImageView fx:id="logo">
+                    <fitWidth>60</fitWidth>
+                    <preserveRatio>true</preserveRatio>
+                </ImageView>
+                <Label fx:id="project_name_left_sidebar" minHeight="16" minWidth="69" text="B-KNOW" />
+            </HBox>
+            
+            <VBox fx:id="left_sidebar_content">
+                <AnchorPane styleClass="sidebar-item" fx:id="dashboard" prefHeight="40">
+                    <Button fx:id="dashboard_button" prefWidth="200" prefHeight="40" text="Dashboard" onAction="#changeToDashboard" />
+                    <ImageView styleClass="icon" fx:id="dashboard_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="produk" prefHeight="40">
+                    <Button fx:id="produk_button" prefWidth="200" prefHeight="40" text="Produk" onAction="#changeToDaftarProduk" />
+                    <ImageView styleClass="icon" fx:id="produk_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="cashflow" prefHeight="40">
+                    <Button fx:id="cashflow_button" prefWidth="200" prefHeight="40" text="Cash Flow" onAction="#changeToCashflow" />
+                    <ImageView styleClass="icon" fx:id="cashflow_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="penjualan" prefHeight="40">
+                    <Button fx:id="penjualan_button" prefWidth="200" prefHeight="40" text="Penjualan" onAction="#changeToPenjualan" />
+                    <ImageView styleClass="icon" fx:id="penjualan_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="rekap_penjualan" prefHeight="40">
+                    <Button fx:id="rekap_penjualan_button" prefWidth="200" prefHeight="40" text="Rekap Penjualan" onAction="#changeToRekapPenjualan" />
+                    <ImageView styleClass="icon" fx:id="rekap_penjualan_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="rekap_produk" prefHeight="40">
+                    <Button fx:id="rekap_produk_button" prefWidth="200" prefHeight="40" text="Rekap Produk" onAction="#changeToRekapProduk"/>
+                    <ImageView styleClass="icon" fx:id="rekap_produk_icon" />
+                </AnchorPane>
+                <AnchorPane styleClass="sidebar-item" fx:id="logout" prefHeight="40">
+                    <Button styleClass="logout" fx:id="logout_button" prefWidth="200" prefHeight="40" text="Keluar" onAction="#logout" />
+                    <ImageView styleClass="icon" fx:id="logout_icon" />
+                </AnchorPane>
+            </VBox>
+        </VBox>
+    </children>
+  
+</fx:root>
