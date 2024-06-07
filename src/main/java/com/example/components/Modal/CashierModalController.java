@@ -9,12 +9,18 @@ import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.InputTypeHelper;
 import com.example.model.Modal;
+import com.example.model.Penjualan;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -23,12 +29,17 @@ public class CashierModalController extends BaseModalController implements Initi
     private String title;
     private InputTypeHelper input_helper = new InputTypeHelper();
     private PenjualanController parent_controller;
-
     
+    // fx:id="fruitCombo" 
+    @FXML private ComboBox<String> fruitCombo;
     //Cashier modal fxml element
     @FXML private Button close_button, action_button;
     @FXML private TextField modal;
     // @FXML private Button action_button;
+    @FXML private TableView<Penjualan> invoiceTable;
+    
+    @FXML TableColumn<Void, Void> noCol, namaProdukCol, stockCol, hargaCol, statusCol;
+    @FXML private Label modal_label;
     
     public CashierModalController() {
         this.title = "Input Modal";
@@ -42,19 +53,35 @@ public class CashierModalController extends BaseModalController implements Initi
         controller.setController(parent_controller);
         controller.updateState();
     }
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         input_helper.setToInt(modal);
+        
+        this.setupColumn();
+    }
+    
+    public void setupColumn() {
+        noCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.15));
+        namaProdukCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
+        stockCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.15));
+        hargaCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
+        statusCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
     }
     
     public void openModal() {
         this.showAndWait();
+        
     }
     
     public void closeModal() {
         Stage stage = (Stage) close_button.getScene().getWindow();
         stage.close();
+    }
+
+    public void updateModal(String modal) {
+        modal_label.setText(modal);
+        
     }
     
     public void updateState() {

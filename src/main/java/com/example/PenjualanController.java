@@ -8,6 +8,8 @@ import com.example.components.LeftSidebar;
 import com.example.components.Modal.CashierModalController;
 import com.example.components.Modal.TambahPenjualanModalController;
 import com.example.helpers.DateHelper;
+import com.example.helpers.FormatHelper;
+import com.example.model.Modal;
 import com.example.model.Penjualan;
 
 import javafx.event.ActionEvent;
@@ -45,9 +47,6 @@ public class PenjualanController implements Initializable {
     
     @FXML private Label today_date, modal_label;
 
-    @FXML private HBox tombol;
-    @FXML private Button openCashier_button, closeCashier_button;
-
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
@@ -59,7 +58,6 @@ public class PenjualanController implements Initializable {
 
         this.setupColumn();
         today_date.setText(new DateHelper().getTodayDate());
-        this.updateState(false);
     }
 
     public void setupColumn() {
@@ -74,22 +72,12 @@ public class PenjualanController implements Initializable {
 
     public void updateModal(String modal) {
         modal_label.setText(modal);
-        this.updateState(true);
-    }
-
-    public void updateState(boolean state) {
-        if(state) {
-            this.tombol.getChildren().remove(openCashier_button);
-            this.tombol.getChildren().add(closeCashier_button);
-        } else {
-            this.tombol.getChildren().remove(closeCashier_button);
-        }
     }
 
     @FXML
     public void openCashierModal(ActionEvent e) {
         try {
-            CashierModalController cashier_modal = new CashierModalController("Input Modal", 300, 150, (Node) e.getSource(), this);
+            CashierModalController cashier_modal = new CashierModalController("Buka Kasir", 550, 350, (Node) e.getSource(), this);
             cashier_modal.openModal();
 
         } catch (IOException e1) {
@@ -112,3 +100,5 @@ public class PenjualanController implements Initializable {
         }
     }
 }
+
+

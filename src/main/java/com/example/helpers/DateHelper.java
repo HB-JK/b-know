@@ -47,6 +47,10 @@ public class DateHelper {
         return new SimpleDateFormat("d MMM Y").format(this.getCurrentTimestamp());
     }
     
+    public String getTodayDatabaseDate() {
+        return new SimpleDateFormat("Y-MM-dd").format(this.getCurrentTimestamp());
+    }
+    
     public Long getFutureDateByDay(int day) {
         calendar.add(Calendar.DAY_OF_MONTH, day);
         
