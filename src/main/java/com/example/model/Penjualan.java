@@ -1,22 +1,49 @@
 package com.example.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.example.database.ConnectDatabase;
+import com.example.enums.ErrorLevel;
+
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Penjualan extends BaseModel {
     private String table = "penjualan";
-    private int id;
+    private String id;
     private Admin admin;
-    private String nomor_faktur, nama_customer;
-    private int total_harga;
-    private String created_at, updated_at, deleted_at;
+    private StringProperty nomorFaktur = new SimpleStringProperty();
+    private StringProperty namaCustomer = new SimpleStringProperty();
+    private StringProperty totalHarga = new SimpleStringProperty();
+    private StringProperty createdAt = new SimpleStringProperty();
+    private String updated_at;
     private List<DetailPenjualan> list_detail_penjualan;
     
+    public Penjualan() {}
+    
+    // instantiate penjualan from database
+    public Penjualan(Object object){
+        try{
+            List<String> data = (ArrayList<String>) object;
+            
+            this.setId(String.valueOf(data.get(0)));
+            this.nomorFaktur.set(data.get(2).toString());
+            this.totalHarga.set(String.valueOf(data.get(4)));
+            this.createdAt.set(data.get(5).toString());
+            this.namaCustomer.set((data.get(3) == null) ? "Tidak ada nama" : data.get(3).toString());
+            
+        } catch ( Exception e ) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+        }
+    }
+    
     // Getter and Setter for 'id'
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,40 +56,60 @@ public class Penjualan extends BaseModel {
         this.admin = admin;
     }
 
-    // Getter and Setter for 'nomor_faktur'
+    // Getter and Setter for 'nomorFaktur'
+    public final StringProperty nomorFakturProperty() {
+        return nomorFaktur;
+    }
+
     public String getNomorFaktur() {
-        return nomor_faktur;
+        return nomorFaktur.get();
     }
 
-    public void setNomorFaktur(String nomor_faktur) {
-        this.nomor_faktur = nomor_faktur;
+    public void setNomorFaktur(String nomorFaktur) {
+        this.nomorFaktur.set(nomorFaktur);
     }
 
-    // Getter and Setter for 'nama_customer'
+    // Getter and Setter for 'namaCustomer'
+    public final StringProperty namaCustomerProperty() {
+        return namaCustomer;
+    }
+    
     public String getNamaCustomer() {
-        return nama_customer;
+        return namaCustomer.get();
     }
 
-    public void setNamaCustomer(String nama_customer) {
-        this.nama_customer = nama_customer;
+    public void setNamaCustomer(String namaCustomer) {
+        this.namaCustomer.set(namaCustomer);;
     }
 
-    // Getter and Setter for 'total_harga'
+    // Getter and Setter for 'totalHarga'
+    public final StringProperty totalHargaProperty() {
+        return new SimpleStringProperty(
+            this.format_helper.convertToRupiah(Integer.parseInt(totalHarga.get()))
+        );
+    }
+    
     public int getTotalHarga() {
-        return total_harga;
+        return (totalHarga.get() == null) ? 0 : Integer.parseInt(totalHarga.get());
     }
 
-    public void setTotalHarga(int total_harga) {
-        this.total_harga = total_harga;
+    public void setTotalHarga(String totalHarga) {
+        this.totalHarga.set(totalHarga);
     }
 
-    // Getter and Setter for 'created_at'
+    // Getter and Setter for 'createdAt'
+    public final StringProperty createdAtProperty() {
+        return new SimpleStringProperty(
+            this.date_helper.getDatabaseDate(createdAt.get())
+        );
+    }
+    
     public String getCreatedAt() {
-        return created_at;
+        return createdAt.get();
     }
 
-    public void setCreatedAt(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt.set(createdAt);
     }
 
     // Getter and Setter for 'updated_at'
@@ -75,12 +122,16 @@ public class Penjualan extends BaseModel {
     }
 
     // Getter and Setter for 'deleted_at'
-    public String getDeletedAt() {
-        return deleted_at;
-    }
-
-    public void setDeletedAt(String deleted_at) {
-        this.deleted_at = deleted_at;
+    public StringProperty jumlahProdukProperty() {
+        int totalProduk = 0;
+        
+        // for(DetailPenjualan detail : list_detail_penjualan) {
+        //     totalProduk++;
+        // }
+        
+        return new SimpleStringProperty(
+            String.valueOf(totalProduk)
+        );
     }
 
     // Getter and Setter for 'list_detail_penjualan'
@@ -90,5 +141,21 @@ public class Penjualan extends BaseModel {
 
     public void setListDetailPenjualan(DetailPenjualan detail_penjualan) {
         this.list_detail_penjualan.add(detail_penjualan);
+    }
+    
+    public List<Penjualan> getTableData() {
+        try{
+            List<Penjualan> data = new ArrayList<Penjualan>();
+            ArrayList<Object> data_fetch = new ConnectDatabase().getAllData(table);
+            
+            for(Object detail : data_fetch) {
+                data.add(new Penjualan(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
+            return null;
+        }
     }
 }

@@ -12,6 +12,8 @@ import com.example.helpers.FormatHelper;
 import com.example.model.Modal;
 import com.example.model.Penjualan;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,33 +25,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 import java.time.LocalDate;
 
 public class PenjualanController implements Initializable {
-    @FXML
-    private LeftSidebar sidebar;
-
-    @FXML // fx:id="fruitCombo"
-    private ComboBox<String> fruitCombo;
-
-    @FXML
-    private DatePicker tanggalDatePicker;
-
-    @FXML
-    private TableView<Penjualan> invoiceTable;
-
-    @FXML
-    TableColumn<Void, Void> noCol, tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol, aksiCol;
-    
+    @FXML private LeftSidebar sidebar; // self made component
+    @FXML private ComboBox<String> fruitCombo; // comboxbox element which data is list of sring with fx:id fruitombo
+    @FXML private DatePicker tanggalDatePicker;
+    @FXML private TableView<Penjualan> invoiceTable;
     @FXML private ScrollPane scrollpane;
-    
     @FXML private Label today_date, modal_label;
-
     @FXML private HBox tombol;
     @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button;
+    @FXML TableColumn<Penjualan, String> tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol;
     
+    public ObservableList<Penjualan> initialData = FXCollections.observableArrayList(new Penjualan().getTableData());
+    private Modal modal = new Modal();
 
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
@@ -63,22 +56,29 @@ public class PenjualanController implements Initializable {
         this.setupColumn();
         today_date.setText(new DateHelper().getTodayDate());
         
-        Modal modal = new Modal().getTodayCashier();
+        modal.getTodayCashier();
         if(modal.getId() != null) {
             this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
         } else {
             this.updateState(false);
         }
+        
+        invoiceTable.setItems(initialData);
     }
 
     public void setupColumn() {
-        noCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.05));
-        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.120));
+        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.25));
         noFakturCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.150));
-        namaPembeliCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
+        namaPembeliCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.260));
         jumlahItemCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.140));
-        totalHargaCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
-        aksiCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.180));
+        totalHargaCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
+        
+        //set property of each column to get data from the model Penjualan
+        tanggalCol.setCellValueFactory(new PropertyValueFactory<Penjualan, String>("createdAt"));
+        noFakturCol.setCellValueFactory(new PropertyValueFactory<Penjualan, String>("nomorFaktur"));
+        namaPembeliCol.setCellValueFactory(new PropertyValueFactory<Penjualan, String>("namaCustomer"));
+        jumlahItemCol.setCellValueFactory(new PropertyValueFactory<Penjualan, String>("jumlahProduk"));
+        totalHargaCol.setCellValueFactory(new PropertyValueFactory<Penjualan, String>("totalHarga"));
     }
 
     public void updateModal(String modal) {

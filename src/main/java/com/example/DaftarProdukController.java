@@ -124,12 +124,11 @@ public class DaftarProdukController implements Initializable {
             if(produk.delete()) {
                 SuccessAlert success_alert = new SuccessAlert("Menghapus data", (Node) e.getSource(), "Berhasil menghapus data " + produk.getNama());
                 success_alert.openModal();
+                produkTable.getItems().remove(produk_index);
             } else {
                 ErrorAlert error_alert = new ErrorAlert("Menghapus data", (Node) e.getSource(), "Gagal menghapus data, sudah ada histori penjualan pada produk ini.");
                 error_alert.openModal();
             }
-            
-            produkTable.getItems().remove(produk_index);
         }
     }
     

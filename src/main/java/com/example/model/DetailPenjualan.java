@@ -1,33 +1,60 @@
 package com.example.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
+
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class DetailPenjualan extends BaseModel {
     private String table = "detail_penjualan";
-    private int id;
+    private String id;
     private Penjualan penjualan;
     private Produk produk;
-    private int jumlah_produk, harga_jual, diskon, total_harga;
-    private String created_at, updated_at, deleted_at;
+    private StringProperty jumlahProduk = new SimpleStringProperty();
+    private StringProperty hargaJual = new SimpleStringProperty();
+    private StringProperty diskon = new SimpleStringProperty();
+    private StringProperty totalHarga = new SimpleStringProperty();
+    private StringProperty createdAt = new SimpleStringProperty();
+    private String updated_at;
     
-    public DetailPenjualan() {}
+    public DetailPenjualan(String id_penjualan) {}
     
-    public DetailPenjualan(Penjualan penjualan, Produk produk, int jumlah_produk, int harga_jual, int diskon) {
-        this.setPenjualan(penjualan);
-        this.setProduk(produk);
-        this.setJumlahProduk(jumlah_produk);
-        this.setHargaJual(harga_jual);
-        this.setDiskon(diskon);
-        this.setTotalHarga(this.jumlah_produk * this.harga_jual - this.diskon);
+    public DetailPenjualan(Penjualan penjualan, Produk produk, int jumlahProduk, int hargaJual, int diskon) {
+        // this.setPenjualan(penjualan);
+        // this.setProduk(produk);
+        // this.setJumlahProduk(jumlahProduk);
+        // this.setHargaJual(hargaJual);
+        // this.setDiskon(diskon);
+        // this.setTotalHarga(this.jumlahProduk * this.hargaJual - this.diskon);
         this.setCreatedAt(date_helper.getDatabaseTimestamp());
     }
     
+    //Constructor for instantiate existing data
+    public DetailPenjualan(Object object){
+        try{
+            List<String> data = (ArrayList<String>) object;
+            
+            this.setId(data.get(0));
+            this.jumlahProduk.set(data.get(3));
+            this.hargaJual.set(data.get(4));
+            this.diskon.set(String.valueOf(data.get(5)));
+            this.totalHarga.set(data.get(6));
+            this.createdAt.set(data.get(7));
+        } catch ( Exception e ) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+        }
+    }
+    
     // Getter and Setter for 'id'
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,49 +76,69 @@ public class DetailPenjualan extends BaseModel {
         this.produk = produk;
     }
 
-    // Getter and Setter for 'jumlah_produk'
+    // Getter and Setter for 'jumlahProduk'
+    public final StringProperty jumlahProdukProperty() {
+        return jumlahProduk;
+    }
+    
     public int getJumlahProduk() {
-        return jumlah_produk;
+        return (jumlahProduk.get() == null) ? 0 : Integer.parseInt(jumlahProduk.get());
     }
 
-    public void setJumlahProduk(int jumlah_produk) {
-        this.jumlah_produk = jumlah_produk;
+    public void setJumlahProduk(String jumlahProduk) {
+        this.jumlahProduk.set(jumlahProduk);;
     }
 
-    // Getter and Setter for 'harga_jual'
-    public int getHargaJual() {
-        return harga_jual;
+    // Getter and Setter for 'hargaJual'
+    public final StringProperty hargaJualProperty() {
+        return hargaJual;
+    }
+    
+    public String getHargaJual() {
+        return hargaJual.get();
     }
 
-    public void setHargaJual(int harga_jual) {
-        this.harga_jual = harga_jual;
+    public void setHargaJual(String hargaJual) {
+        this.hargaJual.set(hargaJual);;
     }
 
     // Getter and Setter for 'diskon'
-    public int getDiskon() {
+    public final StringProperty diskonProperty() {
         return diskon;
     }
-
-    public void setDiskon(int diskon) {
-        this.diskon = diskon;
+    
+    public int getDiskon() {
+        return Integer.parseInt(diskon.get());
     }
 
-    // Getter and Setter for 'total_harga'
+    public void setDiskon(String diskon) {
+        this.diskon.set(diskon);;
+    }
+
+    // Getter and Setter for 'totalHarga'
+    public final StringProperty totalHargaProperty() {
+        return totalHarga;
+    }
+    
     public int getTotalHarga() {
-        return total_harga;
+        return Integer.parseInt(totalHarga.get());
     }
 
-    public void setTotalHarga(int total_harga) {
-        this.total_harga = total_harga;
+    public void setTotalHarga(String totalHarga) {
+        this.totalHarga.set(totalHarga);;
     }
 
-    // Getter and Setter for 'created_at'
+    // Getter and Setter for 'createdAt'
+    public final StringProperty createdAtProperty() {
+        return createdAt;
+    }
+    
     public String getCreatedAt() {
-        return created_at;
+        return createdAt.get();
     }
 
-    public void setCreatedAt(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt.set(createdAt);;
     }
 
     // Getter and Setter for 'updated_at'
@@ -102,20 +149,27 @@ public class DetailPenjualan extends BaseModel {
     public void setUpdatedAt(String updated_at) {
         this.updated_at = updated_at;
     }
-
-    // Getter and Setter for 'deleted_at'
-    public String getDeletedAt() {
-        return deleted_at;
-    }
-
-    public void setDeletedAt(String deleted_at) {
-        this.deleted_at = deleted_at;
+    
+    public List<DetailPenjualan> getTableData() {
+        try{
+            List<DetailPenjualan> data = new ArrayList<DetailPenjualan>();
+            ArrayList<Object> data_fetch = new ConnectDatabase().getAllData(table);
+            
+            for(Object detail : data_fetch) {
+                data.add(new DetailPenjualan(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model DetailPenjualan");
+            return null;
+        }
     }
     
     public void save() {
         try {
             String query = String.format(
-                "INSERT INTO detail_penjualan (id_penjualan, id_produk, nama_customer, jumlah_produk, harga_jual, diskon, total_harga, created_at, updated_at) VALUES ('1', '4', '10', '7000', '0', '70000', '2024-06-07 05:34:50', NULL);"
+                "INSERT INTO detail_penjualan (id_penjualan, id_produk, jumlah_produk, harga_jal, diskon, total_harga, created_at, updated_at) VALUES ('1', '4', '10', '7000', '0', '70000', '2024-06-07 05:34:50', NULL);"
             );
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage());

@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 import com.example.components.Modal.BaseModalController;
-import com.example.helpers.InputTypeHelper;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
