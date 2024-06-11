@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 import com.example.helpers.DateHelper;
-import com.example.model.Penjualan;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

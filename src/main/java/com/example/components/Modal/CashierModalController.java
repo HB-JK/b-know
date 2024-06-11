@@ -11,7 +11,6 @@ import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.InputTypeHelper;
 import com.example.model.Modal;
-import com.example.model.Penjualan;
 import com.example.model.Produk;
 import com.example.model.StokJual;
 
@@ -24,13 +23,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.stage.Stage;
 
 public class CashierModalController extends BaseModalController implements Initializable{
@@ -79,11 +76,13 @@ public class CashierModalController extends BaseModalController implements Initi
         for(Produk produk : list_produk) {
             StokJual stok_jual = new StokJual();
             stok_jual.setProduk(produk);
+            stok_jual.setStatus();
             list_stok_jual.add(stok_jual);
         }
         
         initialData.addAll(list_stok_jual);
         cashierModalTable.setItems(initialData);
+        cashierModalTable.setEditable(true);
     }
     
     public void setupColumn() {
@@ -104,6 +103,7 @@ public class CashierModalController extends BaseModalController implements Initi
         stockCol.setOnEditCommit(event -> {
             StokJual stok_jual = event.getTableView().getItems().get(event.getTablePosition().getRow());
             stok_jual.setJumlahStokAwal(event.getNewValue());
+            stok_jual.setStatus();
         });
     }
     
@@ -141,8 +141,13 @@ public class CashierModalController extends BaseModalController implements Initi
             errorAlert.openModal();
             return;
         }
-
+        
         Modal modal = new Modal(this.modal.getText(), "Buka");
+        
+        for(int i = 0; i < cashierModalTable.getItems().size(); i++) {
+            modal.setStokJual(cashierModalTable.getItems().get(i));
+        }
+
         if (modal.save()) {
             SuccessAlert successAlert = new SuccessAlert("Success", (Node) e.getSource(), "Modal ditambahkan");
             successAlert.openModal();

@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.components.Modal.BaseModalController;
-import com.example.helpers.InputTypeHelper;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

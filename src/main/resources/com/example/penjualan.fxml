@@ -56,13 +56,11 @@
                 
                 <TableView fx:id="invoiceTable" >
                     <columns>
-                        <TableColumn fx:id="noCol" text="No." prefWidth="50.0" />
                         <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="150.0" />
                         <TableColumn fx:id="noFakturCol" text="No. Faktur" prefWidth="150.0" />
                         <TableColumn fx:id="namaPembeliCol" text="Nama Pembeli" prefWidth="190.0" />
                         <TableColumn fx:id="jumlahItemCol" text="Jumlah Item" prefWidth="100.0" />
                         <TableColumn fx:id="totalHargaCol" text="Total Harga" prefWidth="100.0" />
-                        <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
                     </columns>
                 </TableView>
             </VBox>
