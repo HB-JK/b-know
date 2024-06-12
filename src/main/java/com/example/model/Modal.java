@@ -19,6 +19,7 @@ public class Modal extends BaseModel {
     private final StringProperty statusKasir = new SimpleStringProperty();
     private final StringProperty createdAt = new SimpleStringProperty();
     private final StringProperty updatedAt = new SimpleStringProperty();
+    private List<StokJual> list_stok_jual = new ArrayList<StokJual>();
     private Admin admin;
 
     public Modal() {
@@ -121,7 +122,27 @@ public class Modal extends BaseModel {
         this.updatedAt.set(this.date_helper.getDatabaseTimestamp());
     }
     
-    public Modal getTodayCashier() {
+    //Getter and Setter for list_stok_jual
+    public StokJual[] getListStokJual() {
+        if(!list_stok_jual.isEmpty()) {
+            StokJual[] list_stok = new StokJual[list_stok_jual.size()];
+            for(int i = 0; i < list_stok_jual.size(); i++) {
+                StokJual stok = list_stok_jual.get(i);
+                stok.setModal(this);
+                list_stok[i] = stok;
+            }
+            
+            return list_stok;
+        } else {
+            return new StokJual[0];
+        }
+    }
+    
+    public void setStokJual(StokJual stok_jual) {
+        list_stok_jual.add(stok_jual);
+    }
+    
+    public void getTodayCashier() {
         try {
             String query = String
                 .format(
@@ -144,8 +165,6 @@ public class Modal extends BaseModel {
             e.printStackTrace();
             new LogError(ErrorLevel.CRITICAL, e.getMessage());
         }
-        
-        return this;
     }
 
     public boolean save() {
@@ -157,7 +176,23 @@ public class Modal extends BaseModel {
                 );
 
             int rs = this.database.createUpdateQuery(query);
-            return (rs == 1) ? true : false;
+            String failed_stock_saving = null;
+            
+            if(rs == 1 ) {
+                this.getTodayCashier();
+                
+                if(this.getId() != null) {
+                    for(StokJual stok_jual: getListStokJual()) {
+                        if(!stok_jual.save()) {
+                            failed_stock_saving += "Gagal menyimpan data " + stok_jual.getProduk().getNama() + " \n";
+                        }
+                    }
+                    
+                    if(failed_stock_saving != null) throw new Exception(failed_stock_saving);
+                }
+            }
+            
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
