@@ -41,7 +41,7 @@ public class PenjualanController implements Initializable {
     @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button;
     @FXML TableColumn<Penjualan, String> tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol;
     
-    public ObservableList<Penjualan> initialData = FXCollections.observableArrayList(new Penjualan().getTableData());
+    public ObservableList<Penjualan> initialData = FXCollections.observableArrayList(new Penjualan().getData());
     private Modal modal = new Modal();
 
     @Override
@@ -59,11 +59,10 @@ public class PenjualanController implements Initializable {
         modal.getTodayCashier();
         if(modal.getId() != null) {
             this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
+            invoiceTable.setItems(initialData);
         } else {
             this.updateState(false);
         }
-        
-        invoiceTable.setItems(initialData);
     }
 
     public void setupColumn() {

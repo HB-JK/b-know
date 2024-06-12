@@ -180,7 +180,7 @@ public class Produk extends BaseModel {
         }
     }
     
-    public List<Produk> getTableData() {
+    public List<Produk> getData() {
         try{
             List<Produk> data = new ArrayList<Produk>();
             ArrayList<Object> data_fetch = new ConnectDatabase().getAllData("produk");
