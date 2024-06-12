@@ -150,7 +150,7 @@ public class DetailPenjualan extends BaseModel {
         this.updated_at = updated_at;
     }
     
-    public List<DetailPenjualan> getTableData() {
+    public List<DetailPenjualan> getData() {
         try{
             List<DetailPenjualan> data = new ArrayList<DetailPenjualan>();
             ArrayList<Object> data_fetch = new ConnectDatabase().getAllData(table);

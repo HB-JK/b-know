@@ -143,10 +143,15 @@ public class Penjualan extends BaseModel {
         this.list_detail_penjualan.add(detail_penjualan);
     }
     
-    public List<Penjualan> getTableData() {
+    public List<Penjualan> getData() {
         try{
             List<Penjualan> data = new ArrayList<Penjualan>();
-            ArrayList<Object> data_fetch = new ConnectDatabase().getAllData(table);
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE DATE(created_at)='%2$s' AND id_admin=%3$s",
+                table, this.date_helper.getTodayDatabaseDate(), this.user_helper.getAdmin().getId()
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
             
             for(Object detail : data_fetch) {
                 data.add(new Penjualan(detail));

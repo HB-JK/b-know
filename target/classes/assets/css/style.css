@@ -139,7 +139,7 @@
 }
 
 .bg-grey {
-    -fx-text-fill: #f1f1f1;
+    -fx-text-fill: #333;
     -fx-background-color: #d1d1d1;
 }
 /* Reusable background style end*/

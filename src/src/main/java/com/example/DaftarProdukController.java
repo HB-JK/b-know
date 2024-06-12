@@ -31,7 +31,7 @@ public class DaftarProdukController implements Initializable {
     
     @FXML private ScrollPane scrollpane;
     
-    public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getTableData());
+    public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getData());
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {

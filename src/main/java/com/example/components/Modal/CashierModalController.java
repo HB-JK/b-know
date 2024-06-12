@@ -72,7 +72,7 @@ public class CashierModalController extends BaseModalController implements Initi
     public void setupStokJual() {
         List<StokJual> list_stok_jual = new ArrayList<StokJual>();
         
-        List<Produk> list_produk = new Produk().getTableData(); 
+        List<Produk> list_produk = new Produk().getData(); 
         for(Produk produk : list_produk) {
             StokJual stok_jual = new StokJual();
             stok_jual.setProduk(produk);
