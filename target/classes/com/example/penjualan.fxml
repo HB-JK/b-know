@@ -51,6 +51,7 @@
                         <Button text="Tutup Kasir" fx:id="close_cashier_button" styleClass="btn, bg-primary" onAction="#closeCashier" />
                         <Button text="Buka Kasir" fx:id="open_cashier_button" styleClass="btn, bg-primary" onAction="#openCashierModal" />
                         <Button text="Tambah" fx:id="add_penjualan_button" styleClass="btn, bg-primary" onAction="#openTambahPenjualanModal" />
+                        <Button text="Stok" fx:id="input_penjualan_button" styleClass="btn, bg-primary" onAction="#inputPenjualanModal"/>
                     </HBox>
                 </HBox>
                 

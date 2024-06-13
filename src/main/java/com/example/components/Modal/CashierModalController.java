@@ -102,7 +102,7 @@ public class CashierModalController extends BaseModalController implements Initi
         stockCol.setCellFactory(TextFieldTableCell.<StokJual>forTableColumn());
         stockCol.setOnEditCommit(event -> {
             StokJual stok_jual = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            stok_jual.setJumlahStokAwal(event.getNewValue());
+            stok_jual.setJumlahStokAwal(Integer.parseInt(event.getNewValue()));
             stok_jual.setStatus();
         });
     }
