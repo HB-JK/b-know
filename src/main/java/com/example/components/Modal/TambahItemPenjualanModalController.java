@@ -90,7 +90,7 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
 
     public void setJumlahProduk() {
         if (Integer.parseInt(jumlah_produk.getText()) > stok_jual.getJumlahStokAwal()) {
-            jumlah_produk.setText(String.valueOf(stok_jual.getJumlahStokAwal()));
+            jumlah_produk.setText(String.valueOf(stok_jual.getJumlahStokAwal() - stok_jual.getJumlahStokSekarang()));
         }
     }
 
@@ -108,7 +108,7 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
         for (StokJual data : list_stok_jual) {
             if (data.getProduk().getKodeProduk().equals(produk[0])) {
                 stok_jual = data;
-                sisa_stok.setText(String.valueOf(data.getJumlahStokAwal()));
+                sisa_stok.setText(String.valueOf(data.getJumlahStokAwal() - data.getJumlahStokSekarang()));
                 harga.setText(new FormatHelper().convertToRupiah(data.getProduk().getHargaProduk()));
 
                 if (jumlah_produk.getText() != null && !jumlah_produk.getText().equals("")) {
@@ -120,37 +120,26 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
     }
 
     @FXML
-    public void inputStok(ActionEvent e) {
+    public void tambah(ActionEvent e) throws IOException {
         try {
-            if (stok_jual != null) {
+            if (stok_jual != null && !jumlah_produk.getText().equals("")) {
                 int jumlah = Integer.parseInt(jumlah_produk.getText());
-                if (jumlah <= 0) {
+                if (jumlah < 1) {
                     throw new Exception("Jumlah produk harus lebih dari 0.");
                 }
-                if (jumlah > stok_jual.getJumlahStokAwal()) {
-                    throw new Exception("Jumlah produk melebihi stok yang tersedia.");
+
+                stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
+                if(stok_jual.update()) {
+                    new SuccessAlert("Success", (Node) e.getSource(), "Transaksi ditambahkan").openModal();
+                    closeModal();
                 }
-                stok_jual.setJumlahStokAwal(stok_jual.getJumlahStokAwal() - jumlah);
-                stok_jual.save();
-                new SuccessAlert("Success", (Node) e.getSource(), "Transaksi ditambahkan").openModal();
-                closeModal();
-            } else {
-                throw new Exception("Stok jual tidak ditemukan.");
+                
+                return;
             }
-        } catch (NumberFormatException ex) {
-            System.err.println("Error: Jumlah produk harus berupa angka.");
-            ex.printStackTrace();
-            try {
-                new ErrorAlert("Error", (Node) e.getSource(), "Jumlah produk harus berupa angka.").openModal();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            
+            throw new Exception("Pastikan produk sudah terpilih dan jumlah produk sudah terisi");
         } catch (Exception ex) {
-            try {
-                new ErrorAlert("Error", (Node) e.getSource(), ex.getMessage()).openModal();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            new ErrorAlert("Error", (Node) e.getSource(), ex.getMessage()).openModal();
         }
     }
 }

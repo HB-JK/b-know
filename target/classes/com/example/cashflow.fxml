@@ -29,7 +29,6 @@
                 
                 <TableView fx:id="invoiceTable" >
                     <columns>
-                        <TableColumn fx:id="noCol" text="No." />
                         <TableColumn fx:id="tanggalCol" text="Tanggal" />
                         <TableColumn fx:id="modalCol" text="Modal" />
                         <TableColumn fx:id="pendapatanCol" text="Pendapatan" />

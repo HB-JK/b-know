@@ -15,6 +15,7 @@ public class StokJual extends BaseModel {
     private String table = "stok_jual";
     private StringProperty id = new SimpleStringProperty();
     private StringProperty jumlahStokAwal = new SimpleStringProperty();
+    private StringProperty jumlahStokSekarang = new SimpleStringProperty();
     private StringProperty jumlahStokTutup = new SimpleStringProperty();
     private StringProperty status = new SimpleStringProperty();
     private String createdAt, updatedAt;
@@ -32,8 +33,9 @@ public class StokJual extends BaseModel {
             this.id.set(String.valueOf(data.get(0)));
             this.setProduk(new Produk().getDataById(String.valueOf(data.get(2))));
             this.jumlahStokAwal.set(String.valueOf(data.get(3)));
-            this.jumlahStokTutup.set(String.valueOf(data.get(4)));
-            this.setCreatedAt(data.get(5));
+            this.jumlahStokSekarang.set(String.valueOf(data.get(4)));
+            this.jumlahStokTutup.set(String.valueOf(data.get(5)));
+            this.setCreatedAt(data.get(6));
         } catch ( Exception e ) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
         }
@@ -65,6 +67,19 @@ public class StokJual extends BaseModel {
 
     public void setJumlahStokAwal(int jumlahStokAwal) {
         this.jumlahStokAwal.set(String.valueOf(jumlahStokAwal));
+    }
+    
+    // Getter and Setter for 'jumlah_stok_awal'
+    public final StringProperty jumlahStokSekarangProperty() {
+        return jumlahStokSekarang;
+    }
+    
+    public int getJumlahStokSekarang() {
+        return (jumlahStokSekarang.get() == null) ? 0 : Integer.parseInt(jumlahStokSekarang.get());
+    }
+
+    public void setJumlahStokSekarang(int jumlahStokSekarang) {
+        this.jumlahStokSekarang.set(String.valueOf(jumlahStokSekarang));
     }
 
     // Getter and Setter for 'jumlahStokTutup'
@@ -163,8 +178,25 @@ public class StokJual extends BaseModel {
     public boolean save() {
         try {
             String query = String.format(
-                "INSERT INTO %1$s (id_modal, id_produk, jumlah_stok_awal, created_at) VALUES ('%2$s', '%3$s', %4$d, '%5$s');",
+                "INSERT INTO %1$s (id_modal, id_produk, jumlah_stok_awal, jumlah_stok_sekarang, created_at) VALUES ('%2$s', '%3$s', %4$d, %4$d, '%5$s');",
                 table, modal.getId(), produk.getId(), getJumlahStokAwal(), getCreatedAt()
+            );
+            
+            int rs = this.database.createUpdateQuery(query);
+            
+            return (rs == 1) ? true : false;
+            
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean update() {
+        try {
+            String query = String.format(
+                "UPDATE %1$s SET jumlah_stok_sekarang=%2$d, jummlah_stok_tutup=%3$d, updated_at='%4$s' WHERE id_%1$s='%5$s';",
+                table, this.getJumlahStokSekarang(), this.getJumlahStokTutup(), this.getUpdatedAt(), this.getId()
             );
             
             int rs = this.database.createUpdateQuery(query);

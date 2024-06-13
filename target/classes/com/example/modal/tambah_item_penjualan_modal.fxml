@@ -21,7 +21,7 @@
             
             <HBox alignment="BASELINE_CENTER" spacing="5">
                 <Label text="Jumlah produk" prefWidth="140" styleClass="fs-4" />
-                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_produk" promptText="Masukkan jumlah produk beli" onAction="#inputStok" />
+                <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_produk" promptText="Masukkan jumlah produk beli" />
             </HBox>
             
             <HBox alignment="BASELINE_CENTER" spacing="5">
@@ -37,7 +37,7 @@
         
         <HBox alignment="CENTER_RIGHT" spacing="5">
             <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
-            <Button HBox.hgrow="ALWAYS" fx:id="save_button" styleClass="btn, bg-primary" text="Simpan" onAction="#inputStok" />
+            <Button HBox.hgrow="ALWAYS" fx:id="save_button" styleClass="btn, bg-primary" text="Simpan" onAction="#tambah" />
         </HBox>
     </VBox>
 </HBox>

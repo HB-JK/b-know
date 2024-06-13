@@ -6,7 +6,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
+import com.example.helpers.FormatHelper;
+
 import javafx.beans.property.StringProperty;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -31,6 +34,20 @@ public class Modal extends BaseModel {
         this.setJumlahModalMasuk(jumlahModalMasuk);
         this.setStatusKasir(statusKasir);
         this.setCreatedAt(date_helper.getDatabaseTimestamp());
+    }
+    
+    public Modal (Object object) {
+        try{
+            List<String> data = (ArrayList<String>) object;
+            
+            this.id.set(String.valueOf(data.get(0)));
+            this.setJumlahModalMasuk(String.valueOf(data.get(2)));
+            this.setJumlahPenarikanModal(String.valueOf(data.get(3)));
+            this.setStatusKasir(String.valueOf(data.get(5)));
+            this.setCreatedAt(data.get(6));
+        } catch ( Exception e ) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+        }
     }
 
     // Getter and Setter for 'id'
@@ -57,7 +74,9 @@ public class Modal extends BaseModel {
 
     // Getter and Setter for 'jumlahModalMasuk'
     public final StringProperty jumlahModalMasukProperty() {
-        return jumlahModalMasuk;
+        return new SimpleStringProperty(
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahModalMasuk()))
+        );
     }
     
     public int getJumlahModalMasuk() {
@@ -70,7 +89,9 @@ public class Modal extends BaseModel {
 
     // Getter and Setter for 'jumlahPenarikanModal'
     public final StringProperty jumlahPenarikanModalProperty() {
-        return jumlahPenarikanModal;
+        return new SimpleStringProperty(
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahPenarikanModal()))
+        );
     }
     
     public int getJumlahPenarikanModal() {
@@ -120,6 +141,30 @@ public class Modal extends BaseModel {
 
     public void setUpdatedAt() {
         this.updatedAt.set(this.date_helper.getDatabaseTimestamp());
+    }
+    
+    public StringProperty profitProperty() {
+        return new SimpleStringProperty(
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahPenarikanModal() - getJumlahModalMasuk()))
+        );
+    }
+    
+    public List<Modal> getData() {
+        try{
+            List<Modal> data = new ArrayList<Modal>();
+            
+            String query = String.format("SELECT * FROM %1$s WHERE status_kasir='tutup'",table);
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            for(Object detail : data_fetch) {
+                data.add(new Modal(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model StokJual");
+            return null;
+        }
     }
     
     //Getter and Setter for list_stok_jual
