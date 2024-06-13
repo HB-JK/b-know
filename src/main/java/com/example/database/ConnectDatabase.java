@@ -143,8 +143,8 @@ public class ConnectDatabase {
         return data_fetch;
     }
     
-    public ArrayList<Object> findById(String table_name, int id) {
-        ArrayList<Object> listData = new ArrayList<Object>();
+    public Object findById(String table_name, String id) {
+        Object data_fetch = new Object();
         
         try{
             String query = String.format("SELECT * FROM %1$s WHERE id_%1$s=%2$s", table_name, id);
@@ -153,13 +153,13 @@ public class ConnectDatabase {
             while(rs.next()) {
                 ResultSetMetaData meta_data = rs.getMetaData();
                 
-                List<Object> data = new ArrayList<Object>();
+                List<String> data = new ArrayList<String>();
                 
                 for(int i = 1; i <= meta_data.getColumnCount(); i++) {
                     data.add(rs.getString(i));
                 }
                 
-                listData.add(data);
+                data_fetch = data;
             }
             
             this.stmt.close();
@@ -170,7 +170,7 @@ public class ConnectDatabase {
             return null;
         }
         
-        return listData;
+        return data_fetch;
     }
     
     public ArrayList<Object> getDataQuery(String query) {

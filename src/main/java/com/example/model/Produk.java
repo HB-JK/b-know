@@ -180,7 +180,28 @@ public class Produk extends BaseModel {
         }
     }
     
-    public List<Produk> getTableData() {
+    public Produk getDataById(String id) {
+        try {
+            List<String> data = (List<String>) this.database.findById(table, id);
+            
+            if(data.size() > 0) {
+                this.setId(String.valueOf(data.get(0)));
+                this.setKodeProduk(data.get(1));
+                this.setNama(data.get(2));
+                this.setHargaProduk(String.valueOf(data.get(3)));
+                this.setSatuan(data.get(4));
+                this.setSisaStok(String.valueOf(data.get(5)));
+                this.setCreatedAt(data.get(6));
+            }
+            return this;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage());
+            
+            return null;
+        }
+    }
+    
+    public List<Produk> getData() {
         try{
             List<Produk> data = new ArrayList<Produk>();
             ArrayList<Object> data_fetch = new ConnectDatabase().getAllData("produk");

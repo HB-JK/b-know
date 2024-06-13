@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -29,6 +30,7 @@ public class StokJual extends BaseModel {
             List<String> data = (ArrayList<String>) object;
             
             this.id.set(String.valueOf(data.get(0)));
+            this.setProduk(new Produk().getDataById(String.valueOf(data.get(2))));
             this.jumlahStokAwal.set(String.valueOf(data.get(3)));
             this.jumlahStokTutup.set(String.valueOf(data.get(4)));
             this.setCreatedAt(data.get(5));
@@ -135,6 +137,27 @@ public class StokJual extends BaseModel {
 
     public void setProduk(Produk produk) {
         this.produk = produk;
+    }
+    
+    public List<StokJual> getData() {
+        try{
+            List<StokJual> data = new ArrayList<StokJual>();
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE DATE(created_at)='%2$s' AND id_modal=%3$s",
+                table, this.date_helper.getTodayDatabaseDate(), this.getModal().getId()
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            for(Object detail : data_fetch) {
+                data.add(new StokJual(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model StokJual");
+            return null;
+        }
     }
     
     public boolean save() {

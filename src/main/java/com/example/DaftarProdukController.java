@@ -32,7 +32,7 @@ public class DaftarProdukController implements Initializable {
     
     private boolean is_confirm = false;
     
-    public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getTableData());
+    public ObservableList<Produk> initialData = FXCollections.observableArrayList(new Produk().getData());
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
