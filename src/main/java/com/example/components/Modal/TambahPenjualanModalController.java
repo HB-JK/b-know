@@ -29,6 +29,7 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     @FXML private TableView<Penjualan> list_penjualan_table;
     @FXML private TableColumn<Void, Void> nama_produk_property, jumlah_property, harga_property, total_harga_property;
     @FXML private Button action_button;
+    // @FXML private TextField ;
     
     public TambahPenjualanModalController() {
         this.title = "Tambah Penjualan";
@@ -75,4 +76,10 @@ public class TambahPenjualanModalController extends BaseModalController implemen
             e1.printStackTrace();
         }
     }
+
+
+    // @FXML 
+    // public void tambahPenjualan(ActionEvent e) throws IOException {
+    //     if (this..getTex)
+    // }
 }

@@ -66,7 +66,7 @@ public class CashierModalController extends BaseModalController implements Initi
         
         this.setupStokJual();
         this.setupColumn();
-        this.editData();
+        this.editData();   
     }
     
     public void setupStokJual() {
@@ -83,7 +83,7 @@ public class CashierModalController extends BaseModalController implements Initi
         initialData.addAll(list_stok_jual);
         cashierModalTable.setItems(initialData);
         cashierModalTable.setEditable(true);
-    }
+    }   
     
     public void setupColumn() {
         namaProdukCol.prefWidthProperty().bind(cashierModalTable.widthProperty().multiply(0.3));
@@ -102,7 +102,7 @@ public class CashierModalController extends BaseModalController implements Initi
         stockCol.setCellFactory(TextFieldTableCell.<StokJual>forTableColumn());
         stockCol.setOnEditCommit(event -> {
             StokJual stok_jual = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            stok_jual.setJumlahStokAwal(event.getNewValue());
+            stok_jual.setJumlahStokAwal(Integer.parseInt(event.getNewValue()));
             stok_jual.setStatus();
         });
     }
