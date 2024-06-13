@@ -8,6 +8,8 @@ import java.util.List;
 
 import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
+import com.example.helpers.FormatHelper;
+
 import javafx.beans.property.StringProperty;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -72,7 +74,9 @@ public class Modal extends BaseModel {
 
     // Getter and Setter for 'jumlahModalMasuk'
     public final StringProperty jumlahModalMasukProperty() {
-        return jumlahModalMasuk;
+        return new SimpleStringProperty(
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahModalMasuk()))
+        );
     }
     
     public int getJumlahModalMasuk() {
@@ -85,7 +89,9 @@ public class Modal extends BaseModel {
 
     // Getter and Setter for 'jumlahPenarikanModal'
     public final StringProperty jumlahPenarikanModalProperty() {
-        return jumlahPenarikanModal;
+        return new SimpleStringProperty(
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahPenarikanModal()))
+        );
     }
     
     public int getJumlahPenarikanModal() {
@@ -139,7 +145,7 @@ public class Modal extends BaseModel {
     
     public StringProperty profitProperty() {
         return new SimpleStringProperty(
-            String.valueOf(getJumlahPenarikanModal() - getJumlahModalMasuk())
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahPenarikanModal() - getJumlahModalMasuk()))
         );
     }
     
@@ -147,10 +153,7 @@ public class Modal extends BaseModel {
         try{
             List<Modal> data = new ArrayList<Modal>();
             
-            String query = String.format(
-                "SELECT * FROM %1$s WHERE DATE(created_at)='%2$s' AND status_kasir='tutup'",
-                table, this.date_helper.getTodayDatabaseDate()
-            );
+            String query = String.format("SELECT * FROM %1$s WHERE status_kasir='tutup'",table);
             ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
             
             for(Object detail : data_fetch) {

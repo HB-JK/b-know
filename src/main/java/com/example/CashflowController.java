@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class CashflowController implements Initializable {
     @FXML private LeftSidebar sidebar;
     @FXML private DatePicker tanggalDatePicker;
-    @FXML private TableView<String> invoiceTable;
+    @FXML private TableView<Modal> invoiceTable;
     @FXML private TableColumn<Modal, String> tanggalCol, modalCol, pendapatanCol, pendapatanBersihCol;
     @FXML private ScrollPane scrollpane;
     @FXML private Label today_date;
