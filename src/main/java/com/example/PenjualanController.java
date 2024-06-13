@@ -117,9 +117,7 @@ public class PenjualanController implements Initializable {
 
     @FXML
     public void closeCashier(ActionEvent e) {
-        // try {
-            
-        // }
+        
     }
     
     @FXML
@@ -131,6 +129,10 @@ public class PenjualanController implements Initializable {
             e1.printStackTrace();
         }
     }
-}
 
+    @FXML
+    private void inputPenjualanModal(ActionEvent e) {
+        openCashierModal(e);
+    }
+}
 

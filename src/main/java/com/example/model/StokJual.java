@@ -63,8 +63,8 @@ public class StokJual extends BaseModel {
         return (jumlahStokAwal.get() == null) ? 0 : Integer.parseInt(jumlahStokAwal.get());
     }
 
-    public void setJumlahStokAwal(String jumlahStokAwal) {
-        this.jumlahStokAwal.set(jumlahStokAwal);
+    public void setJumlahStokAwal(int jumlahStokAwal) {
+        this.jumlahStokAwal.set(String.valueOf(jumlahStokAwal));
     }
 
     // Getter and Setter for 'jumlahStokTutup'

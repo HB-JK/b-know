@@ -37,7 +37,7 @@
         
         <HBox alignment="CENTER_RIGHT" spacing="5">
             <Button HBox.hgrow="ALWAYS" fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close" />
-            <Button HBox.hgrow="ALWAYS" styleClass="btn, bg-primary" text="Simpan" />
+            <Button HBox.hgrow="ALWAYS" fx:id="save_button" styleClass="btn, bg-primary" text="Simpan" onAction="#tambah" />
         </HBox>
     </VBox>
 </HBox>
