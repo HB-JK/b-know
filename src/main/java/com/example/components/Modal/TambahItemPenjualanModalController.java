@@ -119,9 +119,4 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
             }
         }
     }
-    
-    @FXML
-    public void inputStok(ActionEvent e) {
-        
-    }
 }
