@@ -66,7 +66,7 @@ public class CashierModalController extends BaseModalController implements Initi
         
         this.setupStokJual();
         this.setupColumn();
-        this.editData();
+        this.editData();   
     }
     
     public void setupStokJual() {
@@ -83,7 +83,7 @@ public class CashierModalController extends BaseModalController implements Initi
         initialData.addAll(list_stok_jual);
         cashierModalTable.setItems(initialData);
         cashierModalTable.setEditable(true);
-    }
+    }   
     
     public void setupColumn() {
         namaProdukCol.prefWidthProperty().bind(cashierModalTable.widthProperty().multiply(0.3));
