@@ -38,7 +38,7 @@ public class PenjualanController implements Initializable {
     @FXML private ScrollPane scrollpane;
     @FXML private Label today_date, modal_label;
     @FXML private HBox tombol;
-    @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button;
+    @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button, edit_stok_button;
     @FXML TableColumn<Penjualan, String> tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol;
     
     public ObservableList<Penjualan> initialData = FXCollections.observableArrayList(new Penjualan().getData());
@@ -96,11 +96,16 @@ public class PenjualanController implements Initializable {
             this.tombol.getChildren().add(add_penjualan_button);
         }
         
+        if(!this.tombol.getChildren().contains(edit_stok_button) && state) {
+            this.tombol.getChildren().add(edit_stok_button);
+        }
+        
         if(state) {
             this.tombol.getChildren().remove(open_cashier_button);
         } else {
             this.tombol.getChildren().remove(close_cashier_button);
             this.tombol.getChildren().remove(add_penjualan_button);
+            this.tombol.getChildren().remove(edit_stok_button);
         }
     }
 

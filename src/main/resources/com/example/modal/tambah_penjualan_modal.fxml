@@ -20,12 +20,12 @@
                 <VBox spacing="10">
                     <HBox alignment="BASELINE_CENTER" spacing="5">
                         <Label text="Customer" prefWidth="80" styleClass="fs-4" />
-                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_produk" promptText="" />
+                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_customer" promptText="" />
                     </HBox>
                     
                     <HBox alignment="BASELINE_CENTER" spacing="5">
                         <Label text="No Faktur" prefWidth="80" styleClass="fs-4" />
-                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control, bg-grey" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_stok" editable="false" />
+                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control, bg-grey" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="no_faktur" editable="false" />
                     </HBox>
                 </VBox>
                 
@@ -35,7 +35,6 @@
                     <AnchorPane HBox.hgrow="ALWAYS" />
                     <Button fx:id="button_proses" text="Proses Jual" styleClass="btn, bg-primary" />
                 </HBox>
-                
             </VBox>
             
             <VBox spacing="10" HBox.hgrow="ALWAYS">

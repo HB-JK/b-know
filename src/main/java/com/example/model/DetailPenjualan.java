@@ -14,6 +14,7 @@ public class DetailPenjualan extends BaseModel {
     private String id;
     private Penjualan penjualan;
     private Produk produk;
+    private StokJual stok_jual;
     private StringProperty jumlahProduk = new SimpleStringProperty();
     private StringProperty hargaJual = new SimpleStringProperty();
     private StringProperty diskon = new SimpleStringProperty();
@@ -21,15 +22,15 @@ public class DetailPenjualan extends BaseModel {
     private StringProperty createdAt = new SimpleStringProperty();
     private String updated_at;
     
-    public DetailPenjualan(String id_penjualan) {}
+    public DetailPenjualan() {}
     
-    public DetailPenjualan(Penjualan penjualan, Produk produk, int jumlahProduk, int hargaJual, int diskon) {
-        // this.setPenjualan(penjualan);
-        // this.setProduk(produk);
-        // this.setJumlahProduk(jumlahProduk);
-        // this.setHargaJual(hargaJual);
-        // this.setDiskon(diskon);
-        // this.setTotalHarga(this.jumlahProduk * this.hargaJual - this.diskon);
+    public DetailPenjualan(StokJual stok_jual, Produk produk, int jumlahProduk, int hargaJual, int diskon) {
+        this.setProduk(produk);
+        this.setStokJual(stok_jual);
+        this.setJumlahProduk(String.valueOf(jumlahProduk));
+        this.setHargaJual(String.valueOf(hargaJual));
+        this.setDiskon(String.valueOf(diskon));
+        this.setTotalHarga(String.valueOf(jumlahProduk * hargaJual - diskon));
         this.setCreatedAt(date_helper.getDatabaseTimestamp());
     }
     
@@ -74,6 +75,15 @@ public class DetailPenjualan extends BaseModel {
 
     public void setProduk(Produk produk) {
         this.produk = produk;
+    }
+    
+    // Getter and Setter for 'stok_jual'
+    public StokJual getStokJual() {
+        return stok_jual;
+    }
+
+    public void setStokJual(StokJual stok_jual) {
+        this.stok_jual = stok_jual;
     }
 
     // Getter and Setter for 'jumlahProduk'

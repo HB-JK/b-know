@@ -178,7 +178,7 @@ public class StokJual extends BaseModel {
     public boolean save() {
         try {
             String query = String.format(
-                "INSERT INTO %1$s (id_modal, id_produk, jumlah_stok_awal, jumlah_stok_sekarang, created_at) VALUES ('%2$s', '%3$s', %4$d, %4$d, '%5$s');",
+                "INSERT INTO %1$s (id_modal, id_produk, jumlah_stok_awal, jumlah_stok_terjual, created_at) VALUES ('%2$s', '%3$s', %4$d, 0, '%5$s');",
                 table, modal.getId(), produk.getId(), getJumlahStokAwal(), getCreatedAt()
             );
             
@@ -195,7 +195,7 @@ public class StokJual extends BaseModel {
     public boolean update() {
         try {
             String query = String.format(
-                "UPDATE %1$s SET jumlah_stok_sekarang=%2$d, jummlah_stok_tutup=%3$d, updated_at='%4$s' WHERE id_%1$s='%5$s';",
+                "UPDATE %1$s SET jumlah_stok_terjual=%2$d, jumlah_stok_tutup=%3$d, updated_at='%4$s' WHERE id_%1$s='%5$s';",
                 table, this.getJumlahStokSekarang(), this.getJumlahStokTutup(), this.getUpdatedAt(), this.getId()
             );
             
