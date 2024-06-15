@@ -163,4 +163,26 @@ public class Penjualan extends BaseModel {
             return null;
         }
     }
+    
+    public void getTotalPenjualan() {
+        try{
+            List<Penjualan> data = new ArrayList<Penjualan>();
+            
+            String query = String.format(
+                "SELECT SUM(total_harga) FROM %1$s WHERE MONTH(created_at) = %2$s;",
+                table, this.date_helper.getCurrentMonth()
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            System.out.println(data_fetch);
+            // for(Object detail : data_fetch) {
+            //     data.add(new Penjualan(detail));
+            // }
+            
+            // return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
+            // return null;
+        }
+    }
 }

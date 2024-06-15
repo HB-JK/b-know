@@ -5,14 +5,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.helpers.InputTypeHelper;
+import com.example.model.DetailPenjualan;
 import com.example.model.Penjualan;
+import com.example.model.Produk;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,7 +32,8 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     @FXML private TableView<Penjualan> list_penjualan_table;
     @FXML private TableColumn<Void, Void> nama_produk_property, jumlah_property, harga_property, total_harga_property;
     @FXML private Button action_button;
-    // @FXML private TextField ;
+    @FXML private TextField nama_customer;
+    public ObservableList<DetailPenjualan> initialData = FXCollections.observableArrayList();
     
     public TambahPenjualanModalController() {
         this.title = "Tambah Penjualan";
@@ -70,13 +74,18 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     @FXML
     public void tambahItemPenjualan(ActionEvent e) {
         try {
-            TambahItemPenjualanModalController tambah_item_penjualan_modal = new TambahItemPenjualanModalController("Tambah Item Penjualan", 450, 300, (Node) e.getSource());
+            TambahItemPenjualanModalController tambah_item_penjualan_modal = new TambahItemPenjualanModalController("Tambah Item Penjualan", 450, 300, (Node) e.getSource(), this);
             tambah_item_penjualan_modal.openModal();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
-
+    
+    public void updateTable(DetailPenjualan detail) {
+        initialData.add(detail);
+        
+        list_penjualan_table.refresh();
+    }
 
     // @FXML 
     // public void tambahPenjualan(ActionEvent e) throws IOException {

@@ -48,18 +48,14 @@ public class DaftarProdukController implements Initializable {
         
     public void setupColumn() {        
         //set column width to fit with tableview
-        tanggalCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.15));
-        kodeProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.17));
+        kodeProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.25));
         namaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.25));
-        jumlahStokCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.10));
-        satuanCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.12));
-        hargaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.20));
+        satuanCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.25));
+        hargaProdukCol.prefWidthProperty().bind(produkTable.widthProperty().multiply(0.25));
         
         //set property of each column to get data from the model Produk
-        tanggalCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("createdAt"));
         kodeProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("kodeProduk"));
         namaProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("nama"));
-        jumlahStokCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("sisaStok"));
         satuanCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("satuan"));
         hargaProdukCol.setCellValueFactory(new PropertyValueFactory<Produk, String>("hargaProduk"));
     }
@@ -69,7 +65,7 @@ public class DaftarProdukController implements Initializable {
             TableRow<Produk> row = new TableRow<>();
             
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                if (event.getClickCount() == 2 && !row.isEmpty() ) {
                     Produk rowData = row.getItem();
                     
                     try {

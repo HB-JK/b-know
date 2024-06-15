@@ -33,13 +33,10 @@
 
             <TableView fx:id="produkTable" >
                 <columns>
-                    <TableColumn fx:id="tanggalCol" text="Tanggal" prefWidth="120.0" />
                     <TableColumn fx:id="kodeProdukCol" text="Kode Produk" prefWidth="100.0" />
                     <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="170.0" />
-                    <TableColumn fx:id="jumlahStokCol" text="Jumlah Stok" prefWidth="100.0" />
                     <TableColumn fx:id="satuanCol" text="Satuan" prefWidth="100.0" />
                     <TableColumn fx:id="hargaProdukCol" text="Harga Produk" prefWidth="100.0" />
-                    <TableColumn fx:id="aksiCol" text="Aksi" prefWidth="100.0" />
                 </columns>
             </TableView>
         </VBox>    

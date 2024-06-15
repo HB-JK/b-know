@@ -149,11 +149,14 @@ public class Modal extends BaseModel {
         );
     }
     
-    public List<Modal> getData() {
+    public List<Modal> getData(String tanggal_awal, String tanggal_akhir) {
         try{
             List<Modal> data = new ArrayList<Modal>();
             
-            String query = String.format("SELECT * FROM %1$s WHERE status_kasir='tutup'",table);
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE status_kasir='tutup' AND DATE(Created_at) BETWEEN '%2$s' AND '%3$s'",
+                table, tanggal_awal, tanggal_akhir
+            );
             ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
             
             for(Object detail : data_fetch) {

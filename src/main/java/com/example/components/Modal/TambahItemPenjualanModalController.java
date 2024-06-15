@@ -10,6 +10,7 @@ import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.FormatHelper;
 import com.example.helpers.InputTypeHelper;
+import com.example.model.DetailPenjualan;
 import com.example.model.Modal;
 import com.example.model.StokJual;
 
@@ -27,11 +28,13 @@ import javafx.stage.Stage;
 public class TambahItemPenjualanModalController extends BaseModalController implements Initializable {
     // Tambah / Edit Produk Modal property
     private String title;
-    private Modal modal = new Modal(); // Ensure modal is not null
     private InputTypeHelper input_helper = new InputTypeHelper();
     private List<StokJual> list_stok_jual;
-    private StokJual stok_jual;
+    private TambahPenjualanModalController parent_controller;
     public ObservableList<String> initialData = FXCollections.observableArrayList();
+    private Modal modal = new Modal(); // Ensure modal is not null
+    private StokJual stok_jual;
+    private DetailPenjualan detail;
 
     // Tambah / Edit Produk Modal FXML element
     @FXML private Button close_button;
@@ -43,9 +46,11 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
         this.title = "Tambah Item Penjualan";
     }
 
-    public TambahItemPenjualanModalController(String title, double width, double height, Node parent_source) throws IOException {
+    public TambahItemPenjualanModalController(String title, double width, double height, Node parent_source, TambahPenjualanModalController controller) throws IOException {
         super(title, width, height, parent_source, "modal/tambah_item_penjualan_modal.fxml");
         this.title = title;
+        
+        this.parent_controller = controller;
     }
 
     @Override
@@ -87,6 +92,10 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
         Stage stage = (Stage) close_button.getScene().getWindow();
         stage.close();
     }
+    
+    public void setController(TambahPenjualanModalController controller) {
+        parent_controller = controller;
+    }
 
     public void setJumlahProduk() {
         if (Integer.parseInt(jumlah_produk.getText()) > stok_jual.getJumlahStokAwal()) {
@@ -108,6 +117,7 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
         for (StokJual data : list_stok_jual) {
             if (data.getProduk().getKodeProduk().equals(produk[0])) {
                 stok_jual = data;
+                
                 sisa_stok.setText(String.valueOf(data.getJumlahStokAwal() - data.getJumlahStokSekarang()));
                 harga.setText(new FormatHelper().convertToRupiah(data.getProduk().getHargaProduk()));
 
@@ -127,12 +137,13 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
                 if (jumlah < 1) {
                     throw new Exception("Jumlah produk harus lebih dari 0.");
                 }
-
-                stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
-                if(stok_jual.update()) {
-                    new SuccessAlert("Success", (Node) e.getSource(), "Transaksi ditambahkan").openModal();
-                    closeModal();
-                }
+                
+                detail = new DetailPenjualan(stok_jual, stok_jual.getProduk(), jumlah, stok_jual.getProduk().getHargaProduk(), 0);
+                
+                // stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
+                new SuccessAlert("Success", (Node) e.getSource(), "Transaksi ditambahkan").openModal();
+                parent_controller.updateTable(detail);
+                closeModal();
                 
                 return;
             }

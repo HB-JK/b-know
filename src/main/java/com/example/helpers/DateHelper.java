@@ -68,4 +68,8 @@ public class DateHelper {
         
         return calendar.getTimeInMillis();
     }
+    
+    public int getCurrentMonth() {
+        return this.calendar.get(Calendar.MONTH) + 1;
+    }
 }
