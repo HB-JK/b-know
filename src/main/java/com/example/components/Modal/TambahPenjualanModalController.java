@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -52,6 +53,7 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setupColumn();
+        this.setupRow();
         
         list_penjualan_table.setItems(initialData);
     }
@@ -67,6 +69,26 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         jumlah.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("jumlahProduk"));
         harga.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("hargaJual"));
         total_harga.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("totalHarga"));
+    }
+    
+    public void setupRow() {
+        list_penjualan_table.setRowFactory(tv -> {
+            TableRow<DetailPenjualan> row = new TableRow<>();
+            
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty() ) {
+                    DetailPenjualan rowData = row.getItem();
+                    
+                    try {
+                        TambahItemPenjualanModalController tambah_item_penjualan = new TambahItemPenjualanModalController("Edit Item Penjualan", 450, 300, (Node) event.getSource(), this, rowData, row.getIndex());
+                        tambah_item_penjualan.openModal();
+                    } catch (IOException el) {
+                        el.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
     }
     
     public void openModal() {
@@ -106,8 +128,20 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         if(!isDuplicate(detail)) {
             initialData.add(detail);
         }
+    }
+    
+    public void updateTable(DetailPenjualan detail, int index) {
+        DetailPenjualan detail_penjualan = list_penjualan_table.getItems().get(index);
         
-        // list_penjualan_table.refresh();
+        if(detail_penjualan.getProduk().getKodeProduk().equals(detail.getProduk().getKodeProduk())) {
+            detail_penjualan.setJumlahProduk(String.valueOf(detail.getJumlahProduk()));
+            return;
+        }
+
+        list_penjualan_table.getItems().remove(index); // remove the item from table        
+        if(!isDuplicate(detail)) { // if not duplicate then add a new item
+            initialData.add(detail);
+        }
     }
     
     @FXML
@@ -117,6 +151,16 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     
     @FXML
     public void tambahItemPenjualan(ActionEvent e) {
+        try {
+            TambahItemPenjualanModalController tambah_item_penjualan_modal = new TambahItemPenjualanModalController("Tambah Item Penjualan", 450, 300, (Node) e.getSource(), this);
+            tambah_item_penjualan_modal.openModal();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void resetPenjualan(ActionEvent e) {
         try {
             TambahItemPenjualanModalController tambah_item_penjualan_modal = new TambahItemPenjualanModalController("Tambah Item Penjualan", 450, 300, (Node) e.getSource(), this);
             tambah_item_penjualan_modal.openModal();

@@ -19,19 +19,19 @@
             <VBox spacing="30" minWidth="300" maxWidth="600">
                 <VBox spacing="10">
                     <HBox alignment="BASELINE_CENTER" spacing="5">
-                        <Label text="Customer" prefWidth="80" styleClass="fs-4" />
-                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_customer" promptText="" />
+                        <Label text="No Faktur" prefWidth="80" styleClass="fs-4" />
+                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control, bg-grey" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="no_faktur" editable="false" />
                     </HBox>
                     
                     <HBox alignment="BASELINE_CENTER" spacing="5">
-                        <Label text="No Faktur" prefWidth="80" styleClass="fs-4" />
-                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control, bg-grey" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="no_faktur" editable="false" />
+                        <Label text="Customer" prefWidth="80" styleClass="fs-4" />
+                        <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="nama_customer" promptText="" />
                     </HBox>
                 </VBox>
                 
                 <HBox spacing="5">
                     <Button fx:id="button_tambah" text="Tambah" styleClass="btn, bg-secondary" onAction="#tambahItemPenjualan" />
-                    <Button fx:id="button_reset" text="Reset" styleClass="btn, bg-secondary-light" />
+                    <Button fx:id="button_reset" text="Reset" styleClass="btn, bg-secondary-light" onAction="#resetPenjualan" />
                     <AnchorPane HBox.hgrow="ALWAYS" />
                     <Button fx:id="button_proses" text="Proses Jual" styleClass="btn, bg-primary" />
                 </HBox>

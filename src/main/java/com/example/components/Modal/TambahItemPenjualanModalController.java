@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.example.PenjualanController;
 import com.example.components.Alert.ErrorAlert;
 import com.example.components.Alert.SuccessAlert;
 import com.example.helpers.FormatHelper;
@@ -24,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class TambahItemPenjualanModalController extends BaseModalController implements Initializable {
@@ -32,17 +32,19 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
     private InputTypeHelper input_helper = new InputTypeHelper();
     private List<StokJual> list_stok_jual;
     private TambahPenjualanModalController parent_controller;
-    public ObservableList<String> initialData = FXCollections.observableArrayList();
+    private ObservableList<String> initial_choice = FXCollections.observableArrayList();
     private Modal modal = new Modal(); // Ensure modal is not null
     private StokJual stok_jual;
     private DetailPenjualan detail;
+    private int item_index;
 
     // Tambah / Edit Produk Modal FXML element
-    @FXML private Button close_button;
+    @FXML private Button close_button, save_button, edit_button;
     @FXML private ComboBox<String> nama_produk;
     @FXML private TextField jumlah_produk, sisa_stok, harga;
     @FXML private TextField[] list_integer_input;
     @FXML private Label total_harga;
+    @FXML private HBox buttons;
 
     public TambahItemPenjualanModalController() {
         this.title = "Tambah Item Penjualan";
@@ -54,6 +56,17 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
         
         TambahItemPenjualanModalController controller = super.loader.getController();
         controller.setController(parent_controller);
+        controller.updateState();
+    }
+    
+    public TambahItemPenjualanModalController(String title, double width, double height, Node parent_source, TambahPenjualanModalController parent_controller, DetailPenjualan detail, int index) throws IOException {
+        super(title, width, height, parent_source, "modal/tambah_item_penjualan_modal.fxml");
+        this.title = title;
+        
+        TambahItemPenjualanModalController controller = super.loader.getController();
+        controller.setController(parent_controller);
+        controller.setDetail(detail, index);
+        controller.updateState();
     }
 
     @Override
@@ -75,8 +88,12 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
             setJumlahProduk();
         });
         
-        total_harga.setText(new FormatHelper().convertToRupiah(0));
         setupProduk();
+        if(detail == null) {
+            total_harga.setText(new FormatHelper().convertToRupiah(0));
+            return;
+        }
+        
     }
 
     public void setupProduk() {
@@ -85,9 +102,9 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
         list_stok_jual = stok.getData();
 
         for (StokJual data : list_stok_jual) {
-            initialData.add(data.getProduk().getKodeProduk() + "_" + data.getProduk().getNama());
+            initial_choice.add(data.getProduk().getKodeProduk() + "_" + data.getProduk().getNama());
         }
-        nama_produk.setItems(initialData);
+        nama_produk.setItems(initial_choice);
     }
 
     public void openModal() {
@@ -101,6 +118,24 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
     
     public void setController(TambahPenjualanModalController controller) {
         parent_controller = controller;
+    }
+    
+    public void setDetail(DetailPenjualan detail, int index) {
+        this.detail = detail;
+        this.item_index = index;
+        this.stok_jual = detail.getStokJual();
+        this.nama_produk.setValue(detail.getProduk().getKodeProduk() + "_" + detail.getProduk().getNama());
+        this.sisa_stok.setText(String.valueOf(detail.getStokJual().getJumlahStokAwal() - detail.getStokJual().getJumlahStokSekarang()));
+        this.harga.setText(new FormatHelper().convertToRupiah(detail.getProduk().getHargaProduk()));
+        this.jumlah_produk.setText(String.valueOf(detail.getJumlahProduk()));
+    }
+    
+    public void updateState() {
+        if(detail == null) {
+            this.buttons.getChildren().remove(edit_button);
+        } else {
+            this.buttons.getChildren().remove(save_button);
+        }
     }
 
     public void setJumlahProduk() {
@@ -149,8 +184,34 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
                 detail = new DetailPenjualan(stok_jual, stok_jual.getProduk(), jumlah, stok_jual.getProduk().getHargaProduk(), 0);
                 
                 // stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
-                new SuccessAlert("Success", (Node) e.getSource(), "Transaksi ditambahkan").openModal();
+                new SuccessAlert("Success", (Node) e.getSource(), stok_jual.getProduk().getNama() + " berhasil ditambahkan").openModal();
                 parent_controller.updateTable(detail);
+                closeModal();
+                
+                return;
+            }
+            
+            throw new Exception("Pastikan produk sudah terpilih dan jumlah produk sudah terisi");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            new ErrorAlert("Error", (Node) e.getSource(), ex.getMessage()).openModal();
+        }
+    }
+    
+    @FXML
+    public void edit(ActionEvent e) throws IOException {
+        try {
+            if (stok_jual != null && !jumlah_produk.getText().equals("")) {
+                int jumlah = Integer.parseInt(jumlah_produk.getText());
+                if (jumlah < 1) {
+                    throw new Exception("Jumlah produk harus lebih dari 0.");
+                }
+                
+                detail = new DetailPenjualan(stok_jual, stok_jual.getProduk(), jumlah, stok_jual.getProduk().getHargaProduk(), 0);
+                
+                // stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
+                new SuccessAlert("Success", (Node) e.getSource(), stok_jual.getProduk().getNama() + " berhasil diubah").openModal();
+                parent_controller.updateTable(detail, item_index);
                 closeModal();
                 
                 return;

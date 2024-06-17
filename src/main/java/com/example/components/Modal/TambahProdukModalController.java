@@ -49,12 +49,12 @@ public class TambahProdukModalController extends BaseModalController implements 
         controller.updateState();
     }
     
-    public TambahProdukModalController(String title, double width, double height, Node parent_source, DaftarProdukController daftarProdukController, Produk produk) throws IOException {
+    public TambahProdukModalController(String title, double width, double height, Node parent_source, DaftarProdukController parent_controller, Produk produk) throws IOException {
         super(title, width, height, parent_source, "modal/tambah_produk_modal.fxml");
         this.title = title;
         
         TambahProdukModalController controller = super.loader.getController();
-        controller.setController(daftarProdukController);
+        controller.setController(parent_controller);
         controller.setProduk(produk);
         controller.updateState();
     }
