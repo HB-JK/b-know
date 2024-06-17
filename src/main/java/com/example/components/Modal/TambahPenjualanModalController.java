@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.components.Alert.ErrorAlert;
+import com.example.enums.ErrorLevel;
 import com.example.helpers.InputTypeHelper;
 import com.example.model.DetailPenjualan;
+import com.example.model.LogError;
 import com.example.model.Penjualan;
 import com.example.model.Produk;
 
@@ -19,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
@@ -29,8 +33,8 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     
     //Tambah / Edit Produk Modal FXML element
     @FXML private Button close_button;
-    @FXML private TableView<Penjualan> list_penjualan_table;
-    @FXML private TableColumn<Void, Void> nama_produk_property, jumlah_property, harga_property, total_harga_property;
+    @FXML private TableView<DetailPenjualan> list_penjualan_table;
+    @FXML private TableColumn<DetailPenjualan, String> nama_produk, jumlah, harga, total_harga;
     @FXML private Button action_button;
     @FXML private TextField nama_customer;
     public ObservableList<DetailPenjualan> initialData = FXCollections.observableArrayList();
@@ -48,13 +52,21 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.setupColumn();
+        
+        list_penjualan_table.setItems(initialData);
     }
     
     public void setupColumn() {
-        nama_produk_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
-        jumlah_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
-        harga_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
-        total_harga_property.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
+        nama_produk.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
+        jumlah.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
+        harga.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
+        total_harga.prefWidthProperty().bind(list_penjualan_table.widthProperty().multiply(0.25));
+        
+        //set property of each column to get data from the model Detail Penjualan
+        nama_produk.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("namaProduk"));
+        jumlah.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("jumlahProduk"));
+        harga.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("hargaJual"));
+        total_harga.setCellValueFactory(new PropertyValueFactory<DetailPenjualan, String>("totalHarga"));
     }
     
     public void openModal() {
@@ -64,6 +76,38 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     public void closeModal() {
         Stage stage = (Stage) close_button.getScene().getWindow();
         stage.close();
+    }
+    
+    public boolean isDuplicate(DetailPenjualan detail) {
+        try {
+            for(int i = 0; i < list_penjualan_table.getItems().size(); i++) {
+                DetailPenjualan detail_loop = list_penjualan_table.getItems().get(i); // make a loop item to a variable
+                
+                // check if sale item is the exist or not on menu? If exist then will add current added item on exist item count
+                if(detail_loop.getProduk().getKodeProduk().equals(detail.getProduk().getKodeProduk())) {
+                    if(detail_loop.getJumlahProduk() + detail.getJumlahProduk() > detail_loop.getStokJual().getJumlahStokAwal()) {
+                        detail_loop.setJumlahProduk(String.valueOf(detail.getStokJual().getJumlahStokAwal()));
+                    } else {
+                        detail_loop.setJumlahProduk(String.valueOf(detail_loop.getJumlahProduk() + detail.getJumlahProduk()));
+                    }
+                    
+                    return true;
+                }
+            }
+            
+            return false;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());;
+            return false;
+        }
+    }
+    
+    public void updateTable(DetailPenjualan detail) {
+        if(!isDuplicate(detail)) {
+            initialData.add(detail);
+        }
+        
+        // list_penjualan_table.refresh();
     }
     
     @FXML
@@ -79,12 +123,6 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-    }
-    
-    public void updateTable(DetailPenjualan detail) {
-        initialData.add(detail);
-        
-        list_penjualan_table.refresh();
     }
 
     // @FXML 

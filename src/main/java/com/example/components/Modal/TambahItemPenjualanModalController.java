@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -41,16 +42,18 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
     @FXML private ComboBox<String> nama_produk;
     @FXML private TextField jumlah_produk, sisa_stok, harga;
     @FXML private TextField[] list_integer_input;
+    @FXML private Label total_harga;
 
     public TambahItemPenjualanModalController() {
         this.title = "Tambah Item Penjualan";
     }
 
-    public TambahItemPenjualanModalController(String title, double width, double height, Node parent_source, TambahPenjualanModalController controller) throws IOException {
+    public TambahItemPenjualanModalController(String title, double width, double height, Node parent_source, TambahPenjualanModalController parent_controller) throws IOException {
         super(title, width, height, parent_source, "modal/tambah_item_penjualan_modal.fxml");
         this.title = title;
         
-        this.parent_controller = controller;
+        TambahItemPenjualanModalController controller = super.loader.getController();
+        controller.setController(parent_controller);
     }
 
     @Override
@@ -67,9 +70,12 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
 
         jumlah_produk.textProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal.equals("") || stok_jual == null) return;
+            
+            total_harga.setText(new FormatHelper().convertToRupiah(Integer.parseInt(jumlah_produk.getText()) * stok_jual.getProduk().getHargaProduk()));
             setJumlahProduk();
         });
-
+        
+        total_harga.setText(new FormatHelper().convertToRupiah(0));
         setupProduk();
     }
 
@@ -122,6 +128,8 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
                 harga.setText(new FormatHelper().convertToRupiah(data.getProduk().getHargaProduk()));
 
                 if (jumlah_produk.getText() != null && !jumlah_produk.getText().equals("")) {
+                    total_harga.setText(new FormatHelper().convertToRupiah(Integer.parseInt(jumlah_produk.getText()) * stok_jual.getProduk().getHargaProduk()));
+                    
                     setJumlahProduk();
                 }
                 return;
@@ -150,6 +158,7 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
             
             throw new Exception("Pastikan produk sudah terpilih dan jumlah produk sudah terisi");
         } catch (Exception ex) {
+            ex.printStackTrace();
             new ErrorAlert("Error", (Node) e.getSource(), ex.getMessage()).openModal();
         }
     }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
+import com.example.helpers.FormatHelper;
 
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -101,7 +102,9 @@ public class DetailPenjualan extends BaseModel {
 
     // Getter and Setter for 'hargaJual'
     public final StringProperty hargaJualProperty() {
-        return hargaJual;
+        return new SimpleStringProperty(
+            new FormatHelper().convertToRupiah(Integer.parseInt(hargaJual.get()))
+        );
     }
     
     public String getHargaJual() {
@@ -127,7 +130,9 @@ public class DetailPenjualan extends BaseModel {
 
     // Getter and Setter for 'totalHarga'
     public final StringProperty totalHargaProperty() {
-        return totalHarga;
+        return new SimpleStringProperty(
+            new FormatHelper().convertToRupiah(Integer.parseInt(totalHarga.get()))
+        );
     }
     
     public int getTotalHarga() {
@@ -158,6 +163,16 @@ public class DetailPenjualan extends BaseModel {
 
     public void setUpdatedAt(String updated_at) {
         this.updated_at = updated_at;
+    }
+    
+    // Getter for 'namaProduk'
+    public final StringProperty namaProdukProperty() {
+        return produk.namaProperty();
+    }
+    
+    // Getter for 'hargaProduk'
+    public final StringProperty hargaProdukProperty() {
+        return produk.hargaProdukProperty();
     }
     
     public List<DetailPenjualan> getData() {

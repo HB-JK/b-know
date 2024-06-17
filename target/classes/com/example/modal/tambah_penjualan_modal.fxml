@@ -41,14 +41,14 @@
                 <AnchorPane styleClass="bg-aqua, p-1" prefHeight="50">
                     <HBox spacing="5" alignment="BASELINE_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="Total Harga" styleClass="fs-2" />
-                        <Label fx:id="total_harga" text="35.000" styleClass="fs-6, fw-bold" />
+                        <Label fx:id="total_harga_label" text="35.000" styleClass="fs-6, fw-bold" />
                     </HBox>
                 </AnchorPane>
                 
                 <AnchorPane styleClass="p-1" prefHeight="25">
                     <HBox spacing="5" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="Pembayaran" styleClass="fs-2" />
-                        <Label fx:id="total_pembayaran" text="100.000" styleClass="fs-5, fw-semibold" />
+                        <Label fx:id="total_pembayaran_label" text="100.000" styleClass="fs-5, fw-semibold" />
                     </HBox>
                 </AnchorPane>
                 
@@ -63,10 +63,10 @@
         
         <TableView fx:id="list_penjualan_table">
             <columns>
-                <TableColumn text="Nama Produk" fx:id="nama_produk_property" />
-                <TableColumn text="Jumlah" fx:id="jumlah_property" />
-                <TableColumn text="Harga" fx:id="harga_property" />
-                <TableColumn text="Total Harga" fx:id="total_harga_property" />
+                <TableColumn text="Nama Produk" fx:id="nama_produk" />
+                <TableColumn text="Jumlah" fx:id="jumlah" />
+                <TableColumn text="Harga" fx:id="harga" />
+                <TableColumn text="Total Harga" fx:id="total_harga" />
             </columns>
         </TableView>
         
