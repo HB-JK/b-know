@@ -29,11 +29,11 @@
                     </HBox>
                 </VBox>
                 
-                <HBox spacing="5">
-                    <Button fx:id="button_tambah" text="Tambah" styleClass="btn, bg-secondary" onAction="#tambahItemPenjualan" />
-                    <Button fx:id="button_reset" text="Reset" styleClass="btn, bg-secondary-light" onAction="#resetPenjualan" />
+                <HBox spacing="5" fx:id="buttons">
+                    <Button fx:id="add_button" text="Tambah" styleClass="btn, bg-secondary" onAction="#tambahItemPenjualan" />
+                    <Button fx:id="reset_button" text="Reset" styleClass="btn, bg-secondary-light" onAction="#resetPenjualan" />
                     <AnchorPane HBox.hgrow="ALWAYS" />
-                    <Button fx:id="button_proses" text="Proses Jual" styleClass="btn, bg-primary" />
+                    <Button fx:id="process_button" text="Proses Jual" styleClass="btn, bg-primary" onAction="#tambahPenjualan" />
                 </HBox>
             </VBox>
             
@@ -46,8 +46,9 @@
                 </AnchorPane>
                 
                 <AnchorPane styleClass="p-1" prefHeight="25">
-                    <HBox spacing="5" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
+                    <HBox spacing="5" alignment="CENTER_RIGHT" fx:id="pembayaran_actions" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="Pembayaran" styleClass="fs-2" />
+                        <TextField fx:id="total_pembayaran" styleClass="fs-4, form-control" />
                         <Label fx:id="total_pembayaran_label" text="100.000" styleClass="fs-5, fw-semibold" />
                     </HBox>
                 </AnchorPane>
@@ -55,7 +56,7 @@
                 <AnchorPane styleClass="p-1" prefHeight="25">
                     <HBox spacing="5" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
                         <Label text="Kembalian" styleClass="fs-2" />
-                        <Label fx:id="Kembalian" text="65.000" styleClass="fs-5, fw-semibold" />
+                        <Label fx:id="kembalian_label" text="65.000" styleClass="fs-5, fw-semibold" />
                     </HBox>
                 </AnchorPane>
             </VBox>

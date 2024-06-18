@@ -17,8 +17,9 @@ public class Penjualan extends BaseModel {
     private StringProperty namaCustomer = new SimpleStringProperty();
     private StringProperty totalHarga = new SimpleStringProperty();
     private StringProperty createdAt = new SimpleStringProperty();
+    private int jumlah_bayar, kembalian;
     private String updated_at;
-    private List<DetailPenjualan> list_detail_penjualan;
+    private List<DetailPenjualan> list_detail_penjualan = new ArrayList<DetailPenjualan>();
     
     public Penjualan() {}
     
@@ -30,11 +31,10 @@ public class Penjualan extends BaseModel {
             this.setId(String.valueOf(data.get(0)));
             this.nomorFaktur.set(data.get(2).toString());
             this.totalHarga.set(String.valueOf(data.get(4)));
-            this.createdAt.set(data.get(5).toString());
+            this.createdAt.set(data.get(7).toString());
             this.namaCustomer.set((data.get(3) == null) ? "Tidak ada nama" : data.get(3).toString());
-            
         } catch ( Exception e ) {
-            new LogError(ErrorLevel.ERROR, e.getMessage());
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " pada constructor model Penjualan");
         }
     }
     
@@ -96,6 +96,24 @@ public class Penjualan extends BaseModel {
     public void setTotalHarga(String totalHarga) {
         this.totalHarga.set(totalHarga);
     }
+    
+    // Getter and Setter for 'jumlah_bayar'    
+    public int getJumlahBayar() {
+        return jumlah_bayar;
+    }
+
+    public void setJumlahBayar(int jumlah_bayar) {
+        this.jumlah_bayar = jumlah_bayar;
+    }
+    
+    // Getter and Setter for 'kembalian'    
+    public int getKembalian() {
+        return kembalian;
+    }
+
+    public void setKembalian() {
+        this.kembalian = getJumlahBayar() - getTotalHarga();
+    }
 
     // Getter and Setter for 'createdAt'
     public final StringProperty createdAtProperty() {
@@ -133,10 +151,34 @@ public class Penjualan extends BaseModel {
             String.valueOf(totalProduk)
         );
     }
+    
+    public String getUniqueCode() {
+        try{
+            List<String> data = this.getLatestData();
+            int index = (data.size() > 0) ? Integer.parseInt(data.get(0).toString()) : 1;
+            
+            return "P-" + String.format("%07d", index + 1);
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage());
+            
+            return null;
+        }
+    }
 
     // Getter and Setter for 'list_detail_penjualan'
-    public List<DetailPenjualan> getListDetailPenjualan() {
-        return list_detail_penjualan;
+    public DetailPenjualan[] getListDetailPenjualan() {
+        if(!list_detail_penjualan.isEmpty()) {
+            DetailPenjualan[] list_detail = new DetailPenjualan[list_detail_penjualan.size()];
+            for(int i = 0; i < list_detail_penjualan.size(); i++) {
+                DetailPenjualan detail = list_detail_penjualan.get(i);
+                detail.setPenjualan(this);
+                list_detail[i] = detail;
+            }
+            
+            return list_detail;
+        } else {
+            return new DetailPenjualan[0];
+        }
     }
 
     public void setListDetailPenjualan(DetailPenjualan detail_penjualan) {
@@ -164,6 +206,22 @@ public class Penjualan extends BaseModel {
         }
     }
     
+    public List<String> getLatestData() {
+        try {
+            List<String> data = (List<String>) this.database.getSingleDataByDesc(table);
+            
+            if(data.size() > 0) {
+                this.setId(String.valueOf(data.get(0)));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage() + " di function getLatestData() di model penjualan");
+            
+            return null;
+        }
+    }
+    
     public void getTotalPenjualan() {
         try{
             List<Penjualan> data = new ArrayList<Penjualan>();
@@ -183,6 +241,42 @@ public class Penjualan extends BaseModel {
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
             // return null;
+        }
+    }
+    
+    public boolean save() {
+        try {
+            this.setCreatedAt(this.date_helper.getDatabaseTimestamp());
+            String nama_customer = (this.getNamaCustomer() == null) ? null : "'" + this.getNamaCustomer() + "'";
+            
+            String query = String.format(
+                "INSERT INTO %1$s (id_admin, nomor_faktur, nama_customer, total_harga, jumlah_pembayaran, kembalian, created_at) VALUES ('%2$s', '%3$s', %4$s, %5$d, %6$d, %7$d, '%8$s');",
+                table, this.user_helper.getAdmin().getId(), this.getUniqueCode(), nama_customer, this.getTotalHarga(), this.getJumlahBayar(), this.getKembalian(), this.getCreatedAt()
+            );
+            
+            int rs = this.database.createUpdateQuery(query);
+            String failed_detail_saving = null;
+            
+            if(rs == 1 ) {
+                this.getLatestData();
+                
+                if(this.getId() != null) {
+                    for(DetailPenjualan detail: getListDetailPenjualan()) {
+                        if(!detail.save()) {
+                            failed_detail_saving += "Gagal menyimpan data " + detail.getProduk().getNama() + " \n";
+                        }
+                    }
+                    
+                    if(failed_detail_saving != null) throw new Exception(failed_detail_saving);
+                }
+            }
+            
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di function save pada model penjualan");
+            
+            return false;
         }
     }
 }
