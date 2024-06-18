@@ -32,7 +32,6 @@ public class DetailPenjualan extends BaseModel {
         this.setHargaJual(String.valueOf(hargaJual));
         this.setDiskon(String.valueOf(diskon));
         this.setTotalHarga(String.valueOf(jumlahProduk * hargaJual - diskon));
-        this.setCreatedAt(date_helper.getDatabaseTimestamp());
     }
     
     //Constructor for instantiate existing data
@@ -107,8 +106,8 @@ public class DetailPenjualan extends BaseModel {
         );
     }
     
-    public String getHargaJual() {
-        return hargaJual.get();
+    public int getHargaJual() {
+        return (hargaJual.get() == null) ? 0 : Integer.parseInt(hargaJual.get());
     }
 
     public void setHargaJual(String hargaJual) {
@@ -191,13 +190,31 @@ public class DetailPenjualan extends BaseModel {
         }
     }
     
-    public void save() {
+    public boolean save() {
         try {
+            this.setCreatedAt(date_helper.getDatabaseTimestamp());
+            
             String query = String.format(
-                "INSERT INTO detail_penjualan (id_penjualan, id_produk, jumlah_produk, harga_jal, diskon, total_harga, created_at, updated_at) VALUES ('1', '4', '10', '7000', '0', '70000', '2024-06-07 05:34:50', NULL);"
+                "INSERT INTO %1$s (id_penjualan, id_produk, id_stok_jual, jumlah_produk, harga_jual, diskon, total_harga, created_at) VALUES ('%2$s', '%3$s', '%4$s', %5$d, %6$d, %7$d, %8$d, '%9$s');",
+                table, getPenjualan().getId(), getProduk().getId(), getStokJual().getId(), getJumlahProduk(), getHargaJual(), getDiskon(), getTotalHarga(), getCreatedAt()
             );
+            
+            int rs = this.database.createUpdateQuery(query);
+            
+            if(rs == 1) {
+                StokJual stok = getStokJual();
+                stok.setJumlahStokSekarang(stok.getJumlahStokSekarang() + getJumlahProduk());
+                stok.update();
+                
+                return true;
+            }
+            
+            return false;
         } catch (Exception e) {
+            e.printStackTrace();
             new LogError(ErrorLevel.ERROR, e.getMessage());
+            
+            return false;
         }
     }
 }
