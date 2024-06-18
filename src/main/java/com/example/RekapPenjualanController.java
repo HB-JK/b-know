@@ -67,4 +67,7 @@ public class RekapPenjualanController implements Initializable {
         jumlahProdukCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
         totalPenjualanCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
     }
+
+    
 }
+
