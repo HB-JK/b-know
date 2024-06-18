@@ -139,9 +139,9 @@ public class PenjualanController implements Initializable {
         }
     }
 
-    @FXML
-    private void inputPenjualanModal(ActionEvent e) {
-        openCashierModal(e);
-    }
+        @FXML
+        private void inputPenjualanModal(ActionEvent e) {
+            openCashierModal(e);
+        }
 }
 
