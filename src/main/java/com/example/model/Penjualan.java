@@ -79,7 +79,7 @@ public class Penjualan extends BaseModel {
     }
 
     public void setNamaCustomer(String namaCustomer) {
-        this.namaCustomer.set(namaCustomer);;
+        this.namaCustomer.set(namaCustomer);
     }
 
     // Getter and Setter for 'totalHarga'
@@ -192,6 +192,27 @@ public class Penjualan extends BaseModel {
             String query = String.format(
                 "SELECT * FROM %1$s WHERE DATE(created_at)='%2$s' AND id_admin=%3$s",
                 table, this.date_helper.getTodayDatabaseDate(), this.user_helper.getAdmin().getId()
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            for(Object detail : data_fetch) {
+                data.add(new Penjualan(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
+            return null;
+        }
+    }
+
+    public List<Penjualan> getData(String tanggal_awal, String tanggal_akhir) {
+        try{
+            List<Penjualan> data = new ArrayList<Penjualan>();
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE DATE(created_at) between '%2$s' AND '%3$s'",
+                table, tanggal_awal, tanggal_akhir
             );
             ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
             
