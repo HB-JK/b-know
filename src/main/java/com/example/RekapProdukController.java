@@ -38,7 +38,7 @@ public class RekapProdukController implements Initializable {
     @FXML
     private Button filter_button;
 
-    private ObservableList<Penjualan> initialData = FXCollections.observableArrayList(new Penjualan().getData());
+    private ObservableList<Penjualan> initialData = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -52,7 +52,7 @@ public class RekapProdukController implements Initializable {
         setupColumn();
         today_date.setText(new DateHelper().getTodayDate());
         invoiceTable.setItems(initialData);
-        // filterData();
+        filterData();
     }
 
     public void setupColumn() {
@@ -69,12 +69,13 @@ public class RekapProdukController implements Initializable {
     }
 
 
-    // public void filterData() {
-    //     initialData.setAll(new Modal().getData(String.valueOf(tanggalAwalPicker.getValue()), String.valueOf(tanggalAkhirPicker.getValue())));
-    // }
+    public void filterData() {        
+        initialData.setAll(new Penjualan().getData(tanggalAwalPicker.getValue().toString(), tanggalAkhirPicker.getValue().toString()));
+    }
     
-    // @FXML
-    // public void filter(ActionEvent e ) {
-    //     filterData();
-    // }
+    
+    @FXML
+    public void Filter(ActionEvent e ) {
+        filterData();
+    }
 }

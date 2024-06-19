@@ -16,7 +16,7 @@ public class DateHelper {
     
     public DateHelper() {
         this.date = new Date();
-        this.calendar = Calendar.getInstance();
+    this.calendar = Calendar.getInstance();
     }
     
     public Long getCurrentTime() {

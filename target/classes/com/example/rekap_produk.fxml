@@ -34,7 +34,7 @@
                         <DatePicker fx:id="tanggalAkhirPicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
                     </HBox>
                     
-                    <Button fx:id="filter_button" styleClass="btn, bg-primary" text="Filter"  />
+                    <Button fx:id="filter_button" styleClass="btn, bg-primary" text="Filter" onAction="#Filter"  />
                 </HBox>
                 
                 <TableView fx:id="invoiceTable" >
