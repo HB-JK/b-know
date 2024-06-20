@@ -35,6 +35,7 @@ public class StokJual extends BaseModel {
             this.jumlahStokAwal.set(String.valueOf(data.get(3)));
             this.jumlahStokSekarang.set(String.valueOf(data.get(4)));
             this.jumlahStokTutup.set(String.valueOf(data.get(5)));
+            this.setStatus();
             this.setCreatedAt(data.get(6));
         } catch ( Exception e ) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
@@ -88,7 +89,7 @@ public class StokJual extends BaseModel {
     }
     
     public int getJumlahStokTutup() {
-        return (jumlahStokTutup.get() == null) ? 0 : Integer.parseInt(jumlahStokTutup.get());
+        return (jumlahStokTutup.get() == "null") ? 0 : Integer.parseInt(jumlahStokTutup.get());
     }
 
     public void setJumlahStokTutup(String jumlahStokTutup) {
@@ -126,6 +127,12 @@ public class StokJual extends BaseModel {
         this.status.set((this.getJumlahStokAwal() > 0) ? "Tersedia" : "Tidak tersedia");
     }
     
+    public final StringProperty sisaStokProperty() {
+        return new SimpleStringProperty(
+            String.valueOf(this.getJumlahStokAwal() - this.getJumlahStokSekarang())
+        );
+    }
+    
     // Getter for 'namaProduk'
     public final StringProperty namaProdukProperty() {
         return produk.namaProperty();
@@ -152,6 +159,54 @@ public class StokJual extends BaseModel {
 
     public void setProduk(Produk produk) {
         this.produk = produk;
+    }
+    
+    public List<StokJual> getDataByProductId(String id) {
+        try {
+            List<StokJual> data = new ArrayList<StokJual>();
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE id_produk='%2$s'",
+                table, id
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            for(Object detail : data_fetch) {
+                data.add(new StokJual(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage() + " di model stok_jual");
+            e.printStackTrace();
+            
+            return null;
+        }
+    }
+    
+    public List<StokJual> getDataByProductId(String id, String tanggal) {
+        try {
+            List<StokJual> data = new ArrayList<StokJual>();
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE id_produk='%2$s' AND DATE(created_at)='%3$s'",
+                table, id, tanggal
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            if(data_fetch != null) {
+                for(Object detail : data_fetch) {
+                    data.add(new StokJual(detail));
+                }
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage() + " di model stok_jual");
+            e.printStackTrace();
+            
+            return null;
+        }
     }
     
     public List<StokJual> getData() {
@@ -196,8 +251,8 @@ public class StokJual extends BaseModel {
         this.setUpdatedAt();
         try {
             String query = String.format(
-                "UPDATE %1$s SET jumlah_stok_terjual=%2$d, jumlah_stok_tutup=%3$d, updated_at='%4$s' WHERE id_%1$s='%5$s';",
-                table, this.getJumlahStokSekarang(), this.getJumlahStokTutup(), this.getUpdatedAt(), this.getId()
+                "UPDATE %1$s SET jumlah_stok_awal=%2$d, jumlah_stok_terjual=%3$d, jumlah_stok_tutup=%4$d, updated_at='%5$s' WHERE id_%1$s='%6$s';",
+                table, this.getJumlahStokAwal(), this.getJumlahStokSekarang(), this.getJumlahStokTutup(), this.getUpdatedAt(), this.getId()
             );
             
             int rs = this.database.createUpdateQuery(query);

@@ -190,8 +190,8 @@ public class ConnectDatabase {
                 listData.add(data);
             }
             
-            this.stmt.close();
-            this.connection.close();
+            // this.stmt.close();
+            // this.connection.close();
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -211,6 +211,24 @@ public class ConnectDatabase {
             e.printStackTrace();
             return 0;
         }
+    }
+    
+    public int getIntDataByQuery(String query) {
+        int totalInt = 0;
+        try{
+            ResultSet rs = this.stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                totalInt += rs.getInt(1);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+            return 0;
+        }
+        
+        return totalInt;
     }
     
     public boolean isNumberType(int column_type_number) {

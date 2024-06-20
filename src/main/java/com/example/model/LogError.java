@@ -66,8 +66,10 @@ public class LogError extends BaseModel {
     
     public void save() {
         try{
-            String query = String
-            .format("INSERT INTO %1$s(error_level, pesan, created_at, updated_at) VALUES('%2$s', '%3$s', '%4$s', %5$s)", table, error_level , pesan, created_at, updated_at);
+            String query = String.format(
+                "INSERT INTO %1$s(error_level, pesan, created_at) VALUES('%2$s', '%3$s', '%4$s')",
+                table, error_level, pesan, created_at
+            );
             
             this.database.createUpdateQuery(query);            
         } catch (Exception e) {

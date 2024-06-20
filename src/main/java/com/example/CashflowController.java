@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 import com.example.helpers.DateHelper;
+import com.example.helpers.FormatHelper;
 import com.example.model.Modal;
 
 import javafx.collections.FXCollections;
@@ -27,7 +28,7 @@ public class CashflowController implements Initializable {
     @FXML private TableView<Modal> invoiceTable;
     @FXML private TableColumn<Modal, String> tanggalCol, modalCol, pendapatanCol, pendapatanBersihCol;
     @FXML private ScrollPane scrollpane;
-    @FXML private Label today_date;
+    @FXML private Label today_date, total_pendapatan;
     @FXML private Button filter_button;
     
     public ObservableList<Modal> initialData = FXCollections.observableArrayList();
@@ -61,6 +62,17 @@ public class CashflowController implements Initializable {
     
     public void filterData() {
         initialData.setAll(new Modal().getData(String.valueOf(tanggalAwalPicker.getValue()), String.valueOf(tanggalAkhirPicker.getValue())));
+        setTotalPendapatan();
+    }
+    
+    public void setTotalPendapatan() {
+        int total_bersih = 0;
+        
+        for(Modal modal: invoiceTable.getItems()) {
+            total_bersih += modal.getJumlahPenarikanModal() - modal.getJumlahModalMasuk();
+        }
+        
+        total_pendapatan.setText(new FormatHelper().convertToRupiah(total_bersih));
     }
     
     @FXML

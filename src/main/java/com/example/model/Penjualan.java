@@ -139,13 +139,16 @@ public class Penjualan extends BaseModel {
         this.updated_at = updated_at;
     }
 
-    // Getter and Setter for 'deleted_at'
+    // Getter and Setter for 'jumlah_produk'
     public StringProperty jumlahProdukProperty() {
         int totalProduk = 0;
+        List<DetailPenjualan> list_detail = new DetailPenjualan().getDataByPenjualan(id);
         
-        // for(DetailPenjualan detail : list_detail_penjualan) {
-        //     totalProduk++;
-        // }
+        if(list_detail != null) {
+            for(DetailPenjualan detail : list_detail) {
+                totalProduk += detail.getJumlahProduk();
+            }
+        }
         
         return new SimpleStringProperty(
             String.valueOf(totalProduk)
@@ -155,9 +158,15 @@ public class Penjualan extends BaseModel {
     public String getUniqueCode() {
         try{
             List<String> data = this.getLatestData();
-            int index = (data.size() > 0) ? Integer.parseInt(data.get(0).toString()) : 1;
+            int index = 0;
             
-            return "P-" + String.format("%07d", index + 1);
+            if(data != null ) {
+                index = (data.size() > 0) ? Integer.parseInt(data.get(0)) + 1 : 1;
+            } else {
+                index = 1;
+            }
+            
+            return "P-" + String.format("%07d", index);
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
             
@@ -243,25 +252,18 @@ public class Penjualan extends BaseModel {
         }
     }
     
-    public void getTotalPenjualan() {
+    public int getTotalPenjualan() {
         try{
-            List<Penjualan> data = new ArrayList<Penjualan>();
-            
             String query = String.format(
-                "SELECT SUM(total_harga) FROM %1$s WHERE MONTH(created_at) = %2$s;",
-                table, this.date_helper.getCurrentMonth()
+                "SELECT SUM(total_harga) AS jumlah_harga FROM %1$s WHERE DATE(created_at) = '%2$s';",
+                table, this.date_helper.getTodayDatabaseDate()
             );
-            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
-            
-            System.out.println(data_fetch);
-            // for(Object detail : data_fetch) {
-            //     data.add(new Penjualan(detail));
-            // }
-            
-            // return data;
+            int data_fetch = new ConnectDatabase().getIntDataByQuery(query);
+                        
+            return data_fetch;
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
-            // return null;
+            return 0;
         }
     }
     

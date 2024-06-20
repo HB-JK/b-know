@@ -60,7 +60,7 @@ public class RekapPenjualanController implements Initializable {
         String.valueOf(invoiceTable.getItems().indexOf(data.getValue()) + 1)));
         tanggalCol.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
         jumlahProdukCol.setCellValueFactory(new PropertyValueFactory<>("jumlahProduk"));
-        totalPenjualanCol.setCellValueFactory(new PropertyValueFactory<>("totalPenjualan"));
+        totalPenjualanCol.setCellValueFactory(new PropertyValueFactory<>("totalHarga"));
 
         noCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.1));
         tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
@@ -68,17 +68,13 @@ public class RekapPenjualanController implements Initializable {
         totalPenjualanCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.3));
     }
 
-    
     public void filterData() {        
         initialData.setAll(new Penjualan().getData(tanggalAwalPicker.getValue().toString(), tanggalAkhirPicker.getValue().toString()));
     }
-    
     
     @FXML
     public void Filter(ActionEvent e ) {
         filterData();
     }
-
-    
 }
 

@@ -149,7 +149,9 @@ public class TambahPenjualanModalController extends BaseModalController implemen
                         detail_loop.setJumlahProduk(String.valueOf(detail_loop.getJumlahProduk() + detail.getJumlahProduk()));
                     }
                     
+                    detail_loop.setTotalHarga(String.valueOf(detail_loop.getJumlahProduk() * detail_loop.getHargaJual()));
                     getTotalHarga();
+                    list_penjualan_table.refresh();
                     return true;
                 }
             }
@@ -175,6 +177,10 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         
         if(detail_penjualan.getProduk().getKodeProduk().equals(detail.getProduk().getKodeProduk())) {
             detail_penjualan.setJumlahProduk(String.valueOf(detail.getJumlahProduk()));
+            detail_penjualan.setTotalHarga(String.valueOf(detail_penjualan.getJumlahProduk() * detail.getHargaJual()));
+            
+            getTotalHarga();
+            list_penjualan_table.refresh();
             return;
         }
 
@@ -183,6 +189,7 @@ public class TambahPenjualanModalController extends BaseModalController implemen
             initialData.add(detail);
             
             getTotalHarga();
+            list_penjualan_table.refresh();
         }
     }
     

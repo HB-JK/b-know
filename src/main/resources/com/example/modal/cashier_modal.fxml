@@ -15,16 +15,22 @@
 
 <HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.components.Modal.CashierModalController" spacing="25" styleClass="p-2">
     <VBox HBox.hgrow="ALWAYS" spacing="10">
-        <HBox spacing="50">
-            <VBox spacing="5">
+        <HBox spacing="50" fx:id="list_modal">
+            <VBox spacing="5" fx:id="open_modal_output">
                 <Label text="Jumlah modal hari ini" styleClass="fs-s"/>
-                <TextField fx:id="modal" styleClass="form-control" promptText="Masukkan modal hari ini" maxWidth="1.7976931348623157E308"/>
+                <TextField fx:id="open_modal_input" styleClass="form-control" promptText="Masukkan modal hari ini" maxWidth="1.7976931348623157E308"/>
+                <Label fx:id="modal_label" styleClass="fs-5" />
+            </VBox>
+            
+            <VBox spacing="5" fx:id="close_modal_output">
+                <Label text="Jumlah pendapatan hari ini" styleClass="fs-s"/>
+                <TextField fx:id="close_modal_input" styleClass="form-control" promptText="Masukkan total pendapatan hari ini" maxWidth="1.7976931348623157E308"/>
             </VBox>
             
             <AnchorPane HBox.hgrow="ALWAYS" />
             
             <VBox alignment="CENTER_RIGHT" spacing="10"> 
-                <Label text="Fendy" styleClass="fs-4 fw-black"/>
+                <Label fx:id="admin_name" styleClass="fs-4 fw-black"/>
                 <Label fx:id="today_date" styleClass="fs-3" text="Rabu, 1 Mei 2024"/> 
             </VBox>
         </HBox>
@@ -33,18 +39,18 @@
             <TableView HBox.hgrow="ALWAYS" fx:id="cashierModalTable">
                 <columns>
                     <TableColumn fx:id="namaProdukCol" text="Nama Produk" prefWidth="100.0"/>
-                    <TableColumn fx:id="stockCol" text="Stock" prefWidth="170.0"/>
+                    <TableColumn fx:id="stockCol" text="Jumlah Stock" prefWidth="170.0"/>
                     <TableColumn fx:id="hargaCol" text="Harga per/pcs" prefWidth="100.0"/>
                     <TableColumn fx:id="statusCol" text="Status" prefWidth="100.0"/>
                 </columns>
             </TableView>
         </HBox>
 
-        <HBox  alignment="BOTTOM_RIGHT" spacing="10">
+        <HBox fx:id="buttons" alignment="BOTTOM_RIGHT" spacing="10">
             <Button fx:id="close_button" styleClass="btn, bg-danger" text="Tutup" onAction="#close"/>
             <Button fx:id="action_button" styleClass="btn, bg-primary" text="Simpan" onAction="#openKasir"/>
+            <Button fx:id="close_cashier_button" styleClass="btn, bg-primary" text="Simpan" onAction="#closeKasir"/>
         </HBox>
     </VBox>
 
-    
 </HBox>

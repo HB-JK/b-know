@@ -183,7 +183,6 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
                 
                 detail = new DetailPenjualan(stok_jual, stok_jual.getProduk(), jumlah, stok_jual.getProduk().getHargaProduk(), 0);
                 
-                // stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
                 new SuccessAlert("Success", (Node) e.getSource(), stok_jual.getProduk().getNama() + " berhasil ditambahkan").openModal();
                 parent_controller.updateTable(detail);
                 closeModal();
@@ -209,7 +208,6 @@ public class TambahItemPenjualanModalController extends BaseModalController impl
                 
                 detail = new DetailPenjualan(stok_jual, stok_jual.getProduk(), jumlah, stok_jual.getProduk().getHargaProduk(), 0);
                 
-                // stok_jual.setJumlahStokSekarang(stok_jual.getJumlahStokSekarang() + jumlah);
                 new SuccessAlert("Success", (Node) e.getSource(), stok_jual.getProduk().getNama() + " berhasil diubah").openModal();
                 parent_controller.updateTable(detail, item_index);
                 closeModal();

@@ -158,9 +158,15 @@ public class Produk extends BaseModel {
     public String getUniqueCode() {
         try{
             List<String> data = this.getLatestData();
-            int index = (data.size() > 0) ? Integer.parseInt(data.get(0).toString()) : 1;
+            int index = 0;
             
-            return "PROD-" + String.format("%03d", index + 1);
+            if(data != null ) {
+                index = (data.size() > 0) ? Integer.parseInt(data.get(0)) + 1 : 1;
+            } else {
+                index = 1;
+            }
+            
+            return "PROD-" + String.format("%03d", index);
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
             
@@ -174,6 +180,7 @@ public class Produk extends BaseModel {
             
             return data;
         } catch (Exception e) {
+            e.printStackTrace();
             new LogError(ErrorLevel.CRITICAL, e.getMessage());
             
             return null;
@@ -220,11 +227,17 @@ public class Produk extends BaseModel {
     public boolean save() {
         try{
             String query = String.format(
-                "INSERT INTO %1$s(kode_produk, nama, harga_produk, satuan, created_at, updated_at) VALUES('%2$s', '%3$s', %4$d, '%5$s', '%6$s', %7$s)",
-                table, getKodeProduk(), getNama(), getHargaProduk(), getSatuan(),  getCreatedAt(), getUpdatedAt()
+                "INSERT INTO %1$s(kode_produk, nama, harga_produk, satuan, created_at) VALUES('%2$s', '%3$s', %4$d, '%5$s', '%6$s')",
+                table, getKodeProduk(), getNama(), getHargaProduk(), getSatuan(),  getCreatedAt()
             );
             
             int rs = this.database.createUpdateQuery(query);
+            
+            if(rs == 1) {
+                List<String> data = this.getLatestData();
+                
+                this.id.set((data != null) ? data.get(0) : null);
+            }
             return (rs == 1) ? true : false;
             
         } catch (Exception e) {
@@ -255,7 +268,11 @@ public class Produk extends BaseModel {
     
     public boolean delete() {
         try{
-            String query = String.format("DELETE FROM %1$s WHERE id_%1$s='%2$s'", table, this.getId());
+            List<StokJual> data_stok = new StokJual().getDataByProductId(this.getId());
+            
+            if(data_stok == null || data_stok.size() > 0) return false;
+            
+            String query = String.format("DELETE FROM %1$s WHERE id_%1$s=%2$d", table, Integer.parseInt(this.getId()));
             
             int rs = this.database.createUpdateQuery(query);
             
