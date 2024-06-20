@@ -57,7 +57,7 @@ public class RekapProdukController implements Initializable {
 
     public void setupColumn() {
         noCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(
-                String.valueOf(invoiceTable.getItems().indexOf(data.getValue()) + 1)));
+        String.valueOf(invoiceTable.getItems().indexOf(data.getValue()) + 1)));
         tanggalCol.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
         namaProdukCol.setCellValueFactory(new PropertyValueFactory<>("namaCustomer"));
         jumlahCol.setCellValueFactory(new PropertyValueFactory<>("jumlahProduk"));
