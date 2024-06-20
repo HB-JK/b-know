@@ -79,7 +79,7 @@ public class Penjualan extends BaseModel {
     }
 
     public void setNamaCustomer(String namaCustomer) {
-        this.namaCustomer.set(namaCustomer);;
+        this.namaCustomer.set(namaCustomer);
     }
 
     // Getter and Setter for 'totalHarga'
@@ -139,7 +139,7 @@ public class Penjualan extends BaseModel {
         this.updated_at = updated_at;
     }
 
-    // Getter and Setter for 'deleted_at'
+    // Getter and Setter for 'jumlah_produk'
     public StringProperty jumlahProdukProperty() {
         int totalProduk = 0;
         List<DetailPenjualan> list_detail = new DetailPenjualan().getDataByPenjualan(id);
@@ -214,6 +214,27 @@ public class Penjualan extends BaseModel {
             return null;
         }
     }
+
+    public List<Penjualan> getData(String tanggal_awal, String tanggal_akhir) {
+        try{
+            List<Penjualan> data = new ArrayList<Penjualan>();
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE DATE(created_at) between '%2$s' AND '%3$s'",
+                table, tanggal_awal, tanggal_akhir
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            for(Object detail : data_fetch) {
+                data.add(new Penjualan(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
+            return null;
+        }
+    }
     
     public List<String> getLatestData() {
         try {
@@ -231,25 +252,18 @@ public class Penjualan extends BaseModel {
         }
     }
     
-    public void getTotalPenjualan() {
+    public int getTotalPenjualan() {
         try{
-            List<Penjualan> data = new ArrayList<Penjualan>();
-            
             String query = String.format(
-                "SELECT SUM(total_harga) FROM %1$s WHERE MONTH(created_at) = %2$s;",
-                table, this.date_helper.getCurrentMonth()
+                "SELECT SUM(total_harga) AS jumlah_harga FROM %1$s WHERE DATE(created_at) = '%2$s';",
+                table, this.date_helper.getTodayDatabaseDate()
             );
-            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
-            
-            System.out.println(data_fetch);
-            // for(Object detail : data_fetch) {
-            //     data.add(new Penjualan(detail));
-            // }
-            
-            // return data;
+            int data_fetch = new ConnectDatabase().getIntDataByQuery(query);
+                        
+            return data_fetch;
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage() + " di model Penjualan");
-            // return null;
+            return 0;
         }
     }
     

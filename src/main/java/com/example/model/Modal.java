@@ -158,7 +158,7 @@ public class Modal extends BaseModel {
                 table, tanggal_awal, tanggal_akhir
             );
             ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
-            
+                
             for(Object detail : data_fetch) {
                 data.add(new Modal(detail));
             }

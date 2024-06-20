@@ -27,19 +27,13 @@
                     <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-secondary-light, radius-1" spacing="10" prefWidth="270">
                         <Label styleClass="fs-2" text="Total Penjualan" />
                         <Label fx:id="total_penjualan" styleClass="fs-6" text="70" />
-                        <Label fx:id="total_penjualan_description" styleClass="fs-1, fw-bold" text="Penjualan meningkat sebanyak 10%" />
-                    </VBox>
-                    
-                    <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-light-pink, radius-1" spacing="10" prefWidth="270">
-                        <Label styleClass="fs-2" text="Total Produk" />
-                        <Label fx:id="total_produk" styleClass="fs-6" text="3" />
-                        <Label fx:id="total_produk_description" styleClass="fs-1, fw-bold" text="Produk meningkat sebanyak 66%" />
+                        <!-- <Label fx:id="total_penjualan_description" styleClass="fs-1, fw-bold" text="Penjualan meningkat sebanyak 10%" /> -->
                     </VBox>
                     
                     <VBox HBox.hgrow="ALWAYS" styleClass="p-3, bg-aqua, radius-1" spacing="10" prefWidth="270">
                         <Label styleClass="fs-2" text="Total Pendapatan" />
                         <Label fx:id="total_pendapatan" styleClass="fs-6" text="2.875.000" />
-                        <Label fx:id="total_pendapatan_description" styleClass="fs-1, fw-bold" text="Pendapatan meningkat sebanyak 20%" />
+                        <!-- <Label fx:id="total_pendapatan_description" styleClass="fs-1, fw-bold" text="Pendapatan meningkat sebanyak 20%" /> -->
                     </VBox>
                 </HBox> <!-- Scorebox penjualan end-->
                 

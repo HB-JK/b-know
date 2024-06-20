@@ -213,6 +213,24 @@ public class ConnectDatabase {
         }
     }
     
+    public int getIntDataByQuery(String query) {
+        int totalInt = 0;
+        try{
+            ResultSet rs = this.stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                totalInt += rs.getInt(1);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+            return 0;
+        }
+        
+        return totalInt;
+    }
+    
     public boolean isNumberType(int column_type_number) {
         if(column_type_number == -5) return true;
         if(column_type_number == 4) return true;

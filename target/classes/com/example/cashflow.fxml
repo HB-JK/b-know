@@ -46,7 +46,8 @@
                 </TableView>
                 
                 <HBox alignment="CENTER_RIGHT" prefHeight="40">
-                    <Label styleClass="fs-3, fw-semibold" text="Total Pendapatan Bersih Rp0" />
+                    <Label styleClass="fs-3, fw-semibold" text="Total Pendapatan Bersih: " />
+                    <Label fx:id="total_pendapatan" styleClass="fs-3" />
                 </HBox>
             </VBox>
         </VBox>

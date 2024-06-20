@@ -1,11 +1,17 @@
 package com.example;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar; // Assuming LeftSidebar is in the same package
 import com.example.helpers.DateHelper;
+import com.example.helpers.FormatHelper;
+import com.example.helpers.UserHelper;
+import com.example.model.Penjualan;
 import com.example.model.Produk;
+import com.example.model.StokJual;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +30,7 @@ public class DashboardController implements Initializable {
     private PieChart totalPenjualanChart;
 
     @FXML
-    private Label total_penjualan, total_produk, total_pendapatan, today_date;
+    private Label total_penjualan, total_pendapatan, today_date;
 
     @FXML
     private TableView<Produk> produkHariIniTableView;
@@ -36,21 +42,38 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sidebar.setActiveClass("dashboard");
-        total_penjualan.setText("70");
-        total_produk.setText("3");
-        total_pendapatan.setText("2.875.000");
-
-        // Set sales data to chart and labels
-        PieChart.Data pangsit_mayo = new PieChart.Data("Pangsit Mayoo", 3);
-        PieChart.Data pangsit_sosis = new PieChart.Data("Pangsit Sosis Ayam", 1);
-        PieChart.Data pangsit_bakso = new PieChart.Data("Pangsit Bakso Ayam", 2);
-        totalPenjualanChart.getData().addAll(pangsit_bakso, pangsit_mayo, pangsit_sosis);
+        Penjualan penjualan = new Penjualan();
+        int total_data = (new UserHelper().getAdmin().getAdminRole().equals("kasir")) ?
+            penjualan.getData().size() : penjualan.getData(LocalDate.now().toString(),  LocalDate.now().toString()).size();
+            
+        total_penjualan.setText(String.valueOf(total_data));
+        total_pendapatan.setText(new FormatHelper().convertToRupiah(penjualan.getTotalPenjualan()));
         
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
         this.setColumnSize();
         today_date.setText(new DateHelper().getTodayDate());
+        setChartData();
+    }
+    
+    public void setChartData() {
+        List<Produk> list_produk = new Produk().getData();
+        if(list_produk != null) {
+            for(Produk produk : list_produk) {
+                List<StokJual> list_stok = new StokJual().getDataByProductId(produk.getId(), String.valueOf(LocalDate.now()));
+                int sell_total = 0;
+                
+                if(list_stok != null) {
+                    for(StokJual stok: list_stok) {
+                        sell_total += stok.getJumlahStokSekarang();
+                    }
+                }
+                
+                PieChart.Data produk_data = new PieChart.Data(produk.getNama(), sell_total);
+                totalPenjualanChart.getData().add(produk_data);
+            }
+        }
     }
     
     public void setColumnSize() {

@@ -184,6 +184,31 @@ public class StokJual extends BaseModel {
         }
     }
     
+    public List<StokJual> getDataByProductId(String id, String tanggal) {
+        try {
+            List<StokJual> data = new ArrayList<StokJual>();
+            
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE id_produk='%2$s' AND DATE(created_at)='%3$s'",
+                table, id, tanggal
+            );
+            ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
+            
+            if(data_fetch != null) {
+                for(Object detail : data_fetch) {
+                    data.add(new StokJual(detail));
+                }
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.CRITICAL, e.getMessage() + " di model stok_jual");
+            e.printStackTrace();
+            
+            return null;
+        }
+    }
+    
     public List<StokJual> getData() {
         try{
             List<StokJual> data = new ArrayList<StokJual>();

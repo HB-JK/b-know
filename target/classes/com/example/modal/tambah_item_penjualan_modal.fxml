@@ -24,7 +24,7 @@
                 <TextField HBox.hgrow="ALWAYS" styleClass="form-control" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="jumlah_produk" promptText="Masukkan jumlah produk beli" />
             </HBox>
             
-            <HBox alignment="BASELINE_CENTER" spacing="5">
+        <HBox alignment="BASELINE_CENTER" spacing="5">
                 <Label text="Sisa stok" prefWidth="140" styleClass="fs-4" />
                 <TextField HBox.hgrow="ALWAYS" styleClass="form-control, bg-grey" prefHeight="20" maxWidth="1.7976931348623157E308" fx:id="sisa_stok" editable="false" />
             </HBox>
