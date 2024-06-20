@@ -22,11 +22,18 @@
             </HBox>
             
             <VBox spacing="10">
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="Pilih Tanggal Awal: " styleClass="fs-1" />
-                    <DatePicker fx:id="tanggalAwalDatePicker" prefWidth="150"/>  
-                    <Label text="Pilih Tanggal Akhir: " styleClass="fs-1" style="-fx-padding: 0px 15px 0px 15px" />
-                    <DatePicker fx:id="tanggalAkhirDatePicker" prefWidth="150"/>  
+                <HBox spacing="15">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Pilih Tanggal Awal:" styleClass="fs-1" style="-fx-padding: 5px 0px 5px 0px" />
+                        <DatePicker fx:id="tanggalAwalPicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+                    </HBox>
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Pilih Tanggal Akhir:" styleClass="fs-1" style="-fx-padding: 5px 0px 5px 0px" />
+                        <DatePicker fx:id="tanggalAkhirPicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
+                    </HBox>
+                    
+                    <Button fx:id="filter_button" styleClass="btn, bg-primary" text="Filter" onAction="#Filter"  />
                 </HBox>
 
                 
