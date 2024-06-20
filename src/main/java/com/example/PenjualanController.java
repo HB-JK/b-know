@@ -108,6 +108,10 @@ public class PenjualanController implements Initializable {
             this.tombol.getChildren().remove(edit_stok_button);
         }
     }
+    
+    public void updateTable(Penjualan penjualan) {
+        initialData.add(penjualan);
+    }
 
     @FXML
     public void openCashierModal(ActionEvent e) {
@@ -128,16 +132,16 @@ public class PenjualanController implements Initializable {
     @FXML
     public void openTambahPenjualanModal(ActionEvent e) {
         try {
-            TambahPenjualanModalController tambah_penjualan_modal = new TambahPenjualanModalController("Tambah Penjualan", 650, 500, (Node) e.getSource());
+            TambahPenjualanModalController tambah_penjualan_modal = new TambahPenjualanModalController("Tambah Penjualan", 650, 500, (Node) e.getSource(), this);
             tambah_penjualan_modal.openModal();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
 
-    @FXML
-    private void inputPenjualanModal(ActionEvent e) {
-        openCashierModal(e);
-    }
+        @FXML
+        private void inputPenjualanModal(ActionEvent e) {
+            openCashierModal(e);
+        }
 }
 

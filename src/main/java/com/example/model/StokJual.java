@@ -88,7 +88,7 @@ public class StokJual extends BaseModel {
     }
     
     public int getJumlahStokTutup() {
-        return Integer.parseInt(jumlahStokTutup.get());
+        return (jumlahStokTutup.get() == null) ? 0 : Integer.parseInt(jumlahStokTutup.get());
     }
 
     public void setJumlahStokTutup(String jumlahStokTutup) {
@@ -113,7 +113,7 @@ public class StokJual extends BaseModel {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt() {
         this.updatedAt = this.date_helper.getDatabaseTimestamp();
     }
     
@@ -193,6 +193,7 @@ public class StokJual extends BaseModel {
     }
     
     public boolean update() {
+        this.setUpdatedAt();
         try {
             String query = String.format(
                 "UPDATE %1$s SET jumlah_stok_terjual=%2$d, jumlah_stok_tutup=%3$d, updated_at='%4$s' WHERE id_%1$s='%5$s';",
@@ -204,6 +205,7 @@ public class StokJual extends BaseModel {
             return (rs == 1) ? true : false;
             
         } catch (Exception e) {
+            e.printStackTrace();
             new LogError(ErrorLevel.ERROR, e.getMessage());
             return false;
         }
