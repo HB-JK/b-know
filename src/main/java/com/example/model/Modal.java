@@ -249,5 +249,39 @@ public class Modal extends BaseModel {
             return false;
         }
     }
+    
+    public boolean update() {
+        try {
+            String query = String
+                .format(
+                    "UPDATE %1$s SET jumlah_penarikan_modal=%2$d, status_kasir='%3$s' WHERE id_%1$s='%4$s'",
+                    table, getJumlahPenarikanModal(), getStatusKasir(), getId()
+                );
 
+            int rs = this.database.createUpdateQuery(query);
+            String failed_stock_saving = null;
+            
+            if(rs == 1 ) {
+                this.getTodayCashier();
+                
+                if(this.getId() != null) {
+                    for(StokJual stok_jual: getListStokJual()) {
+                        if(!stok_jual.update()) {
+                            failed_stock_saving += "Gagal menyimpan data " + stok_jual.getProduk().getNama() + " \n";
+                        }
+                    }
+                    
+                    if(failed_stock_saving != null) throw new Exception(failed_stock_saving);
+                }
+            }
+            
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new LogError(ErrorLevel.CRITICAL, e.getMessage());
+
+            return false;
+        }
+    }
 }

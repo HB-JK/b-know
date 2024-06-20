@@ -3,7 +3,6 @@ package com.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.database.ConnectDatabase;
 import com.example.enums.ErrorLevel;
 import com.example.helpers.FormatHelper;
 
@@ -40,11 +39,11 @@ public class DetailPenjualan extends BaseModel {
             List<String> data = (ArrayList<String>) object;
             
             this.setId(data.get(0));
-            this.jumlahProduk.set(data.get(3));
-            this.hargaJual.set(data.get(4));
-            this.diskon.set(String.valueOf(data.get(5)));
-            this.totalHarga.set(data.get(6));
-            this.createdAt.set(data.get(7));
+            this.jumlahProduk.set(data.get(4));
+            this.hargaJual.set(data.get(5));
+            this.diskon.set(String.valueOf(data.get(6)));
+            this.totalHarga.set(data.get(7));
+            this.createdAt.set(data.get(8));
         } catch ( Exception e ) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
         }
@@ -177,7 +176,27 @@ public class DetailPenjualan extends BaseModel {
     public List<DetailPenjualan> getData() {
         try{
             List<DetailPenjualan> data = new ArrayList<DetailPenjualan>();
-            ArrayList<Object> data_fetch = new ConnectDatabase().getAllData(table);
+            ArrayList<Object> data_fetch = this.database.getAllData(table);
+            
+            for(Object detail : data_fetch) {
+                data.add(new DetailPenjualan(detail));
+            }
+            
+            return data;
+        } catch (Exception e) {
+            new LogError(ErrorLevel.ERROR, e.getMessage() + " di model DetailPenjualan");
+            return null;
+        }
+    }
+    
+    public List<DetailPenjualan> getDataByPenjualan(String id) {
+        try{
+            List<DetailPenjualan> data = new ArrayList<DetailPenjualan>();
+            String query = String.format(
+                "SELECT * FROM %1$s WHERE id_penjualan='%2$s'",
+                table, id
+            );
+            ArrayList<Object> data_fetch = this.database.getDataQuery(query);
             
             for(Object detail : data_fetch) {
                 data.add(new DetailPenjualan(detail));

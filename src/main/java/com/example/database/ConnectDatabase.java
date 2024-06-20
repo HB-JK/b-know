@@ -190,8 +190,8 @@ public class ConnectDatabase {
                 listData.add(data);
             }
             
-            this.stmt.close();
-            this.connection.close();
+            // this.stmt.close();
+            // this.connection.close();
             
         } catch (SQLException e) {
             e.printStackTrace();

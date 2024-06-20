@@ -39,12 +39,7 @@
                     </HBox>
                 </AnchorPane>
 
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="Produk:   " styleClass="fs-1" />
-                    <ComboBox fx:id="fruitCombo" layoutX="15.0" layoutY="33.0" prefWidth="120.0" promptText="Pilih Produk"/>
-                    <Label text="Tanggal:   " styleClass="fs-1" style="-fx-padding: 0px 10px 0px 10px" />
-                    <DatePicker fx:id="tanggalDatePicker" layoutX="15.0" layoutY="33.0" prefWidth="150"/>
-                    
+                <HBox alignment="CENTER_LEFT">                    
                     <AnchorPane HBox.hgrow="ALWAYS" /> <!-- Untuk membuat ada space ditengah -->
                     
                     <HBox spacing="15" fx:id="tombol">

@@ -5,12 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
+import com.example.components.Alert.ErrorAlert;
 import com.example.components.Modal.CashierModalController;
 import com.example.components.Modal.TambahPenjualanModalController;
 import com.example.helpers.DateHelper;
 import com.example.helpers.FormatHelper;
 import com.example.model.Modal;
 import com.example.model.Penjualan;
+import com.example.model.Produk;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,8 +21,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -28,12 +28,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
-import java.time.LocalDate;
-
 public class PenjualanController implements Initializable {
     @FXML private LeftSidebar sidebar; // self made component
-    @FXML private ComboBox<String> fruitCombo; // comboxbox element which data is list of sring with fx:id fruitombo
-    @FXML private DatePicker tanggalDatePicker;
     @FXML private TableView<Penjualan> invoiceTable;
     @FXML private ScrollPane scrollpane;
     @FXML private Label today_date, modal_label;
@@ -47,15 +43,13 @@ public class PenjualanController implements Initializable {
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
         sidebar.setActiveClass("penjualan");
-        fruitCombo.getItems().setAll("Pangsit Pedas", "Pangsit Manis", "Pangsit Goreng");
-        tanggalDatePicker.setValue(LocalDate.now());
         
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         this.setupColumn();
-        today_date.setText(new DateHelper().getTodayDate());
         
+        today_date.setText(new DateHelper().getTodayDate());
         modal.getTodayCashier();
         if(modal.getId() != null) {
             this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
@@ -84,7 +78,17 @@ public class PenjualanController implements Initializable {
         modal_label.setText(
             new FormatHelper().convertToRupiah(Integer.parseInt(modal))
         );
+        
+        this.modal.getTodayCashier();
         this.updateState(true);
+    }
+    
+    public void closeCashier() {
+        modal_label.setText("-");
+        initialData.clear();
+        
+        this.modal.getTodayCashier();
+        this.updateState(false);
     }
 
     public void updateState(boolean state) {
@@ -116,7 +120,12 @@ public class PenjualanController implements Initializable {
     @FXML
     public void openCashierModal(ActionEvent e) {
         try {
-            CashierModalController cashier_modal = new CashierModalController("Buka Kasir", 550, 350, (Node) e.getSource(), this);
+            if(new Produk().getData().size() < 1) {
+                new ErrorAlert("Warning", (Node) e.getSource(), "Belum ada produk di toko, silahkan ditambahkan terlebih dahulu").openModal();
+                return;
+            }
+            
+            CashierModalController cashier_modal = new CashierModalController("Buka Kasir", 550, 350, (Node) e.getSource(), this, modal, "add");
             cashier_modal.openModal();
 
         } catch (IOException e1) {
@@ -126,7 +135,13 @@ public class PenjualanController implements Initializable {
 
     @FXML
     public void closeCashier(ActionEvent e) {
-        
+        try {
+            CashierModalController cashier_modal = new CashierModalController("Buka Kasir", 550, 350, (Node) e.getSource(), this, modal, "edit");
+            cashier_modal.openModal();
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
     
     @FXML

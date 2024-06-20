@@ -142,10 +142,13 @@ public class Penjualan extends BaseModel {
     // Getter and Setter for 'deleted_at'
     public StringProperty jumlahProdukProperty() {
         int totalProduk = 0;
+        List<DetailPenjualan> list_detail = new DetailPenjualan().getDataByPenjualan(id);
         
-        // for(DetailPenjualan detail : list_detail_penjualan) {
-        //     totalProduk++;
-        // }
+        if(list_detail != null) {
+            for(DetailPenjualan detail : list_detail) {
+                totalProduk += detail.getJumlahProduk();
+            }
+        }
         
         return new SimpleStringProperty(
             String.valueOf(totalProduk)
@@ -155,9 +158,15 @@ public class Penjualan extends BaseModel {
     public String getUniqueCode() {
         try{
             List<String> data = this.getLatestData();
-            int index = (data.size() > 0) ? Integer.parseInt(data.get(0).toString()) : 1;
+            int index = 0;
             
-            return "P-" + String.format("%07d", index + 1);
+            if(data != null ) {
+                index = (data.size() > 0) ? Integer.parseInt(data.get(0)) + 1 : 1;
+            } else {
+                index = 1;
+            }
+            
+            return "P-" + String.format("%07d", index);
         } catch (Exception e) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
             
