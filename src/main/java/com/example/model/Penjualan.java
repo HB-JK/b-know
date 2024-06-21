@@ -252,11 +252,11 @@ public class Penjualan extends BaseModel {
         }
     }
     
-    public int getTotalPenjualan() {
+    public int getTotalPenjualan(String tanggal_awal, String tanggal_akhir) {
         try{
             String query = String.format(
-                "SELECT SUM(total_harga) AS jumlah_harga FROM %1$s WHERE DATE(created_at) = '%2$s';",
-                table, this.date_helper.getTodayDatabaseDate()
+                "SELECT SUM(total_harga) AS jumlah_harga FROM %1$s WHERE DATE(created_at) BETWEEN '%2$s' AND '%3$s';",
+                table, tanggal_awal, tanggal_akhir
             );
             int data_fetch = new ConnectDatabase().getIntDataByQuery(query);
                         

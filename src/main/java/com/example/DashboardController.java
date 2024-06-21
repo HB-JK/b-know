@@ -47,7 +47,7 @@ public class DashboardController implements Initializable {
             penjualan.getData().size() : penjualan.getData(LocalDate.now().toString(),  LocalDate.now().toString()).size();
             
         total_penjualan.setText(String.valueOf(total_data));
-        total_pendapatan.setText(new FormatHelper().convertToRupiah(penjualan.getTotalPenjualan()));
+        total_pendapatan.setText(new FormatHelper().convertToRupiah(penjualan.getTotalPenjualan(LocalDate.now().toString(), LocalDate.now().toString())));
         
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -61,7 +61,7 @@ public class DashboardController implements Initializable {
         List<Produk> list_produk = new Produk().getData();
         if(list_produk != null) {
             for(Produk produk : list_produk) {
-                List<StokJual> list_stok = new StokJual().getDataByProductId(produk.getId(), String.valueOf(LocalDate.now()));
+                List<StokJual> list_stok = new StokJual().getDataByProductId(produk.getId(), LocalDate.now().toString());
                 int sell_total = 0;
                 
                 if(list_stok != null) {

@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import com.example.components.LeftSidebar;
 import com.example.helpers.DateHelper;
+import com.example.helpers.FormatHelper;
+import com.example.model.Modal;
 import com.example.model.Penjualan;
 
 import javafx.collections.FXCollections;
@@ -33,7 +35,7 @@ public class RekapPenjualanController implements Initializable {
     @FXML
     private ScrollPane scrollpane;
     @FXML
-    private Label today_date;
+    private Label today_date, total_penjualan;
     @FXML
     private Button filter_button;
 
@@ -70,6 +72,8 @@ public class RekapPenjualanController implements Initializable {
 
     public void filterData() {        
         initialData.setAll(new Penjualan().getData(tanggalAwalPicker.getValue().toString(), tanggalAkhirPicker.getValue().toString()));
+        
+        total_penjualan.setText(new FormatHelper().convertToRupiah(new Penjualan().getTotalPenjualan(tanggalAwalPicker.getValue().toString(),tanggalAkhirPicker.getValue().toString())));
     }
     
     @FXML
