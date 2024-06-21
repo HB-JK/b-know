@@ -6,6 +6,10 @@ import java.util.Locale;
 public class FormatHelper {
 
     public String convertToRupiah(int value) {
+        return "Rp" + convertToCurrency(value);
+    }
+    
+    public String convertToCurrency(int value) {
         return String.valueOf(this.currencyFormatter("id", "ID").format(value));
     }
     
@@ -13,6 +17,6 @@ public class FormatHelper {
     public NumberFormat currencyFormatter(String language, String country) {
         Locale country_local = new Locale(language, country);
         
-        return NumberFormat.getCurrencyInstance(country_local);
+        return NumberFormat.getInstance(country_local);
     }
 }

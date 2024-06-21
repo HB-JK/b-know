@@ -46,8 +46,9 @@
                     </columns>
                 </TableView>
                 
-                <HBox alignment="CENTER_RIGHT" prefHeight="40">
-                    <Label styleClass="fs-3, fw-semibold" text="Total Penjualan Rp0" />
+                <HBox alignment="CENTER_RIGHT" prefHeight="40" spacing="5">
+                    <Label styleClass="fs-3, fw-semibold" text="Total Penjualan" />
+                    <Label styleClass="fs-3" fx:id="total_penjualan" />
                 </HBox>
             </VBox>
 
