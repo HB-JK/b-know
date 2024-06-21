@@ -110,7 +110,6 @@ public class PenjualanController implements Initializable {
         try {
             CashierModalController cashier_modal = new CashierModalController("Buka Kasir", 550, 350, (Node) e.getSource(), this);
             cashier_modal.openModal();
-
         } catch (IOException e1) {
             e1.printStackTrace();
         }
