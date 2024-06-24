@@ -16,7 +16,6 @@ public class Produk extends BaseModel {
     private final StringProperty nama = new SimpleStringProperty();
     private final StringProperty hargaProduk = new SimpleStringProperty();
     private final StringProperty satuan = new SimpleStringProperty();
-    private final StringProperty sisa_stok = new SimpleStringProperty();
     private final StringProperty createdAt = new SimpleStringProperty();
     private final StringProperty updated_at = new SimpleStringProperty();
     private LogStokProduk[] log_stok_produk;
@@ -40,7 +39,6 @@ public class Produk extends BaseModel {
             this.nama.set(data.get(2));
             this.hargaProduk.set(String.valueOf(data.get(3)));
             this.satuan.set(data.get(4));
-            this.sisa_stok.set(String.valueOf(data.get(5)));
             this.createdAt.set(data.get(6));
         } catch ( Exception e ) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
@@ -114,19 +112,6 @@ public class Produk extends BaseModel {
         this.satuan.set(satuan);
     }
 
-    // Getter and Setter for 'sisa_stok'
-    public final StringProperty sisaStokProperty() {
-        return sisa_stok;
-    }
-    
-    public int getSisaStok() {
-        return Integer.parseInt(sisa_stok.get());
-    }
-
-    public void setSisaStok(String sisa_stok) {
-        this.sisa_stok.set(sisa_stok);
-    }
-
     // Getter and Setter for 'createdAt'
     public final StringProperty createdAtProperty() {
         return new SimpleStringProperty(
@@ -197,7 +182,6 @@ public class Produk extends BaseModel {
                 this.setNama(data.get(2));
                 this.setHargaProduk(String.valueOf(data.get(3)));
                 this.setSatuan(data.get(4));
-                this.setSisaStok(String.valueOf(data.get(5)));
                 this.setCreatedAt(data.get(6));
             }
             return this;
@@ -252,14 +236,15 @@ public class Produk extends BaseModel {
             this.setUpdatedAt();
             
             String query = String.format(
-                "UPDATE %1$s SET nama = '%2$s', harga_produk = %3$d, satuan = '%4$s', sisa_stok = %5$d, updated_at = '%6$s' WHERE id_%1$s = '%7$s';",
-                table, getNama(), getHargaProduk(), getSatuan(), getSisaStok(), getUpdatedAt(), getId()
+                "UPDATE %1$s SET nama='%2$s', harga_produk=%3$d, satuan='%4$s',  updated_at='%5$s' WHERE id_%1$s='%6$s';",
+                table, getNama(), getHargaProduk(), getSatuan(), getUpdatedAt(), getId()
             );
             
             int rs = this.database.createUpdateQuery(query);
             return (rs == 1) ? true : false;
             
         } catch (Exception e) {
+            e.printStackTrace();
             new LogError(ErrorLevel.ERROR, e.getMessage());
             
             return false;

@@ -12,6 +12,7 @@ import com.example.helpers.FormatHelper;
 import com.example.helpers.InputTypeHelper;
 import com.example.model.DetailPenjualan;
 import com.example.model.LogError;
+import com.example.model.Modal;
 import com.example.model.Penjualan;
 
 import javafx.collections.FXCollections;
@@ -36,6 +37,7 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     private String title;
     private InputTypeHelper input_helper = new InputTypeHelper();
     private Penjualan penjualan;
+    private Modal modal;
     private PenjualanController parent_controller;
     
     //Tambah / Edit Produk Modal FXML element
@@ -52,12 +54,13 @@ public class TambahPenjualanModalController extends BaseModalController implemen
         this.title = "Tambah Penjualan";
     }
 
-    public TambahPenjualanModalController(String title, double width, double height, Node parent_source, PenjualanController parent_controller) throws IOException {
+    public TambahPenjualanModalController(String title, double width, double height, Node parent_source, Modal modal, PenjualanController parent_controller) throws IOException {
         super(title, width, height, parent_source, "modal/tambah_penjualan_modal.fxml");
         
         this.title = title;
         TambahPenjualanModalController controller = super.loader.getController();
         controller.setController(parent_controller);
+        controller.setModal(modal);
     }
 
     @Override
@@ -136,6 +139,10 @@ public class TambahPenjualanModalController extends BaseModalController implemen
     
     public void setController(PenjualanController controller) {
         this.parent_controller = controller;
+    }
+    
+    public void setModal(Modal modal) {
+        this.modal = modal;
     }
     
     public boolean isDuplicate(DetailPenjualan detail) {
@@ -245,17 +252,21 @@ public class TambahPenjualanModalController extends BaseModalController implemen
                 return;
             }
             
-            penjualan.setNamaCustomer((!nama_customer.getText().equals("")) ? nama_customer.getText() : "Tidak ada nama");
-            
             for(DetailPenjualan detail: list_penjualan_table.getItems()) {
                 penjualan.setListDetailPenjualan(detail);
             }
             
+            penjualan.setNamaCustomer((!nama_customer.getText().equals("")) ? nama_customer.getText() : "Tidak ada nama");
             penjualan.setNomorFaktur(penjualan.getUniqueCode());
+            penjualan.setModal(modal);
             
             if(penjualan.save()) {
                 new SuccessAlert("Berhasil", (Node) e.getSource(), "Berhasil menambahkan penjualan");
+                modal.setJumlahPendapatan(String.valueOf(modal.getJumlahPendapatan() + penjualan.getTotalHarga()));
+                modal.update();
+                
                 parent_controller.updateTable(penjualan);
+                parent_controller.updateModal(String.valueOf(modal.getJumlahPendapatan()));
                 
                 this.closeModal();
             }

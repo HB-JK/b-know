@@ -41,6 +41,7 @@
                         <TableColumn fx:id="tanggalCol" text="Tanggal" />
                         <TableColumn fx:id="modalCol" text="Modal" />
                         <TableColumn fx:id="pendapatanCol" text="Pendapatan" />
+                        <TableColumn fx:id="nominalYangDiinputCol" text="Nominal yang diinput" />
                         <TableColumn fx:id="pendapatanBersihCol" text="Pendapatan Bersih" />
                     </columns>
                 </TableView>

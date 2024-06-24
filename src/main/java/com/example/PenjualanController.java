@@ -37,8 +37,9 @@ public class PenjualanController implements Initializable {
     @FXML private Button open_cashier_button, close_cashier_button, add_penjualan_button, edit_stok_button;
     @FXML TableColumn<Penjualan, String> tanggalCol, noFakturCol, namaPembeliCol, jumlahItemCol, totalHargaCol;
     
-    public ObservableList<Penjualan> initialData = FXCollections.observableArrayList(new Penjualan().getData());
+    public ObservableList<Penjualan> initialData = FXCollections.observableArrayList();
     private Modal modal = new Modal();
+    private Penjualan penjualan = new Penjualan();
 
     @Override
     public void initialize(URL arg, ResourceBundle arg1) {
@@ -46,14 +47,16 @@ public class PenjualanController implements Initializable {
         
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
+        
         this.setupColumn();
+        invoiceTable.setItems(initialData);
         
         today_date.setText(new DateHelper().getTodayDate());
         modal.getTodayCashier();
         if(modal.getId() != null) {
-            this.updateModal(String.valueOf(modal.getJumlahModalMasuk()));
-            invoiceTable.setItems(initialData);
+            penjualan.setModal(modal);
+            this.updateModal(String.valueOf(modal.getJumlahPendapatan()));
+            initialData.setAll(penjualan.getData());
         } else {
             this.updateState(false);
         }
@@ -89,6 +92,7 @@ public class PenjualanController implements Initializable {
         
         this.modal.getTodayCashier();
         this.updateState(false);
+        initialData.clear();
     }
 
     public void updateState(boolean state) {
@@ -102,6 +106,10 @@ public class PenjualanController implements Initializable {
         
         if(!this.tombol.getChildren().contains(edit_stok_button) && state) {
             this.tombol.getChildren().add(edit_stok_button);
+        }
+        
+        if(!this.tombol.getChildren().contains(open_cashier_button) && !state) {
+            this.tombol.getChildren().add(open_cashier_button);
         }
         
         if(state) {
@@ -147,16 +155,16 @@ public class PenjualanController implements Initializable {
     @FXML
     public void openTambahPenjualanModal(ActionEvent e) {
         try {
-            TambahPenjualanModalController tambah_penjualan_modal = new TambahPenjualanModalController("Tambah Penjualan", 650, 500, (Node) e.getSource(), this);
+            TambahPenjualanModalController tambah_penjualan_modal = new TambahPenjualanModalController("Tambah Penjualan", 650, 500, (Node) e.getSource(), this.modal, this);
             tambah_penjualan_modal.openModal();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
 
-        @FXML
-        private void inputPenjualanModal(ActionEvent e) {
-            openCashierModal(e);
-        }
+    @FXML
+    private void inputPenjualanModal(ActionEvent e) {
+        openCashierModal(e);
+    }
 }
 
