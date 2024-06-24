@@ -45,8 +45,8 @@ public class ConnectDatabase {
                 listData.add(data);
             }
             
-            this.stmt.close();
-            this.connection.close();
+            // this.stmt.close();
+            // this.connection.close();
         } catch (Exception e) {
             e.printStackTrace();
             
@@ -75,8 +75,8 @@ public class ConnectDatabase {
                 listData.add(data);
             }
             
-            this.stmt.close();
-            this.connection.close();
+            // this.stmt.close();
+            // this.connection.close();
         } catch (Exception e) {
             e.printStackTrace();
             
@@ -105,8 +105,8 @@ public class ConnectDatabase {
                 data_fetch = data;
             }
             
-            this.stmt.close();
-            this.connection.close();
+            // this.stmt.close();
+            // this.connection.close();
         } catch (Exception e) {
             e.printStackTrace();
             
@@ -162,8 +162,8 @@ public class ConnectDatabase {
                 data_fetch = data;
             }
             
-            this.stmt.close();
-            this.connection.close();
+            // this.stmt.close();
+            // this.connection.close();
         } catch (Exception e) {
             e.printStackTrace();
             

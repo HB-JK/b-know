@@ -26,7 +26,7 @@ public class CashflowController implements Initializable {
     @FXML private LeftSidebar sidebar;
     @FXML private DatePicker tanggalAwalPicker, tanggalAkhirPicker;
     @FXML private TableView<Modal> invoiceTable;
-    @FXML private TableColumn<Modal, String> tanggalCol, modalCol, pendapatanCol, pendapatanBersihCol;
+    @FXML private TableColumn<Modal, String> tanggalCol, modalCol, pendapatanCol, nominalYangDiinputCol, pendapatanBersihCol;
     @FXML private ScrollPane scrollpane;
     @FXML private Label today_date, total_pendapatan;
     @FXML private Button filter_button;
@@ -49,14 +49,16 @@ public class CashflowController implements Initializable {
     }
 
     public void setupColumn() {
-        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.25));
-        modalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.25));
-        pendapatanCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.25));
-        pendapatanBersihCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.25));
+        tanggalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
+        modalCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
+        pendapatanCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
+        nominalYangDiinputCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
+        pendapatanBersihCol.prefWidthProperty().bind(invoiceTable.widthProperty().multiply(0.2));
         
         tanggalCol.setCellValueFactory(new PropertyValueFactory<Modal, String>("createdAt"));
         modalCol.setCellValueFactory(new PropertyValueFactory<Modal, String>("jumlahModalMasuk"));
         pendapatanCol.setCellValueFactory(new PropertyValueFactory<Modal, String>("jumlahPenarikanModal"));
+        nominalYangDiinputCol.setCellValueFactory(new PropertyValueFactory<Modal, String>("jumlahPendapatan"));
         pendapatanBersihCol.setCellValueFactory(new PropertyValueFactory<Modal, String>("profit"));
     }
     

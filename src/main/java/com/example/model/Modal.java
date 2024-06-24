@@ -18,6 +18,7 @@ public class Modal extends BaseModel {
     private String table = "modal";
     private final StringProperty id = new SimpleStringProperty();
     private final StringProperty jumlahModalMasuk = new SimpleStringProperty();
+    private final StringProperty jumlahPendapatan = new SimpleStringProperty();
     private final StringProperty jumlahPenarikanModal = new SimpleStringProperty();
     private final StringProperty statusKasir = new SimpleStringProperty();
     private final StringProperty createdAt = new SimpleStringProperty();
@@ -42,9 +43,10 @@ public class Modal extends BaseModel {
             
             this.id.set(String.valueOf(data.get(0)));
             this.setJumlahModalMasuk(String.valueOf(data.get(2)));
-            this.setJumlahPenarikanModal(String.valueOf(data.get(3)));
-            this.setStatusKasir(String.valueOf(data.get(5)));
-            this.setCreatedAt(data.get(6));
+            this.setJumlahPendapatan(String.valueOf(data.get(3)));
+            this.setJumlahPenarikanModal(String.valueOf(data.get(4)));
+            this.setStatusKasir(String.valueOf(data.get(6)));
+            this.setCreatedAt(data.get(7));
         } catch ( Exception e ) {
             new LogError(ErrorLevel.ERROR, e.getMessage());
         }
@@ -85,6 +87,21 @@ public class Modal extends BaseModel {
 
     public void setJumlahModalMasuk(String jumlahModalMasuk) {
         this.jumlahModalMasuk.set(jumlahModalMasuk);
+    }
+    
+    // Getter and Setter for 'jumlahPendapatan'
+    public final StringProperty jumlahPendapatanProperty() {
+        return new SimpleStringProperty(
+            String.valueOf(new FormatHelper().convertToRupiah(getJumlahPendapatan()))
+        );
+    }
+    
+    public int getJumlahPendapatan() {
+        return Integer.parseInt(jumlahPendapatan.get());
+    }
+
+    public void setJumlahPendapatan(String jumlahPendapatan) {
+        this.jumlahPendapatan.set(jumlahPendapatan);
     }
 
     // Getter and Setter for 'jumlahPenarikanModal'
@@ -204,9 +221,10 @@ public class Modal extends BaseModel {
                 List<String> data = (ArrayList<String>) rs.get(0);
                 this.setId(String.valueOf(data.get(0)));
                 this.setJumlahModalMasuk(String.valueOf(data.get(2)));
-                this.setJumlahPenarikanModal(String.valueOf(data.get(3)));
-                this.setStatusKasir(data.get(5).toString());
-                this.setCreatedAt(data.get(6).toString());
+                this.setJumlahPendapatan(String.valueOf(data.get(3)));
+                this.setJumlahPenarikanModal(String.valueOf(data.get(4)));
+                this.setStatusKasir(data.get(6).toString());
+                this.setCreatedAt(data.get(7).toString());
             }
 
         } catch (Exception e) {
@@ -219,7 +237,7 @@ public class Modal extends BaseModel {
         try {
             String query = String
                 .format(
-                    "INSERT INTO %1$s(id_admin, jumlah_modal_masuk, status_kasir, created_at) VALUES('%2$s', %3$d, '%4$s', '%5$s')",
+                    "INSERT INTO %1$s(id_admin, jumlah_modal_masuk, jumlah_pendapatan, jumlah_penarikan_modal, status_kasir, created_at) VALUES('%2$s', %3$d, %3$d, 0, '%4$s', '%5$s')",
                     table, admin.getId(), getJumlahModalMasuk(), getStatusKasir(), getCreatedAt()
                 );
 
@@ -254,8 +272,8 @@ public class Modal extends BaseModel {
         try {
             String query = String
                 .format(
-                    "UPDATE %1$s SET jumlah_penarikan_modal=%2$d, status_kasir='%3$s' WHERE id_%1$s='%4$s'",
-                    table, getJumlahPenarikanModal(), getStatusKasir(), getId()
+                    "UPDATE %1$s SET jumlah_penarikan_modal=%2$d, jumlah_pendapatan=%3$d, status_kasir='%4$s' WHERE id_%1$s='%5$s'",
+                    table, getJumlahPenarikanModal(), getJumlahPendapatan(), getStatusKasir(), getId()
                 );
 
             int rs = this.database.createUpdateQuery(query);

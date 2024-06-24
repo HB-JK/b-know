@@ -78,6 +78,14 @@ public class CashierModalController extends BaseModalController implements Initi
         this.setupColumn();
         this.editData();
         admin_name.setText(new UserHelper().getAdmin().getNama());
+        
+        // open_modal_input.textProperty().addListener((observable, oldVal, newVal) -> {
+        //     if (modal == null) return;
+            
+        //     modal.setJumlahModalMasuk(newVal.equals("") ? "0" : newVal);
+        //     // return ;
+        //     open_modal_input.textFormatterProperty().asString(new FormatHelper().convertToCurrency(newVal.equals("") ? 0 : Integer.parseInt(newVal)));
+        // });
     }
     
     public void setupStokJual() {
@@ -219,7 +227,6 @@ public class CashierModalController extends BaseModalController implements Initi
             this.parent_controller.closeCashier();
             this.closeModal();
             return;
-
         } else {
             ErrorAlert errorAlert = new ErrorAlert("Error", (Node) e.getSource(), "Gagal menutup kasir");
             errorAlert.openModal();

@@ -13,6 +13,7 @@ public class Penjualan extends BaseModel {
     private String table = "penjualan";
     private String id;
     private Admin admin;
+    private Modal modal;
     private StringProperty nomorFaktur = new SimpleStringProperty();
     private StringProperty namaCustomer = new SimpleStringProperty();
     private StringProperty totalHarga = new SimpleStringProperty();
@@ -29,10 +30,10 @@ public class Penjualan extends BaseModel {
             List<String> data = (ArrayList<String>) object;
             
             this.setId(String.valueOf(data.get(0)));
-            this.nomorFaktur.set(data.get(2).toString());
-            this.totalHarga.set(String.valueOf(data.get(4)));
-            this.createdAt.set(data.get(7).toString());
-            this.namaCustomer.set((data.get(3) == null) ? "Tidak ada nama" : data.get(3).toString());
+            this.nomorFaktur.set(data.get(3).toString());
+            this.namaCustomer.set((data.get(4) == null) ? "Tidak ada nama" : data.get(4).toString());
+            this.totalHarga.set(String.valueOf(data.get(5)));
+            this.createdAt.set(data.get(8).toString());
         } catch ( Exception e ) {
             new LogError(ErrorLevel.ERROR, e.getMessage() + " pada constructor model Penjualan");
         }
@@ -54,6 +55,15 @@ public class Penjualan extends BaseModel {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
+    }
+    
+    // Getter and Setter for 'modal'
+    public Modal getModal() {
+        return modal;
+    }
+
+    public void setModal(Modal modal) {
+        this.modal = modal;
     }
 
     // Getter and Setter for 'nomorFaktur'
@@ -199,8 +209,8 @@ public class Penjualan extends BaseModel {
             List<Penjualan> data = new ArrayList<Penjualan>();
             
             String query = String.format(
-                "SELECT * FROM %1$s WHERE DATE(created_at)='%2$s' AND id_admin=%3$s",
-                table, this.date_helper.getTodayDatabaseDate(), this.user_helper.getAdmin().getId()
+                "SELECT * FROM %1$s WHERE DATE(created_at)='%2$s' AND id_admin='%3$s' AND id_modal='%4$s'",
+                table, this.date_helper.getTodayDatabaseDate(), this.user_helper.getAdmin().getId(), this.getModal().getId()
             );
             ArrayList<Object> data_fetch = new ConnectDatabase().getDataQuery(query);
             
@@ -273,8 +283,8 @@ public class Penjualan extends BaseModel {
             String nama_customer = (this.getNamaCustomer() == null) ? null : "'" + this.getNamaCustomer() + "'";
             
             String query = String.format(
-                "INSERT INTO %1$s (id_admin, nomor_faktur, nama_customer, total_harga, jumlah_pembayaran, kembalian, created_at) VALUES ('%2$s', '%3$s', %4$s, %5$d, %6$d, %7$d, '%8$s');",
-                table, this.user_helper.getAdmin().getId(), this.getUniqueCode(), nama_customer, this.getTotalHarga(), this.getJumlahBayar(), this.getKembalian(), this.getCreatedAt()
+                "INSERT INTO %1$s (id_admin, id_modal, nomor_faktur, nama_customer, total_harga, jumlah_pembayaran, kembalian, created_at) VALUES ('%2$s', '%3$s', '%4$s', %5$s, %6$d, %7$d, %8$d, '%9$s');",
+                table, this.user_helper.getAdmin().getId(), this.getModal().getId(), this.getUniqueCode(), nama_customer, this.getTotalHarga(), this.getJumlahBayar(), this.getKembalian(), this.getCreatedAt()
             );
             
             int rs = this.database.createUpdateQuery(query);
